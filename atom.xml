@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-07-28T13:24:34.458Z</updated>
+  <updated>2019-07-31T09:59:07.697Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -17,44 +17,68 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>MYSQL基础</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/SQL%E7%AC%94%E8%AE%B0/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/SQL笔记/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T13:24:34.458Z</updated>
+    <title>mysql基础</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/SQL%E7%AC%94%E8%AE%B0/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/SQL笔记/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T09:59:07.697Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;查询&quot;&gt;&lt;a href=&quot;#查询&quot; class=&quot;headerlink&quot; title=&quot;查询&quot;&gt;&lt;/a&gt;查询&lt;/h1&gt;&lt;h3 id=&quot;1-排序&quot;&gt;&lt;a href=&quot;#1-排序&quot; class=&quot;headerlink&quot; title=&quot;1.排序&quot;&gt;&lt;/a&gt;1.排序&lt;/h
+        &lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h2 id=&quot;查询&quot;&gt;&lt;a href=&quot;#查询&quot; class=&quot;headerlink&quot; title=&quot;查询&quot;&gt;&lt;/a&gt;查询&lt;/h2&gt;&lt;h3 id=&quot;1-排序&quot;&gt;&lt;a href=&quot;#1-排序&quot; class=&quot;headerlink&quot; title=&quot;1.排序
       
     
     </summary>
     
-      <category term="MYSQL" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/MYSQL/"/>
+      <category term="sql" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/sql/"/>
     
     
   </entry>
   
   <entry>
-    <title>Linux之df</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.526Z</updated>
+    <title>关于不同测试阶段的测试场景</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T09:59:07.678Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
+        &lt;p&gt;[TOC]&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，
       
     
     </summary>
     
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>处理xml文件</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T09:59:07.688Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;python处理&lt;code&gt;xml&lt;/code&gt;文件通常存在多种方式，这里分别以处理简单文件和大文件为例&lt;/p&gt;
+&lt;h2 id=&quot;处理一般文件&quot;&gt;&lt;a href=&quot;#处理一般文件&quot; class=&quot;headerlink&quot; title=&quot;处理一般文件&quot;&gt;&lt;/a&gt;处理一般文件&lt;/
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
     
     
   </entry>
@@ -84,6 +108,28 @@
   </entry>
   
   <entry>
+    <title>Linux之df</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.526Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Linux之uniq</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
@@ -102,29 +148,6 @@
     </summary>
     
       <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>测试笔记</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/%E7%AC%94%E8%AE%B0/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/笔记/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:41:18.998Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;从登录场景来看软件测试：&quot;&gt;&lt;a href=&quot;#从登录场景来看软件测试：&quot; class=&quot;headerlink&quot; title=&quot;从登录场景来看软件测试：&quot;&gt;&lt;/a&gt;从登录场景来看软件测试：&lt;/h4&gt;&lt;p&gt;1.验证功能性需求  &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;显示功能需
-      
-    
-    </summary>
-    
-      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
   </entry>
