@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-07-31T09:59:07.697Z</updated>
+  <updated>2019-07-31T10:01:06.427Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -21,14 +21,13 @@
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/SQL%E7%AC%94%E8%AE%B0/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/SQL笔记/</id>
     <published>2019-07-31T09:57:48.000Z</published>
-    <updated>2019-07-31T09:59:07.697Z</updated>
+    <updated>2019-07-31T10:01:06.427Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h2 id=&quot;查询&quot;&gt;&lt;a href=&quot;#查询&quot; class=&quot;headerlink&quot; title=&quot;查询&quot;&gt;&lt;/a&gt;查询&lt;/h2&gt;&lt;h3 id=&quot;1-排序&quot;&gt;&lt;a href=&quot;#1-排序&quot; class=&quot;headerlink&quot; title=&quot;1.排序
+        &lt;h2 id=&quot;查询&quot;&gt;&lt;a href=&quot;#查询&quot; class=&quot;headerlink&quot; title=&quot;查询&quot;&gt;&lt;/a&gt;查询&lt;/h2&gt;&lt;h3 id=&quot;1-排序&quot;&gt;&lt;a href=&quot;#1-排序&quot; class=&quot;headerlink&quot; title=&quot;1.排序&quot;&gt;&lt;/a&gt;1.排序&lt;/h
       
     
     </summary>
@@ -43,15 +42,13 @@
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
     <published>2019-07-31T09:57:48.000Z</published>
-    <updated>2019-07-31T09:59:07.678Z</updated>
+    <updated>2019-07-31T10:01:06.418Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;[TOC]&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，
+        &lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的
       
     
     </summary>
@@ -84,6 +81,28 @@
   </entry>
   
   <entry>
+    <title>Linux之df</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.526Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Linux之sort排序</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bsort%E6%8E%92%E5%BA%8F/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之sort排序/</id>
@@ -98,28 +117,6 @@
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;参数：&quot;&gt;&lt;a href=&quot;#参数：&quot; class=&quot;headerlink&quot; tit
-      
-    
-    </summary>
-    
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux之df</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.526Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
       
     
     </summary>
