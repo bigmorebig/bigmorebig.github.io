@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-07-31T10:01:06.427Z</updated>
+  <updated>2019-08-01T10:27:40.067Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell文本处理三剑客之sed</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/01/shell%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8Bsed/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/01/shell文本处理三剑客之sed/</id>
+    <published>2019-08-01T10:26:14.102Z</published>
+    <updated>2019-08-01T10:27:40.067Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;sed 是 &lt;code&gt;stream editor&lt;/code&gt; 的缩写，中文称之为“流编辑器”。&lt;/p&gt;
+&lt;p&gt;sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（&lt;code&gt;STDOUT&lt;/code&gt;）。你会发现 
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>mysql基础</title>
@@ -154,7 +176,7 @@
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/python%E7%AC%94%E8%AE%B0/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/python笔记/</id>
     <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.513Z</updated>
+    <updated>2019-08-01T10:27:40.051Z</updated>
     
     <summary type="html">
     
@@ -166,7 +188,7 @@
     
     </summary>
     
-      <category term="Python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/Python/"/>
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
     
     
   </entry>

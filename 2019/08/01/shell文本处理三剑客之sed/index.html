@@ -95,16 +95,17 @@
   };
 </script>
 
-  <meta name="description" content="进击的测试">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/archives/2019/07/index.html">
+  <meta name="description" content="sed 是 stream editor 的缩写，中文称之为“流编辑器”。 sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（STDOUT）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准输出中。   格式1sed [option] &apos;[pattern]/command&apos; filenam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell文本处理三剑客之sed">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/01/shell文本处理三剑客之sed/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="进击的测试">
+<meta property="og:description" content="sed 是 stream editor 的缩写，中文称之为“流编辑器”。 sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（STDOUT）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准输出中。   格式1sed [option] &apos;[pattern]/command&apos; filenam">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-01T10:27:40.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
-<meta name="twitter:description" content="进击的测试">
+<meta name="twitter:title" content="shell文本处理三剑客之sed">
+<meta name="twitter:description" content="sed 是 stream editor 的缩写，中文称之为“流编辑器”。 sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（STDOUT）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准输出中。   格式1sed [option] &apos;[pattern]/command&apos; filenam">
 
 
 
@@ -114,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/archives/2019/07/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/01/shell文本处理三剑客之sed/">
 
 
 
@@ -125,7 +126,7 @@
 </script>
 
   
-  <title>归档 | 我的博客</title>
+  <title>shell文本处理三剑客之sed | 我的博客</title>
   
 
 
@@ -173,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,7 +260,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -341,314 +342,487 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/01/shell文本处理三剑客之sed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="唐潇唐">
+      <meta itemprop="description" content="进击的测试">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">shell文本处理三剑客之sed
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+          
 
-        
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+              
+                
+              
 
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/31/SQL笔记/" itemprop="url">
+              <time title="创建时间：2019-08-01 18:26:14 / 修改时间：18:27:40" itemprop="dateCreated datePublished" datetime="2019-08-01T18:26:14+08:00">2019-08-01</time>
+            </span>
+          
+
+          
             
-              <span itemprop="name">mysql基础</span>
+
             
-          </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T17:57:48+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
 
-    </header>
-  </article>
+                
+                
+              
+            </span>
+          
 
+          
+            
+            
+          
 
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/31/关于不同测试阶段测试场景/" itemprop="url">
-            
-              <span itemprop="name">关于不同测试阶段的测试场景</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T17:57:48+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <p>sed 是 <code>stream editor</code> 的缩写，中文称之为“流编辑器”。</p>
+<p>sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（<code>STDOUT</code>）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准输出中。  </p>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [option] '[pattern]/command' filename</span><br></pre></td></tr></table></figure>
 
-        
-        
+<p>除此之外，<code>sed</code>也支持<code>管道符</code>来传递引用文本</p>
+<h3 id="option参数"><a href="#option参数" class="headerlink" title="option参数"></a>option参数</h3><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-e</td>
+<td align="left">多段编辑</td>
+</tr>
+<tr>
+<td align="center">-n</td>
+<td align="left">只打印出查询到的值</td>
+</tr>
+<tr>
+<td align="center">-f</td>
+<td align="left">可将某个文件作为patter传入</td>
+</tr>
+<tr>
+<td align="center">-r</td>
+<td align="left">支持扩展正则表达式</td>
+</tr>
+<tr>
+<td align="center">-i</td>
+<td align="left">修改源文件的内容</td>
+</tr>
+</tbody></table>
+<h3 id="patter参数"><a href="#patter参数" class="headerlink" title="patter参数"></a>patter参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10command</td>
+<td>匹配第10行</td>
+</tr>
+<tr>
+<td>10,20command</td>
+<td>匹配从第10行到第20行</td>
+</tr>
+<tr>
+<td>10，+5command</td>
+<td>匹配从第10行开始，到第16行结束</td>
+</tr>
+<tr>
+<td>/patter/command</td>
+<td>匹配含有patter的行</td>
+</tr>
+<tr>
+<td>/patter1/,/patter2/command</td>
+<td>匹配到从含有patter1开始，到patter2结束的所有行</td>
+</tr>
+<tr>
+<td>10,/patter/command</td>
+<td>匹配从第10行开始，到含有patter的行结束的所有行</td>
+</tr>
+<tr>
+<td>/patter/,10command</td>
+<td>匹配从含有patter的行开始，到第10行结束的所有行</td>
+</tr>
+</tbody></table>
+<h3 id="command参数"><a href="#command参数" class="headerlink" title="command参数"></a>command参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td>a</td>
+<td>行后增加</td>
+</tr>
+<tr>
+<td>i</td>
+<td>行前增加</td>
+</tr>
+<tr>
+<td>r</td>
+<td>外部文件读入，行后增加</td>
+</tr>
+<tr>
+<td>w</td>
+<td>将匹配到的行写入外部文件</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td>s/old/new</td>
+<td>将行内的第1个old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/g</td>
+<td>将行内的所有old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/2g</td>
+<td>将行内的从第2处开始到结束的old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/ig</td>
+<td>将行内的所有old替换为new，且忽略大小写</td>
+</tr>
+</tbody></table>
+<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>反向引用的意思是将前面匹配到的值通过参数的形式传递给后一个，可用<code>&amp;</code>或<code>\1</code>传递，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/\(redis_Port=\).*/\15555/g' tmp.cfg	#修改redis的端口号为5555</span><br><span class="line"><span class="meta">#</span>result：redis_Port=5555</span><br></pre></td></tr></table></figure>
 
-        
+<p>值得注意的是，<code>\1</code>支持使用括号来指定反向引用的内容，而<code>&amp;</code>并不支持这个功能</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1p</td>
+<td>打印第1行的内容</td>
+</tr>
+<tr>
+<td>1,10p</td>
+<td>打印第1行到第10行的内容</td>
+</tr>
+<tr>
+<td>1，+5p</td>
+<td>打印第1行到第6行的内容</td>
+</tr>
+<tr>
+<td><strong>/patter/p</strong></td>
+<td>打印含有patter的行</td>
+</tr>
+<tr>
+<td><strong>/patter1/, /patter2/p</strong></td>
+<td>打印从含有patter1的行开始，到含有patter2的行结束</td>
+</tr>
+<tr>
+<td>/patter/, 10p</td>
+<td>打印从含有patter的行开始，到第10行结束</td>
+</tr>
+<tr>
+<td>10，/patter/p</td>
+<td>打印从第10行开始，到含有patter的行结束</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查询包含redis的所有行</span><br><span class="line">[srvc@vm-kvm5645-app ~]$ sed -n '/redis/p' tmp.cfg</span><br><span class="line">redis_Port=5555</span><br><span class="line">redis_Timeout=1</span><br><span class="line">redis_PORT_ALARM=6379</span><br><span class="line">redis_TIMEOUT_ALARM=5</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1s/old/new/</td>
+<td>替换第一行的old为new</td>
+</tr>
+<tr>
+<td>1,10s/old/new/</td>
+<td>将1到10行中的old替换为new</td>
+</tr>
+<tr>
+<td>1, +5s/old/new/</td>
+<td>将1到6行中的old替换为new</td>
+</tr>
+<tr>
+<td><strong>/patter/s/old/new/</strong></td>
+<td>将含有patter的行中的old替换为new</td>
+</tr>
+<tr>
+<td><strong>/patter1/,/patter2/s/old/new/</strong></td>
+<td>将从含有patter1开始的行到patter2结束行中的old替换为new</td>
+</tr>
+<tr>
+<td>/patter/,10s/old/new/</td>
+<td>将从patter开始的行到第10行结束的old替换为new</td>
+</tr>
+<tr>
+<td>10,/patter/s/old/new/</td>
+<td>将从第10行开始到含有patter行结束的old替换为new</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 将redis的超时时间修改为3s</span><br><span class="line">sed -i '/\[.*\]/,/\[.*\]/s/\(redis_Timeout=\).*/\13/g' tmp.cfg</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/31/处理xml文件/" itemprop="url">
-            
-              <span itemprop="name">处理xml文件</span>
-            
-          </a>
-        
-      </h2>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1d</td>
+<td>删除第1行的内容</td>
+</tr>
+<tr>
+<td>1,10d</td>
+<td>删除第1行到第10行的内容</td>
+</tr>
+<tr>
+<td>1,+5d</td>
+<td>删除第1行到第6行内容</td>
+</tr>
+<tr>
+<td><strong>/patter/d</strong></td>
+<td>删除含有patter的行</td>
+</tr>
+<tr>
+<td><strong>/patter1/,/patter2/d</strong></td>
+<td>删除从包含patter1的行开始，到包含patter2结束的所有行</td>
+</tr>
+<tr>
+<td>/patter/, 10d</td>
+<td>删除从包含patter的行开始，到第10行结束的所有行</td>
+</tr>
+<tr>
+<td>10,/patter/d</td>
+<td>删除从第10行开始，到含有patter的行结束的所有行</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 删除配置文件中的注释行和空行</span><br><span class="line">sed -i '/^#/d;/^$/d' tmp.cfg</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T17:57:48+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+<h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><p>对于自动化测试来说，shell脚本的存在价值似乎并没有太大必要，而且由于公司使用的是<code>python</code>来作为自动化编程语言，问题在于，使用<code>RF</code>执行python脚本修改服务器上配置文件时，老是会出错，且通过<code>beyond compares</code>对比，修改之后有问题的文件和之前正确的文件无任何差别，初步判断有可能是编码问题，由于公司的<code>RF</code>必须使用jybot来执行脚本，于是，为了不纠结这个问题，使用shell脚本处理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[srvc@vm-kvm5645-app auto_test]$ more modify_wf.sh</span><br><span class="line"><span class="meta">#</span>/bin/bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span>author:tangxiao</span><br><span class="line"><span class="meta">#</span>modify redis password or host in WEATHER.cfg</span><br><span class="line"></span><br><span class="line">function modify</span><br><span class="line">&#123;</span><br><span class="line">sed -i "/\#weather_open/,/redis_Timeout/ s/$1/$2/g" /opt/app/todewf/bin/WEATHER.cfg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modify $1 $2</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>需要注意的点是，由于引用了变量<code>$1</code>和<code>$2</code>，patter部分语句必须使用<code>双引号</code>，且执行脚本的时候，传入的参数必须使用引号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh modify_wf.sh '\(redis_Pass=\).*' '\1$&#123;redis_pass&#125;'</span><br></pre></td></tr></table></figure>
 
-
+<p>参考：</p>
+<ul>
+<li><p><a href="https://man.linuxde.net/sed" target="_blank" rel="noopener">sed基本语法</a></p>
+</li>
+<li><p><a href="https://man.linuxde.net/docs/shell_regex.html" target="_blank" rel="noopener">shell正则表达式基本用法</a></p>
+</li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之df/" itemprop="url">
-            
-              <span itemprop="name">Linux之df</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之sort排序/" itemprop="url">
-            
-              <span itemprop="name">Linux之sort排序</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之uniq/" itemprop="url">
-            
-              <span itemprop="name">Linux之uniq</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/python笔记/" itemprop="url">
-            
-              <span itemprop="name">Python常见问题解析</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="唐潇唐 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="唐潇唐 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/31/SQL笔记/" rel="next" title="mysql基础">
+                <i class="fa fa-chevron-left"></i> mysql基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -668,8 +842,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -784,6 +967,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#option参数"><span class="nav-number">2.</span> <span class="nav-text">option参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patter参数"><span class="nav-number">3.</span> <span class="nav-text">patter参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#command参数"><span class="nav-number">4.</span> <span class="nav-text">command参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向引用"><span class="nav-number">5.</span> <span class="nav-text">反向引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">6.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改"><span class="nav-number">7.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">8.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本"><span class="nav-number">9.</span> <span class="nav-text">shell脚本</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -919,6 +1119,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
@@ -939,6 +1143,8 @@
 
 
 
+
+  
 
 
 
