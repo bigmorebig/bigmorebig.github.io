@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-08-05T10:44:04.506Z</updated>
+  <updated>2019-08-05T10:45:37.232Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>sql基础</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/</id>
     <published>2019-08-05T10:36:36.415Z</published>
-    <updated>2019-08-05T10:44:04.506Z</updated>
+    <updated>2019-08-05T10:45:37.232Z</updated>
     
     <summary type="html">
     
@@ -31,6 +31,8 @@
       
     
     </summary>
+    
+      <category term="sql" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/sql/"/>
     
     
   </entry>
