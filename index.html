@@ -407,7 +407,7 @@
                 
               
 
-              <time title="创建时间：2019-08-05 18:36:36 / 修改时间：18:45:37" itemprop="dateCreated datePublished" datetime="2019-08-05T18:36:36+08:00">2019-08-05</time>
+              <time title="创建时间：2019-08-05 18:36:36 / 修改时间：18:46:42" itemprop="dateCreated datePublished" datetime="2019-08-05T18:36:36+08:00">2019-08-05</time>
             </span>
           
 
@@ -1073,7 +1073,7 @@ try:    import xml.etree.cElementTree as ETexcept Im
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之sort排序/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -1093,7 +1093,7 @@ try:    import xml.etree.cElementTree as ETexcept Im
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/28/linux之sort排序/" class="post-title-link" itemprop="url">Linux之sort排序</a>
+                <a href="/2019/07/28/linux之df/" class="post-title-link" itemprop="url">Linux之df</a>
               
             
           </h1>
@@ -1180,22 +1180,18 @@ try:    import xml.etree.cElementTree as ETexcept Im
         
           
             <p>
-              作用
-排序
+              disk free基本格式
+df  &#123;options&#125; &#123;mount_point_of_filesystem&#125;
 
-参数：
--b   忽略每行前面开始出的空格字符。
--c   检查文件是否已经按照顺序排序。
--d   排序时，处理英文字母、数字及空格字符外，忽略其他的字符。
--f   排序时，将小写字母视为大写字母。
--i   排序时，除了040至176之间的ASCII字符外，忽略其他的字符。
--m
+
+-a列出所有文件系统的磁盘使用量
+[md@vm-kvm5643-app jcf]$ df -aFilesystem           1K-b
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/28/linux之sort排序/#more" rel="contents">
+              <a class="btn" href="/2019/07/28/linux之df/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1440,7 +1436,7 @@ uniq 可检查文本文件中重复出现的行列。参数
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之sort排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -1460,7 +1456,7 @@ uniq 可检查文本文件中重复出现的行列。参数
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/28/linux之df/" class="post-title-link" itemprop="url">Linux之df</a>
+                <a href="/2019/07/28/linux之sort排序/" class="post-title-link" itemprop="url">Linux之sort排序</a>
               
             
           </h1>
@@ -1547,18 +1543,22 @@ uniq 可检查文本文件中重复出现的行列。参数
         
           
             <p>
-              disk free基本格式
-df  &#123;options&#125; &#123;mount_point_of_filesystem&#125;
+              作用
+排序
 
-
--a列出所有文件系统的磁盘使用量
-[md@vm-kvm5643-app jcf]$ df -aFilesystem           1K-b
+参数：
+-b   忽略每行前面开始出的空格字符。
+-c   检查文件是否已经按照顺序排序。
+-d   排序时，处理英文字母、数字及空格字符外，忽略其他的字符。
+-f   排序时，将小写字母视为大写字母。
+-i   排序时，除了040至176之间的ASCII字符外，忽略其他的字符。
+-m
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/28/linux之df/#more" rel="contents">
+              <a class="btn" href="/2019/07/28/linux之sort排序/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
