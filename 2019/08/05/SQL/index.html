@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://github.com/images/Oracle%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/images/MYSQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/images/MYSQL%E7%BB%93%E6%9E%84.jpg">
-<meta property="og:updated_time" content="2019-08-05T10:46:42.462Z">
+<meta property="og:updated_time" content="2019-08-07T11:15:04.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql基础">
 <meta name="twitter:description" content="Oracle执行流程  语法检查：检查 SQL 拼写是否正确，如果不正确，Oracle 会报语法错误。  语义检查：检查 SQL 中的访问对象是否存在。比如我们在写SELECT 语句的时候，列名写错了，系统就会提示错误。语法检查和语义检查的作用是保证 SQL 语句没有错误。  权限检查：看用户是否具备访问该数据的权限。  共享池检查：共享池(Shared Pool)是一块内存池，最主要的作用是缓存">
@@ -409,13 +409,23 @@
                 
               
 
-              <time title="创建时间：2019-08-05 18:36:36 / 修改时间：18:46:42" itemprop="dateCreated datePublished" datetime="2019-08-05T18:36:36+08:00">2019-08-05</time>
+              <time title="创建时间：2019-08-05 18:36:36" itemprop="dateCreated datePublished" datetime="2019-08-05T18:36:36+08:00">2019-08-05</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-07 19:15:04" itemprop="dateModified" datetime="2019-08-07T19:15:04+08:00">2019-08-07</time>
+              </span>
             
           
 
@@ -678,11 +688,12 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id, team_id, player_name <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> player_id <span class="keyword">in</span> (<span class="keyword">SELECT</span> player_id <span class="keyword">FROM</span> player_score <span class="keyword">WHERE</span> player.player_id = player_score.player_id)</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li><p>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中任何一个球员身高高的球员的信息</p>
+<li>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中任何一个球员身高高的球员的信息</li>
+</ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL: <span class="keyword">SELECT</span> player_id, player_name, height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> height &gt; <span class="keyword">ANY</span> (<span class="keyword">SELECT</span> height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> team_id = <span class="number">1002</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中所有球员身高高的球员的信息</p>
-</li>
+
+<ol start="3">
+<li>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中所有球员身高高的球员的信息</li>
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL: <span class="keyword">SELECT</span> player_id, player_name, height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> height &gt; <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> team_id = <span class="number">1002</span>)</span><br></pre></td></tr></table></figure>
 
@@ -934,6 +945,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/08/07/SQL进阶/" rel="prev" title="sql范式">
+                sql范式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1004,7 +1019,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

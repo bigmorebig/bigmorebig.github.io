@@ -95,17 +95,17 @@
   };
 </script>
 
-  <meta name="description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+  <meta name="description" content="数据库范式我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。 目前关系型数据库一共有6种范式，，由低到高分别为：  1NF（第一范式） 2NF（第二范式） 3NF（第三范式） BCNF（巴斯-科德范式） 4NF（第四范式） 5NF（第五范式，也叫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于不同测试阶段的测试场景">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/index.html">
+<meta property="og:title" content="sql范式">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/SQL进阶/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta property="og:description" content="数据库范式我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。 目前关系型数据库一共有6种范式，，由低到高分别为：  1NF（第一范式） 2NF（第二范式） 3NF（第三范式） BCNF（巴斯-科德范式） 4NF（第四范式） 5NF（第五范式，也叫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-31T10:01:06.418Z">
+<meta property="og:updated_time" content="2019-08-07T11:14:31.490Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于不同测试阶段的测试场景">
-<meta name="twitter:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta name="twitter:title" content="sql范式">
+<meta name="twitter:description" content="数据库范式我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。 目前关系型数据库一共有6种范式，，由低到高分别为：  1NF（第一范式） 2NF（第二范式） 3NF（第三范式） BCNF（巴斯-科德范式） 4NF（第四范式） 5NF（第五范式，也叫">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/SQL进阶/">
 
 
 
@@ -126,7 +126,7 @@
 </script>
 
   
-  <title>关于不同测试阶段的测试场景 | 我的博客</title>
+  <title>sql范式 | 我的博客</title>
   
 
 
@@ -362,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/SQL进阶/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -379,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于不同测试阶段的测试场景
+          <h1 class="post-title" itemprop="name headline">sql范式
 
               
             
@@ -405,7 +405,7 @@
                 
               
 
-              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：18:01:06" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
+              <time title="创建时间：2019-08-07 19:13:12 / 修改时间：19:14:31" itemprop="dateCreated datePublished" datetime="2019-08-07T19:13:12+08:00">2019-08-07</time>
             </span>
           
 
@@ -424,7 +424,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/测试/" itemprop="url" rel="index"><span itemprop="name">测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a></span>
 
                 
                 
@@ -464,48 +464,93 @@
       
 
       
-        <h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的<code>等价类</code></p>
-<p>单元测试用例（单元测试是一个包含<code>输入数据</code>和<code>预计输出</code>的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的输入参数  </span><br><span class="line">2. 被测函数内部需要读取的全局静态变量</span><br><span class="line">3. 函数内部调用子函数获得的数据等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>  预计输出并不只是被测函数的返回值，以下为一些分类：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的返回值</span><br><span class="line">2. 被测函数的输出参数</span><br><span class="line">3. 被测函数中进行的文件更新</span><br><span class="line">4. 被测函数中进行的数据库更新等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h4 id="驱动代码，桩代码和Mock代码"><a href="#驱动代码，桩代码和Mock代码" class="headerlink" title="驱动代码，桩代码和Mock代码"></a>驱动代码，桩代码和Mock代码</h4><p><strong>驱动代码</strong>: 调用被测函数的代码，包含调用被测函数前的数据准备，调用被测函数和验证相关结果，驱动代码结构通常由单元测试框架决定。</p>
-<p><strong>桩代码</strong>: 指用来代替函数内部某个尚未实现的函数的代码，与真是代码相比，桩代码具有与原函数相同的原形，只是内部实现不同，桩代码只是起到隔离和补齐的作用，是被测代码能够独立编译，链接并独立运行，同时桩代码还有控制被测函数执行路径的作用，通常桩代码的<code>验证(assert)</code>逻辑出现在驱动代码中</p>
-<p><strong>Mock代码</strong>: 与桩代码类似，对于结果的验证通常出现在<code>Mock</code>代码中</p>
-<h4 id="单元测试自动化的过程"><a href="#单元测试自动化的过程" class="headerlink" title="单元测试自动化的过程"></a>单元测试自动化的过程</h4><ol>
-<li>测试用例自动执行</li>
-<li>用例框架代码生成的自动化,如<code>unittest</code>框架提高开发效率</li>
-<li>部分测试输入数据的自动化生成,如通过条件判断语句来控制测试输入数据的自动化生成</li>
-<li>自动桩代码的生成</li>
+        <h3 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h3><p>我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。</p>
+<p>目前关系型数据库一共有6种范式，，由低到高分别为：</p>
+<ol>
+<li>1NF（第一范式）</li>
+<li>2NF（第二范式）</li>
+<li>3NF（第三范式）</li>
+<li>BCNF（巴斯-科德范式）</li>
+<li>4NF（第四范式）</li>
+<li>5NF（第五范式，也叫完美范式）</li>
 </ol>
+<p>数据库范式的设计越高阶，冗余度就越低，同时高阶的范式一定会满足低阶的要求。</p>
+<p><strong>数据库表中键的定义</strong>：</p>
 <ul>
-<li><p>指自动化工具对被测代码进行分析扫描，自 动为被测函数内部调用的其他函数生成可编程的桩代码</p>
-<ul>
-<li>抽桩：在代码集成测试阶段，希望不再调用桩代码而调用真实代码</li>
-</ul>
-<ol start="5">
-<li>被测代码的自动化静态分析：主要指代码的<code>静态扫描</code>，目的是识别违反编码规则和编码风格的代码行，比较常见的工具有<code>sonar</code>和<code>coverity</code>。</li>
-<li>测试覆盖率的自动统计与分析</li>
-</ol>
+<li><p>超键：能唯一标识的属性集</p>
+</li>
+<li><p>候选键：如果超键中不包含多余的属性，那么这个键就是超键</p>
+</li>
+<li><p>主键：用户可以从候选键中选择一个键作为主键</p>
+</li>
+<li><p>外键：如果R1数据表中某属性集不是R1的主键，而是另一个表R2的主键，那么这个键就是R1的主键</p>
+</li>
+<li><p>主属性：包含任一候选键的属性成为主属性</p>
+</li>
+<li><p>非主属性：与主属性相对，不包含任何一个候选键的属性</p>
 </li>
 </ul>
-<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>如单元测试最大的区别在于代码集成测试不允许使用桩代码<code>web service</code>测试</p>
+<p><strong>第一范式</strong>：<strong>指的是数据表中任何属性都是原子性的，不可再分</strong>。几乎所有关系型数据库都满足第一范式的要求。</p>
+<p><strong>第二范式</strong>：<strong>指的是数据表的非主属性都要和这个数据表的候选键有完全依赖</strong>。以球员表player_game表为例，包含球员编号，姓名，年龄，比赛编号，比赛时间和比赛场地等属性，这里的候选键和主键分别为(球员编号和比赛编号)。但是这个数据表设计并不满足第二范式，因为还存在以下对应关系:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(球员编号)--&gt; (姓名，年龄)</span><br><span class="line">(比赛编号) --&gt; (比赛时间，比赛场地)</span><br></pre></td></tr></table></figure>
+
+<p>这样会产生以下问题：</p>
 <ol>
-<li>测试脚手架代码的自动化生成,如<code>httprunner</code>可以自动生成项目脚手架</li>
-<li>部分测试数据的自动化生成,与单元测试的区别在于单元测试的输入数据是函数的参数组合，API测试对应的是API的参数和API调用的payload</li>
-<li><code>response</code>验证的自动化</li>
-<li>基于测试工具(如<code>postman</code>)的自动化脚本生成:在使用测试工具测试时，在已经存在多个测试用例的情况下来基于代码实现API测试时，存在一个问题就在于，可以开发一个代码转换工具，自动将已有的测试用例(如<code>JSON</code>格式)转换为可执行代码，为后续<code>CI/CD</code>直接使用</li>
+<li>数据冗余：如果一个球员可以参加n场比赛，那么球员的姓名和年龄就重复了n-1次。一个比赛可能有m个球员参加，比赛时间和场地就重复了m-1次</li>
+<li>插入异常：我们想要添加一场新的比赛，但是这时还没确定参加的球员都有谁，那么久没法插入</li>
+<li>删除异常：比如想要删除某个球员编号，如果没有单独保存比赛表时，就会把比赛信息也删除掉</li>
+<li>更新异常：如果想要调整某个比赛时间，那么数据表中所有时间都要调整</li>
 </ol>
-<h3 id="功能测试与性能测试"><a href="#功能测试与性能测试" class="headerlink" title="功能测试与性能测试"></a>功能测试与性能测试</h3><h4 id="验证功能性需求"><a href="#验证功能性需求" class="headerlink" title="验证功能性需求"></a>验证功能性需求</h4><ul>
-<li><strong>显示功能需求</strong>：实现软件本身的功能需求</li>
-<li><strong>隐式功能需求</strong>：软件出现异常的处理机制是否正确</li>
-</ul>
-<h4 id="非功能性需求"><a href="#非功能性需求" class="headerlink" title="非功能性需求"></a>非功能性需求</h4><ul>
-<li><strong>安全</strong>：如密码加密，传输过程加密，<code>SQL注入</code>，<code>XSS攻击</code>（补充：拿到加密密码反解成本是否符合要求）</li>
-<li><strong>性能</strong>：响应时间是否达到要求，死锁和不合理资源等待情况，高并发情况下服务端是否存在内存泄漏</li>
-<li><strong>兼容性</strong>：不同浏览器，不同主机，不同网络，不同分辨率</li>
+<p>为避免以上情况，可以将一张表拆分为3张表。球员player表包含球员编号，年龄，姓名；比赛game表包含比赛编号，比赛时间和比赛场地等属性；球员关系player_game表包含球员编号，比赛编号，比赛得分等属性</p>
+<p><strong>第三范式：对任何非主属性都不传递依赖于候选键。</strong></p>
+<p>以球员player表为例，这张表包含球员编号，姓名，球队名称，球队主教练。球员编号决定了球队名称，球队名称决定了球队主教练，那么非主属性球队主教练就依赖于候选键球员编号。需要将player表拆分为下面这样：</p>
+<p>球员表包含球员编号，姓名和球队名称；球队表包含球队名称和球队主教练。</p>
+<p>当然，也不一定是范式越高就越好，越高阶以为这冗余越少，同时数据表也越多，搜索的时间也越大。实际工作中往往根据实际情况适当采用<strong>反范式</strong>，以时间换取空间的做法，容忍适当的冗余。</p>
+<table>
+<thead>
+<tr>
+<th>仓库名</th>
+<th>管理员</th>
+<th>物品名</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>北京仓</td>
+<td>张三</td>
+<td>iPhone XR</td>
+<td>10</td>
+</tr>
+<tr>
+<td>北京仓</td>
+<td>张三</td>
+<td>iPhone 7</td>
+<td>20</td>
+</tr>
+<tr>
+<td>上海仓</td>
+<td>李四</td>
+<td>iPhone 8</td>
+<td>30</td>
+</tr>
+<tr>
+<td>上海仓</td>
+<td>李四</td>
+<td>iPhone X</td>
+<td>40</td>
+</tr>
+</tbody></table>
+<p>在上表中，一个仓库只有一个管理员，同时一个管理员也管理者一个仓库。这样候选键为(仓库名，物品名)和(管理员，物品名)，然后我们从中选取一个候选键作为主键。按照以上理论梳理，此表满足了1NF,2NF,3NF规范，但是同样存在以下问题：</p>
+<ol>
+<li>增加一个仓库，但是没有存放任何物品，根据数据完整性的要求，主键不能有空值，因此会出现插入异常</li>
+<li>仓库管理员更换之后，会修改多条记录</li>
+<li>仓库物品卖空后，仓库名称和管理员都会随之删除掉</li>
+</ol>
+<p>由此引入<strong>BCNF</strong>(巴斯-科德范式)：<strong>它在3NF的基础上消除了主属性对候选键的部分依赖或者传递依赖关系</strong></p>
+<p>按照<code>BCNF</code>要求，我们需要将上表拆分为两个表：</p>
+<ul>
+<li>仓库表：(仓库名，管理员)</li>
+<li>库存表：（仓库名，物品名，数量）</li>
 </ul>
 
       
@@ -585,8 +630,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/处理xml文件/" rel="next" title="处理xml文件">
-                <i class="fa fa-chevron-left"></i> 处理xml文件
+              <a href="/2019/08/05/SQL/" rel="next" title="sql基础">
+                <i class="fa fa-chevron-left"></i> sql基础
               </a>
             
           </div>
@@ -595,8 +640,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/shell文本处理三剑客之sed/" rel="prev" title="shell文本处理三剑客之sed">
-                shell文本处理三剑客之sed <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/07/python比较与拷贝问题/" rel="prev" title="Python比较符与拷贝问题">
+                Python比较符与拷贝问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -777,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#驱动代码，桩代码和Mock代码"><span class="nav-number">1.1.</span> <span class="nav-text">驱动代码，桩代码和Mock代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试自动化的过程"><span class="nav-number">1.2.</span> <span class="nav-text">单元测试自动化的过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成测试"><span class="nav-number">2.</span> <span class="nav-text">集成测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能测试与性能测试"><span class="nav-number">3.</span> <span class="nav-text">功能测试与性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证功能性需求"><span class="nav-number">3.1.</span> <span class="nav-text">验证功能性需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非功能性需求"><span class="nav-number">3.2.</span> <span class="nav-text">非功能性需求</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库范式"><span class="nav-number">1.</span> <span class="nav-text">数据库范式</span></a></li></ol></div>
             
 
           </div>

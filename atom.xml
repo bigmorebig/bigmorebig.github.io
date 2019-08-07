@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-08-05T10:46:42.462Z</updated>
+  <updated>2019-08-07T11:14:31.626Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python比较符与拷贝问题</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/python%E6%AF%94%E8%BE%83%E4%B8%8E%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/python比较与拷贝问题/</id>
+    <published>2019-08-07T11:13:12.181Z</published>
+    <updated>2019-08-07T11:14:31.626Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;is-VS&quot;&gt;&lt;a href=&quot;#is-VS&quot; class=&quot;headerlink&quot; title=&quot;is VS ==&quot;&gt;&lt;/a&gt;is VS ==&lt;/h3&gt;&lt;p&gt;简单来说，&lt;code&gt;==&lt;/code&gt;比较的是值大小，&lt;code&gt;is&lt;/code&gt;比较的是内存地址，
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>sql范式</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/SQL%E8%BF%9B%E9%98%B6/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/07/SQL进阶/</id>
+    <published>2019-08-07T11:13:12.171Z</published>
+    <updated>2019-08-07T11:14:31.490Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;数据库范式&quot;&gt;&lt;a href=&quot;#数据库范式&quot; class=&quot;headerlink&quot; title=&quot;数据库范式&quot;&gt;&lt;/a&gt;数据库范式&lt;/h3&gt;&lt;p&gt;我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范
+      
+    
+    </summary>
+    
+      <category term="sql" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/sql/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>sql基础</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/</id>
     <published>2019-08-05T10:36:36.415Z</published>
-    <updated>2019-08-05T10:46:42.462Z</updated>
+    <updated>2019-08-07T11:15:04.507Z</updated>
     
     <summary type="html">
     
@@ -125,29 +167,6 @@
   </entry>
   
   <entry>
-    <title>Linux之uniq</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.543Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
-&lt;li&gt;uniq 
-      
-    
-    </summary>
-    
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Linux之sort排序</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bsort%E6%8E%92%E5%BA%8F/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之sort排序/</id>
@@ -162,6 +181,29 @@
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;参数：&quot;&gt;&lt;a href=&quot;#参数：&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux之uniq</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.543Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
+&lt;li&gt;uniq 
       
     
     </summary>
