@@ -63,7 +63,7 @@
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/05/SQL/</id>
     <published>2019-08-05T10:36:36.415Z</published>
-    <updated>2019-08-07T11:15:04.507Z</updated>
+    <updated>2019-08-08T12:24:36.937Z</updated>
     
     <summary type="html">
     
@@ -102,6 +102,27 @@
   </entry>
   
   <entry>
+    <title>关于不同测试阶段的测试场景</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T10:01:06.418Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的
+      
+    
+    </summary>
+    
+      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>处理xml文件</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/</id>
@@ -119,27 +140,6 @@
     </summary>
     
       <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>关于不同测试阶段的测试场景</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
-    <published>2019-07-31T09:57:48.000Z</published>
-    <updated>2019-07-31T10:01:06.418Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的
-      
-    
-    </summary>
-    
-      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
   </entry>

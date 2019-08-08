@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://github.com/images/Oracle%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/images/MYSQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/images/MYSQL%E7%BB%93%E6%9E%84.jpg">
-<meta property="og:updated_time" content="2019-08-07T11:15:04.507Z">
+<meta property="og:updated_time" content="2019-08-08T12:24:36.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql基础">
 <meta name="twitter:description" content="Oracle执行流程  语法检查：检查 SQL 拼写是否正确，如果不正确，Oracle 会报语法错误。  语义检查：检查 SQL 中的访问对象是否存在。比如我们在写SELECT 语句的时候，列名写错了，系统就会提示错误。语法检查和语义检查的作用是保证 SQL 语句没有错误。  权限检查：看用户是否具备访问该数据的权限。  共享池检查：共享池(Shared Pool)是一块内存池，最主要的作用是缓存">
@@ -408,7 +408,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-07 19:15:04" itemprop="dateModified" datetime="2019-08-07T19:15:04+08:00">2019-08-07</time>
+                <time title="修改时间：2019-08-08 20:24:36" itemprop="dateModified" datetime="2019-08-08T20:24:36+08:00">2019-08-08</time>
               </span>
             
           
@@ -841,6 +841,87 @@
 <p>为了保证数据修改的正确，可用try..except…模式捕获异常</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  sql = <span class="string">"INSERT INTO player (team_id, player_name, height) VALUES (%s, %s, %s)"</span></span><br><span class="line">  val = (<span class="number">1003</span>, <span class="string">" 约翰 - 科林斯 "</span>, <span class="number">2.08</span>)</span><br><span class="line">  cursor.execute(sql, val)</span><br><span class="line">  db.commit()</span><br><span class="line">  print(cursor.rowcount, <span class="string">" 记录插入成功。"</span>)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">  <span class="comment"># 打印异常信息</span></span><br><span class="line">  traceback.print_exc()</span><br><span class="line">  <span class="comment"># 回滚  </span></span><br><span class="line">  db.rollback()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">  <span class="comment"># 关闭数据库连接</span></span><br><span class="line">  db.close()</span><br></pre></td></tr></table></figure>
 
+<h3 id="Python-ORM框架操作MYSQL"><a href="#Python-ORM框架操作MYSQL" class="headerlink" title="Python ORM框架操作MYSQL"></a>Python ORM框架操作MYSQL</h3><p>ORM(Object Relation Mapping),使用ORM框架的原因在于随着项目的增加，降低维护成本，且不用关系底层的SQL语句是如何写的，就可以像类或者函数一样使用。以下示例都基于<code>sqlalchemy</code></p>
+<h4 id="初始化表结构"><a href="#初始化表结构" class="headerlink" title="初始化表结构"></a>初始化表结构</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, String, create_engine, Integer, Float</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line"><span class="comment"># 创建对象的基类:Base = declarative_base()</span></span><br><span class="line"><span class="comment"># 定义User对象:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span><span class="params">(Base)</span>:</span></span><br><span class="line"><span class="comment"># 表的名字:</span></span><br><span class="line">	__tablename__ = <span class="string">'player'</span></span><br><span class="line">    <span class="comment"># 表的结构: </span></span><br><span class="line">    player_id = Column(Integer, primary_key=<span class="literal">True</span>, autoincrement=<span class="literal">True</span>)</span><br><span class="line">    team_id = Column(Integer) </span><br><span class="line">    player_name = Column(String(<span class="number">255</span>))   </span><br><span class="line">    height = Column(Float(<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># 初始化数据库连接:</span></span><br><span class="line">engine = create_engine(<span class="string">'mysql+pymysql://root:123456@localhost:3306/heros_data'</span>)</span><br><span class="line"><span class="comment"># 创建DBSession类型:</span></span><br><span class="line">DBSession = sessionmaker(bind=engine)</span><br><span class="line">session = DBSession()</span><br></pre></td></tr></table></figure>
+
+<p>连接格式为<code>数据库类型+数据库连接框架://用户名：密码@host:port/数据库名</code></p>
+<p><code>__tablename</code>指明了对应的数据库表名称</p>
+<p>在 SQLAlchemy 中，我们采用 Column 对字段进行定义，常用的数据类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>Integer</th>
+<th>整数型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Float</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>Decimal</td>
+<td>定点类型</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>布尔类型</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>datetime.date日期类型</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>datetime.date时间类型</td>
+</tr>
+<tr>
+<td>String</td>
+<td>字符类型，使用时需指明长度</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>文本类型</td>
+</tr>
+</tbody></table>
+<p>除了数据类型之外，也可以指定Column参数</p>
+<table>
+<thead>
+<tr>
+<th>default</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>primary_key</td>
+<td>是否为主键</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>是否唯一</td>
+</tr>
+<tr>
+<td>autoincrement</td>
+<td>是否自增</td>
+</tr>
+</tbody></table>
+<h4 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增一行数据</span></span><br><span class="line">new_player = Player(team_id=<span class="number">1002</span>, player_name=<span class="string">'唐潇唐'</span>, height=<span class="number">1.71</span>)</span><br><span class="line">session.add(new_player)</span><br><span class="line">session.commit()</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将球员身高为2.08的全部改为2.09</span></span><br><span class="line">rows = session.query(Player).filter(Player.height == <span class="number">2.08</span>).all()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rows:  </span><br><span class="line">	i.height = <span class="number">2.09</span></span><br><span class="line">session.commit()session.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">row = session.query(Player).filter(Player.player_name==<span class="string">'约翰 - 科林斯'</span>).first()</span><br><span class="line">session.delete(row)</span><br><span class="line">session.commit()</span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><p>query(Player)相当于是<code>select *</code>,这时可以对player表中所有字段进行打印</p>
+<p>filter()函数相当于是<code>WHERE</code>条件查询 </p>
+<p>多条件查询时，比如查询身高大于等于2.08，小于等于2.10的球员</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows = session.query(Player).filter(Player.height &gt;=<span class="number">2.08</span>, Player.height &lt;=<span class="number">2.10</span>).all()</span><br></pre></td></tr></table></figure>
+
+<p>使用or查询时，需要引入<code>or_</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> or_</span><br><span class="line">rows = session.query(Player).filter(or_(Player.height &gt;=<span class="number">2.08</span>, Player.height &lt;=<span class="number">2.10</span>)).all()</span><br></pre></td></tr></table></figure>
+
+<p>分组查询，排序，统计等需要引入<code>func</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line">rows = session.query(Player.team_id, func.count(Player.player_id)).group_by(Player.team_id).having(func.count(Player.player_id)&gt;<span class="number">5</span>).order_by(func.count(Player.player_id).asc()).all()</span><br><span class="line">print(rows)</span><br></pre></td></tr></table></figure>
+
+<p>关于条件查询更多的接口，可以查看<code>filter</code>方法和<code>func</code>方法的源码目录</p>
 
       
     </div>
@@ -1097,7 +1178,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle执行流程"><span class="nav-number">1.</span> <span class="nav-text">Oracle执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL架构"><span class="nav-number">2.</span> <span class="nav-text">MYSQL架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL执行流程"><span class="nav-number">3.</span> <span class="nav-text">MYSQL执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT执行顺序"><span class="nav-number">4.</span> <span class="nav-text">SELECT执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL内置函数"><span class="nav-number">5.</span> <span class="nav-text">SQL内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算术函数"><span class="nav-number">5.1.</span> <span class="nav-text">算术函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串函数"><span class="nav-number">5.2.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期函数"><span class="nav-number">5.3.</span> <span class="nav-text">日期函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换函数"><span class="nav-number">6.</span> <span class="nav-text">转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">7.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联表查询"><span class="nav-number">8.</span> <span class="nav-text">联表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#交叉查询"><span class="nav-number">8.1.</span> <span class="nav-text">交叉查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自然连接"><span class="nav-number">8.2.</span> <span class="nav-text">自然连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ON连接"><span class="nav-number">8.3.</span> <span class="nav-text">ON连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#USING"><span class="nav-number">8.4.</span> <span class="nav-text">USING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外连接"><span class="nav-number">8.5.</span> <span class="nav-text">外连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">9.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">10.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">10.1.</span> <span class="nav-text">事务隔离级别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PYTHON操作MYSQL接口"><span class="nav-number">11.</span> <span class="nav-text">PYTHON操作MYSQL接口</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle执行流程"><span class="nav-number">1.</span> <span class="nav-text">Oracle执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL架构"><span class="nav-number">2.</span> <span class="nav-text">MYSQL架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL执行流程"><span class="nav-number">3.</span> <span class="nav-text">MYSQL执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT执行顺序"><span class="nav-number">4.</span> <span class="nav-text">SELECT执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL内置函数"><span class="nav-number">5.</span> <span class="nav-text">SQL内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算术函数"><span class="nav-number">5.1.</span> <span class="nav-text">算术函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串函数"><span class="nav-number">5.2.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期函数"><span class="nav-number">5.3.</span> <span class="nav-text">日期函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换函数"><span class="nav-number">6.</span> <span class="nav-text">转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">7.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联表查询"><span class="nav-number">8.</span> <span class="nav-text">联表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#交叉查询"><span class="nav-number">8.1.</span> <span class="nav-text">交叉查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自然连接"><span class="nav-number">8.2.</span> <span class="nav-text">自然连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ON连接"><span class="nav-number">8.3.</span> <span class="nav-text">ON连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#USING"><span class="nav-number">8.4.</span> <span class="nav-text">USING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外连接"><span class="nav-number">8.5.</span> <span class="nav-text">外连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">9.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">10.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">10.1.</span> <span class="nav-text">事务隔离级别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PYTHON操作MYSQL接口"><span class="nav-number">11.</span> <span class="nav-text">PYTHON操作MYSQL接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-ORM框架操作MYSQL"><span class="nav-number">12.</span> <span class="nav-text">Python ORM框架操作MYSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化表结构"><span class="nav-number">12.1.</span> <span class="nav-text">初始化表结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加数据"><span class="nav-number">12.2.</span> <span class="nav-text">增加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据"><span class="nav-number">12.3.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据"><span class="nav-number">12.4.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询数据"><span class="nav-number">12.5.</span> <span class="nav-text">查询数据</span></a></li></ol></li></ol></div>
             
 
           </div>
