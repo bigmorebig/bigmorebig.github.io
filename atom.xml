@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-08-07T11:14:31.626Z</updated>
+  <updated>2019-08-09T10:26:43.787Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解迭代器和生成器</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/深入理解迭代器和生成器/</id>
+    <published>2019-08-09T10:25:01.443Z</published>
+    <updated>2019-08-09T10:26:43.787Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用&lt;code&gt;next()&lt;/code&gt;函数才会去取一次数据，直到抛出&lt;code&gt;StopIteration&lt;/code&gt;异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python的参数传递机制</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/python%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/python参数传递/</id>
+    <published>2019-08-09T10:25:01.440Z</published>
+    <updated>2019-08-09T10:28:56.838Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;首先看以下示例：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/spa
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>装饰器</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/装饰器/</id>
+    <published>2019-08-09T10:25:01.429Z</published>
+    <updated>2019-08-09T10:26:05.822Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;之前对于装饰器的理解感觉比较片面，没成体系，在此记录一下装饰器的学习之路&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Decorators is to modify the behavior of the function through a wrapper so we don
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Python比较符与拷贝问题</title>
@@ -102,27 +168,6 @@
   </entry>
   
   <entry>
-    <title>关于不同测试阶段的测试场景</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
-    <published>2019-07-31T09:57:48.000Z</published>
-    <updated>2019-07-31T10:01:06.418Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的
-      
-    
-    </summary>
-    
-      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>处理xml文件</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/</id>
@@ -145,23 +190,22 @@
   </entry>
   
   <entry>
-    <title>Linux之df</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.526Z</updated>
+    <title>关于不同测试阶段的测试场景</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T10:01:06.418Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
+        &lt;h3 id=&quot;单元测试&quot;&gt;&lt;a href=&quot;#单元测试&quot; class=&quot;headerlink&quot; title=&quot;单元测试&quot;&gt;&lt;/a&gt;单元测试&lt;/h3&gt;&lt;p&gt;代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的
       
     
     </summary>
     
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+      <category term="测试" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
   </entry>
@@ -181,6 +225,28 @@
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;参数：&quot;&gt;&lt;a href=&quot;#参数：&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux之df</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bdf/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之df/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.526Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;disk free&lt;/strong&gt;&lt;br&gt;基本格式&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
       
     
     </summary>

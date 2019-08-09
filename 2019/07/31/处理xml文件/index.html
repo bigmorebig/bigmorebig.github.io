@@ -571,8 +571,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/linux之df/" rel="next" title="Linux之df">
-                <i class="fa fa-chevron-left"></i> Linux之df
+              <a href="/2019/07/31/关于不同测试阶段测试场景/" rel="next" title="关于不同测试阶段的测试场景">
+                <i class="fa fa-chevron-left"></i> 关于不同测试阶段的测试场景
               </a>
             
           </div>
@@ -581,8 +581,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/31/关于不同测试阶段测试场景/" rel="prev" title="关于不同测试阶段的测试场景">
-                关于不同测试阶段的测试场景 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/01/shell文本处理三剑客之sed/" rel="prev" title="shell文本处理三剑客之sed">
+                shell文本处理三剑客之sed <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,6 +604,10 @@
 
           </div>
           
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
 
   
 
@@ -655,7 +659,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -914,6 +918,35 @@
 
 
 
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'a764377e47c2bf9c9611',
+    clientSecret: '5cf312fb5970a5d51371f98dccbb81b58838e3d6',
+    repo: 'bigmorebig.github.io/',
+    owner: 'bigmorebig',
+    admin: ['bigmorebig'],
+    id: md5(location.pathname),
+    
+      language: 'zh-CN',
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
 
   
 

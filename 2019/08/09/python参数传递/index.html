@@ -95,17 +95,20 @@
   };
 </script>
 
-  <meta name="description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+  <meta name="description" content="首先看以下示例： 12345678&amp;gt;&amp;gt;&amp;gt; a = 1&amp;gt;&amp;gt;&amp;gt; b = 1&amp;gt;&amp;gt;&amp;gt; a is bTrue&amp;gt;&amp;gt;&amp;gt; a = [1, 2]&amp;gt;&amp;gt;&amp;gt; b = [1, 2]&amp;gt;&amp;gt;&amp;gt; a is bFalse   变量的赋值，表示让变量指向某个对象，并不是拷贝对象给变量；而一个对象是可以由多个对象指向 可变对象(列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于不同测试阶段的测试场景">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/index.html">
+<meta property="og:title" content="Python的参数传递机制">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/python参数传递/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta property="og:description" content="首先看以下示例： 12345678&amp;gt;&amp;gt;&amp;gt; a = 1&amp;gt;&amp;gt;&amp;gt; b = 1&amp;gt;&amp;gt;&amp;gt; a is bTrue&amp;gt;&amp;gt;&amp;gt; a = [1, 2]&amp;gt;&amp;gt;&amp;gt; b = [1, 2]&amp;gt;&amp;gt;&amp;gt; a is bFalse   变量的赋值，表示让变量指向某个对象，并不是拷贝对象给变量；而一个对象是可以由多个对象指向 可变对象(列">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-31T10:01:06.418Z">
+<meta property="og:image" content="https://github.com/images/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png">
+<meta property="og:image" content="https://github.com/images/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png">
+<meta property="og:updated_time" content="2019-08-09T10:28:56.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于不同测试阶段的测试场景">
-<meta name="twitter:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta name="twitter:title" content="Python的参数传递机制">
+<meta name="twitter:description" content="首先看以下示例： 12345678&amp;gt;&amp;gt;&amp;gt; a = 1&amp;gt;&amp;gt;&amp;gt; b = 1&amp;gt;&amp;gt;&amp;gt; a is bTrue&amp;gt;&amp;gt;&amp;gt; a = [1, 2]&amp;gt;&amp;gt;&amp;gt; b = [1, 2]&amp;gt;&amp;gt;&amp;gt; a is bFalse   变量的赋值，表示让变量指向某个对象，并不是拷贝对象给变量；而一个对象是可以由多个对象指向 可变对象(列">
+<meta name="twitter:image" content="https://github.com/images/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png">
 
 
 
@@ -115,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/python参数传递/">
 
 
 
@@ -126,7 +129,7 @@
 </script>
 
   
-  <title>关于不同测试阶段的测试场景 | 我的博客</title>
+  <title>Python的参数传递机制 | 我的博客</title>
   
 
 
@@ -346,7 +349,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/python参数传递/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -363,7 +366,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于不同测试阶段的测试场景
+          <h1 class="post-title" itemprop="name headline">Python的参数传递机制
 
               
             
@@ -389,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：18:01:06" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
+              <time title="创建时间：2019-08-09 18:25:01 / 修改时间：18:28:56" itemprop="dateCreated datePublished" datetime="2019-08-09T18:25:01+08:00">2019-08-09</time>
             </span>
           
 
@@ -408,7 +411,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/测试/" itemprop="url" rel="index"><span itemprop="name">测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -448,48 +451,44 @@
       
 
       
-        <h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的<code>等价类</code></p>
-<p>单元测试用例（单元测试是一个包含<code>输入数据</code>和<code>预计输出</code>的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的输入参数  </span><br><span class="line">2. 被测函数内部需要读取的全局静态变量</span><br><span class="line">3. 函数内部调用子函数获得的数据等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+        <p>首先看以下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
-<p>  预计输出并不只是被测函数的返回值，以下为一些分类：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的返回值</span><br><span class="line">2. 被测函数的输出参数</span><br><span class="line">3. 被测函数中进行的文件更新</span><br><span class="line">4. 被测函数中进行的数据库更新等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>变量的赋值，表示让变量指向某个对象，并不是拷贝对象给变量；而一个对象是可以由多个对象指向</li>
+<li>可变对象(列表，字典，集合等)的改变，会影响所有指向该对象的变量</li>
+<li>对于不可变对象(字符串，整型，元祖)的改变，所有指向该对象的变量的值总是一样的，也不会改变。但是通过某些操作(+,=等等)更新不可变对象时，会返回一个新的对象</li>
+<li>变量可以被删除，但对象无法被删除。这也和python的垃圾回收机制相符合，只有当该对象的指向变量为0个时，才会回收该对象。</li>
+</ul>
+<p>通过以下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a += <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="驱动代码，桩代码和Mock代码"><a href="#驱动代码，桩代码和Mock代码" class="headerlink" title="驱动代码，桩代码和Mock代码"></a>驱动代码，桩代码和Mock代码</h4><p><strong>驱动代码</strong>: 调用被测函数的代码，包含调用被测函数前的数据准备，调用被测函数和验证相关结果，驱动代码结构通常由单元测试框架决定。</p>
-<p><strong>桩代码</strong>: 指用来代替函数内部某个尚未实现的函数的代码，与真是代码相比，桩代码具有与原函数相同的原形，只是内部实现不同，桩代码只是起到隔离和补齐的作用，是被测代码能够独立编译，链接并独立运行，同时桩代码还有控制被测函数执行路径的作用，通常桩代码的<code>验证(assert)</code>逻辑出现在驱动代码中</p>
-<p><strong>Mock代码</strong>: 与桩代码类似，对于结果的验证通常出现在<code>Mock</code>代码中</p>
-<h4 id="单元测试自动化的过程"><a href="#单元测试自动化的过程" class="headerlink" title="单元测试自动化的过程"></a>单元测试自动化的过程</h4><ol>
-<li>测试用例自动执行</li>
-<li>用例框架代码生成的自动化,如<code>unittest</code>框架提高开发效率</li>
-<li>部分测试输入数据的自动化生成,如通过条件判断语句来控制测试输入数据的自动化生成</li>
-<li>自动桩代码的生成</li>
-</ol>
+<p>由于1是不可变对象，a, b都是指向1这个变量，a的值变化时，相当于a的指向又会重新改变，而b的指向是没有变化的</p>
+<p><img src="/images/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png" alt="1565256260196"></p>
+<p>而对于可变对象来说，a, b会同时指向一个内存地址，改变可变对象的值，会改变所有指向该对象的变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png" alt="1565312225472"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中，变量a和b同时指向1这个对象，当执行到a = 2时，是将a重新指向了2这个对象，而b仍然还是指向的1这个对象</p>
+<p>如果想要改变上述过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>可将b变量重新指向2这个对象，这样就能改变b的值</p>
+<p>而对于可变参数来说，改变对象的值，会改变所有指向它的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a.append(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a += [<span class="number">4</span>]</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = a + [<span class="number">4</span>]</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，a += [4]和a = a + [4]是不相同的操作，a = a + [4]是表示新创建一个新的列表，然后让a重新指向它，而a += [4]是一个自增的过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610677016776</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a += [<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610677016776</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = a + [<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610680008648</span></span><br></pre></td></tr></table></figure>
+
+<p>总结来说：</p>
 <ul>
-<li><p>指自动化工具对被测代码进行分析扫描，自 动为被测函数内部调用的其他函数生成可编程的桩代码</p>
-<ul>
-<li>抽桩：在代码集成测试阶段，希望不再调用桩代码而调用真实代码</li>
-</ul>
-<ol start="5">
-<li>被测代码的自动化静态分析：主要指代码的<code>静态扫描</code>，目的是识别违反编码规则和编码风格的代码行，比较常见的工具有<code>sonar</code>和<code>coverity</code>。</li>
-<li>测试覆盖率的自动统计与分析</li>
-</ol>
-</li>
-</ul>
-<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>如单元测试最大的区别在于代码集成测试不允许使用桩代码<code>web service</code>测试</p>
-<ol>
-<li>测试脚手架代码的自动化生成,如<code>httprunner</code>可以自动生成项目脚手架</li>
-<li>部分测试数据的自动化生成,与单元测试的区别在于单元测试的输入数据是函数的参数组合，API测试对应的是API的参数和API调用的payload</li>
-<li><code>response</code>验证的自动化</li>
-<li>基于测试工具(如<code>postman</code>)的自动化脚本生成:在使用测试工具测试时，在已经存在多个测试用例的情况下来基于代码实现API测试时，存在一个问题就在于，可以开发一个代码转换工具，自动将已有的测试用例(如<code>JSON</code>格式)转换为可执行代码，为后续<code>CI/CD</code>直接使用</li>
-</ol>
-<h3 id="功能测试与性能测试"><a href="#功能测试与性能测试" class="headerlink" title="功能测试与性能测试"></a>功能测试与性能测试</h3><h4 id="验证功能性需求"><a href="#验证功能性需求" class="headerlink" title="验证功能性需求"></a>验证功能性需求</h4><ul>
-<li><strong>显示功能需求</strong>：实现软件本身的功能需求</li>
-<li><strong>隐式功能需求</strong>：软件出现异常的处理机制是否正确</li>
-</ul>
-<h4 id="非功能性需求"><a href="#非功能性需求" class="headerlink" title="非功能性需求"></a>非功能性需求</h4><ul>
-<li><strong>安全</strong>：如密码加密，传输过程加密，<code>SQL注入</code>，<code>XSS攻击</code>（补充：拿到加密密码反解成本是否符合要求）</li>
-<li><strong>性能</strong>：响应时间是否达到要求，死锁和不合理资源等待情况，高并发情况下服务端是否存在内存泄漏</li>
-<li><strong>兼容性</strong>：不同浏览器，不同主机，不同网络，不同分辨率</li>
+<li>如果对象是可变的，对象改变时，指向这个对象的所有变量都会改变</li>
+<li>如果对象是不可变的，对象改变时，指向这个对象的变量不会受到影响</li>
+<li>为了安全，函数末尾尽量使用return返回</li>
 </ul>
 
       
@@ -569,8 +568,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/linux之sort排序/" rel="next" title="Linux之sort排序">
-                <i class="fa fa-chevron-left"></i> Linux之sort排序
+              <a href="/2019/08/09/装饰器/" rel="next" title="装饰器">
+                <i class="fa fa-chevron-left"></i> 装饰器
               </a>
             
           </div>
@@ -579,8 +578,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/31/处理xml文件/" rel="prev" title="处理xml文件">
-                处理xml文件 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/09/深入理解迭代器和生成器/" rel="prev" title="深入理解迭代器和生成器">
+                深入理解迭代器和生成器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -629,17 +628,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -740,23 +730,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#驱动代码，桩代码和Mock代码"><span class="nav-number">1.1.</span> <span class="nav-text">驱动代码，桩代码和Mock代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试自动化的过程"><span class="nav-number">1.2.</span> <span class="nav-text">单元测试自动化的过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成测试"><span class="nav-number">2.</span> <span class="nav-text">集成测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能测试与性能测试"><span class="nav-number">3.</span> <span class="nav-text">功能测试与性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证功能性需求"><span class="nav-number">3.1.</span> <span class="nav-text">验证功能性需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非功能性需求"><span class="nav-number">3.2.</span> <span class="nav-text">非功能性需求</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

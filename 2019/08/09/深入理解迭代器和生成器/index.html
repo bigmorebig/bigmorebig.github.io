@@ -95,17 +95,17 @@
   };
 </script>
 
-  <meta name="description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+  <meta name="description" content="对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用next()函数才会去取一次数据，直到抛出StopIteration异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值 12345&amp;gt;&amp;gt;&amp;gt; a = (i for i in range(3))&amp;gt;&amp;gt;&amp;gt; next(a)0&amp;gt;&amp;gt;&amp;gt; list(a)[">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于不同测试阶段的测试场景">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/index.html">
+<meta property="og:title" content="深入理解迭代器和生成器">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/深入理解迭代器和生成器/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta property="og:description" content="对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用next()函数才会去取一次数据，直到抛出StopIteration异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值 12345&amp;gt;&amp;gt;&amp;gt; a = (i for i in range(3))&amp;gt;&amp;gt;&amp;gt; next(a)0&amp;gt;&amp;gt;&amp;gt; list(a)[">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-31T10:01:06.418Z">
+<meta property="og:updated_time" content="2019-08-09T10:26:43.787Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于不同测试阶段的测试场景">
-<meta name="twitter:description" content="单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类 单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类： 12341. 被测函数的输入参数  2. 被测函数内部需要读取的全局静态变量3. 函数内部调用子函数获得的数据等等...">
+<meta name="twitter:title" content="深入理解迭代器和生成器">
+<meta name="twitter:description" content="对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用next()函数才会去取一次数据，直到抛出StopIteration异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值 12345&amp;gt;&amp;gt;&amp;gt; a = (i for i in range(3))&amp;gt;&amp;gt;&amp;gt; next(a)0&amp;gt;&amp;gt;&amp;gt; list(a)[">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/深入理解迭代器和生成器/">
 
 
 
@@ -126,7 +126,7 @@
 </script>
 
   
-  <title>关于不同测试阶段的测试场景 | 我的博客</title>
+  <title>深入理解迭代器和生成器 | 我的博客</title>
   
 
 
@@ -346,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/09/深入理解迭代器和生成器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -363,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于不同测试阶段的测试场景
+          <h1 class="post-title" itemprop="name headline">深入理解迭代器和生成器
 
               
             
@@ -389,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：18:01:06" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
+              <time title="创建时间：2019-08-09 18:25:01 / 修改时间：18:26:43" itemprop="dateCreated datePublished" datetime="2019-08-09T18:25:01+08:00">2019-08-09</time>
             </span>
           
 
@@ -408,7 +408,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/测试/" itemprop="url" rel="index"><span itemprop="name">测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -448,49 +448,19 @@
       
 
       
-        <h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的<code>等价类</code></p>
-<p>单元测试用例（单元测试是一个包含<code>输入数据</code>和<code>预计输出</code>的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的输入参数  </span><br><span class="line">2. 被测函数内部需要读取的全局静态变量</span><br><span class="line">3. 函数内部调用子函数获得的数据等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+        <p>对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用<code>next()</code>函数才会去取一次数据，直到抛出<code>StopIteration</code>异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(a)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 
-<p>  预计输出并不只是被测函数的返回值，以下为一些分类：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的返回值</span><br><span class="line">2. 被测函数的输出参数</span><br><span class="line">3. 被测函数中进行的文件更新</span><br><span class="line">4. 被测函数中进行的数据库更新等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>对于经常使用的<code>(i in a)</code>来说，其实它底层调用的还是生成器原理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    val = next(a)</span><br><span class="line">    <span class="keyword">if</span> val == i:</span><br><span class="line">        <span class="keyword">yield</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="驱动代码，桩代码和Mock代码"><a href="#驱动代码，桩代码和Mock代码" class="headerlink" title="驱动代码，桩代码和Mock代码"></a>驱动代码，桩代码和Mock代码</h4><p><strong>驱动代码</strong>: 调用被测函数的代码，包含调用被测函数前的数据准备，调用被测函数和验证相关结果，驱动代码结构通常由单元测试框架决定。</p>
-<p><strong>桩代码</strong>: 指用来代替函数内部某个尚未实现的函数的代码，与真是代码相比，桩代码具有与原函数相同的原形，只是内部实现不同，桩代码只是起到隔离和补齐的作用，是被测代码能够独立编译，链接并独立运行，同时桩代码还有控制被测函数执行路径的作用，通常桩代码的<code>验证(assert)</code>逻辑出现在驱动代码中</p>
-<p><strong>Mock代码</strong>: 与桩代码类似，对于结果的验证通常出现在<code>Mock</code>代码中</p>
-<h4 id="单元测试自动化的过程"><a href="#单元测试自动化的过程" class="headerlink" title="单元测试自动化的过程"></a>单元测试自动化的过程</h4><ol>
-<li>测试用例自动执行</li>
-<li>用例框架代码生成的自动化,如<code>unittest</code>框架提高开发效率</li>
-<li>部分测试输入数据的自动化生成,如通过条件判断语句来控制测试输入数据的自动化生成</li>
-<li>自动桩代码的生成</li>
-</ol>
-<ul>
-<li><p>指自动化工具对被测代码进行分析扫描，自 动为被测函数内部调用的其他函数生成可编程的桩代码</p>
-<ul>
-<li>抽桩：在代码集成测试阶段，希望不再调用桩代码而调用真实代码</li>
-</ul>
-<ol start="5">
-<li>被测代码的自动化静态分析：主要指代码的<code>静态扫描</code>，目的是识别违反编码规则和编码风格的代码行，比较常见的工具有<code>sonar</code>和<code>coverity</code>。</li>
-<li>测试覆盖率的自动统计与分析</li>
-</ol>
-</li>
-</ul>
-<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>如单元测试最大的区别在于代码集成测试不允许使用桩代码<code>web service</code>测试</p>
-<ol>
-<li>测试脚手架代码的自动化生成,如<code>httprunner</code>可以自动生成项目脚手架</li>
-<li>部分测试数据的自动化生成,与单元测试的区别在于单元测试的输入数据是函数的参数组合，API测试对应的是API的参数和API调用的payload</li>
-<li><code>response</code>验证的自动化</li>
-<li>基于测试工具(如<code>postman</code>)的自动化脚本生成:在使用测试工具测试时，在已经存在多个测试用例的情况下来基于代码实现API测试时，存在一个问题就在于，可以开发一个代码转换工具，自动将已有的测试用例(如<code>JSON</code>格式)转换为可执行代码，为后续<code>CI/CD</code>直接使用</li>
-</ol>
-<h3 id="功能测试与性能测试"><a href="#功能测试与性能测试" class="headerlink" title="功能测试与性能测试"></a>功能测试与性能测试</h3><h4 id="验证功能性需求"><a href="#验证功能性需求" class="headerlink" title="验证功能性需求"></a>验证功能性需求</h4><ul>
-<li><strong>显示功能需求</strong>：实现软件本身的功能需求</li>
-<li><strong>隐式功能需求</strong>：软件出现异常的处理机制是否正确</li>
-</ul>
-<h4 id="非功能性需求"><a href="#非功能性需求" class="headerlink" title="非功能性需求"></a>非功能性需求</h4><ul>
-<li><strong>安全</strong>：如密码加密，传输过程加密，<code>SQL注入</code>，<code>XSS攻击</code>（补充：拿到加密密码反解成本是否符合要求）</li>
-<li><strong>性能</strong>：响应时间是否达到要求，死锁和不合理资源等待情况，高并发情况下服务端是否存在内存泄漏</li>
-<li><strong>兼容性</strong>：不同浏览器，不同主机，不同网络，不同分辨率</li>
-</ul>
+<p>所以，先看以下示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="number">2</span> <span class="keyword">in</span> b)</span><br><span class="line">print(<span class="number">4</span> <span class="keyword">in</span> b)</span><br><span class="line">print(<span class="number">3</span> <span class="keyword">in</span> b)</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>原因在于每次使用print函数时，都会消耗掉b中的值，而每次使用in函数时，比如<code>2 in b</code>就会消耗掉0, 1, 2这三个值，剩下3, 4这两个值，而<code>4 in b</code>时，其中存在4，就返回为True，此时b中已消耗完所有元素，在此调用就会失败。</p>
+<p>在看一个<a href="https://leetcode-cn.com/problems/is-subsequence/submissions/" target="_blank" rel="noopener">leetcode示例</a>，给定字符串 <strong>s</strong> 和 <strong>t</strong> ，判断 <strong>s</strong> 是否为 <strong>t</strong> 的子序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_subsequence</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    b = iter(b)</span><br><span class="line">    <span class="keyword">return</span> all(i <span class="keyword">in</span> b <span class="keyword">for</span> i <span class="keyword">in</span> a)</span><br><span class="line"></span><br><span class="line">print(is_subsequence([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br><span class="line">print(is_subsequence([<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -569,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/linux之sort排序/" rel="next" title="Linux之sort排序">
-                <i class="fa fa-chevron-left"></i> Linux之sort排序
+              <a href="/2019/08/09/python参数传递/" rel="next" title="Python的参数传递机制">
+                <i class="fa fa-chevron-left"></i> Python的参数传递机制
               </a>
             
           </div>
@@ -578,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/31/处理xml文件/" rel="prev" title="处理xml文件">
-                处理xml文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -629,17 +595,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -740,23 +697,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#驱动代码，桩代码和Mock代码"><span class="nav-number">1.1.</span> <span class="nav-text">驱动代码，桩代码和Mock代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试自动化的过程"><span class="nav-number">1.2.</span> <span class="nav-text">单元测试自动化的过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成测试"><span class="nav-number">2.</span> <span class="nav-text">集成测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能测试与性能测试"><span class="nav-number">3.</span> <span class="nav-text">功能测试与性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证功能性需求"><span class="nav-number">3.1.</span> <span class="nav-text">验证功能性需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非功能性需求"><span class="nav-number">3.2.</span> <span class="nav-text">非功能性需求</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
