@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python的垃圾回收机制]]></title>
+    <url>%2F2019%2F08%2F16%2F%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[引用计数引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收 12345678910111213141516171819202122232425import osimport psutil# 显示当前 python 程序占用的内存大小def show_memory_info(hint): pid = os.getpid() p = psutil.Process(pid) info = p.memory_full_info() memory = info.uss / 1024. / 1024 print('&#123;&#125; memory used: &#123;&#125; MB'.format(hint, memory))def func(): show_memory_info('initial') a = [i for i in range(10000000)] show_memory_info('after a created')func()show_memory_info('finished')########## 输出 ##########initial memory used: 47.19140625 MBafter a created memory used: 433.91015625 MBfinished memory used: 48.109375 MB 这个例子说明的是，a是局部变量，当包含a的函数执行完成之后，a的引用就变为0，也就被回收了，想要改变这种方式的话，只需要将a设置为global变量即可 这里存在的问题是，如果a是被返回的值，那么列表a的生命周期就没有消失，仍然会继续占用内存 12345def func(): show_memory_info('initial') a = [i for i in range(10000000)] show_memory_info('after a created') return a 查看对象的引用次数可用sys模块中的getrefcount函数 12345a = []print(sys.getrefcount(a)) #output:2(一次来自于a，一次来自于getrefcount自身)def get_count(a): print(sys.getrefcount(a))#output:4(a,python函数调用，函数参数，getrefcount) 需要注意的是，函数调用时，函数本身和函数参数都会产生调用，sys.getrefcount()并不是统计的指针数，而是统计指针指向的变量数量 123456789101112&gt;&gt;&gt; a = []&gt;&gt;&gt; import sys&gt;&gt;&gt; print(sys.getrefcount(a))2&gt;&gt;&gt; b = a&gt;&gt;&gt; print(sys.getrefcount(a))3&gt;&gt;&gt; c = b&gt;&gt;&gt; d = b&gt;&gt;&gt; f = c&gt;&gt;&gt; print(sys.getrefcount(a))6 而回收内存的方法也很简单，先调用del语句，在强制调用gc.collect()手动启动垃圾回收即可 循环引用python中绝大部分都采用的引用计数的垃圾回收机制，但是，当多个计数存在相互调用的情况下时，可能为内存带来很大的负担 12345678910111213141516def func(): show_memory_info('initial') a = [i for i in range(10000000)] b = [i for i in range(10000000)] show_memory_info('after a, b created') a.append(b) b.append(a)func()show_memory_info('finished')#output"""initial memory used: 8.2421875 MBafter a, b created memory used: 783.05078125 MBfinished memory used: 783.05078125 MB""" 由上例可以看出，当func函数执行完之后，按理说a, b的生命周期已经结束，但是可以看出内存并没有释放。因为他们还有相互引用，导致内存并没有释放。 如果想要回收内存，可以显示调用gc.collect()手动启动垃圾回收 123func()gc.collect()show_memory_info('finished') python采用标记清除算法和分代收集，来启用针对循环引用的自动垃圾回收。 标记清除大致的意思是，python会想一个有向图一样去遍历每个节点，如果存在没有被标记的节点就会被回收，当然，不可能每次都去遍历全部节点，python采用的是双向链表维护了一个数据结构。 分代收集是指，python将所有对象分为三代。刚刚创建的对象为第0代，经过一次垃圾回收之后，依然存在的对象便会从上一代挪到下一代。而每一代都会有自动垃圾回收的阈值，值是可以单独指定的，当垃圾回收时，到达阈值时，对象就会被回收。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[深入理解迭代器和生成器]]></title>
     <url>%2F2019%2F08%2F09%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8%2F</url>
     <content type="text"><![CDATA[对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用next()函数才会去取一次数据，直到抛出StopIteration异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值 12345&gt;&gt;&gt; a = (i for i in range(3))&gt;&gt;&gt; next(a)0&gt;&gt;&gt; list(a)[1, 2] 对于经常使用的(i in a)来说，其实它底层调用的还是生成器原理 1234while True: val = next(a) if val == i: yield True 所以，先看以下示例 1234567891011b = (i for i in range(5))print(2 in b)print(4 in b)print(3 in b)########## 输出 ##########TrueTrueFalse 原因在于每次使用print函数时，都会消耗掉b中的值，而每次使用in函数时，比如2 in b就会消耗掉0, 1, 2这三个值，剩下3, 4这两个值，而4 in b时，其中存在4，就返回为True，此时b中已消耗完所有元素，在此调用就会失败。 在看一个leetcode示例，给定字符串 s 和 t ，判断 s 是否为 t 的子序列。 1234567891011def is_subsequence(a, b): b = iter(b) return all(i in b for i in a)print(is_subsequence([1, 3, 5], [1, 2, 3, 4, 5]))print(is_subsequence([1, 4, 3], [1, 2, 3, 4, 5]))########## 输出 ##########TrueFalse]]></content>
@@ -73,14 +81,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Linux之uniq]]></title>
-    <url>%2F2019%2F07%2F28%2Flinux%E4%B9%8Buniq%2F</url>
-    <content type="text"><![CDATA[作用 Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。 uniq 可检查文本文件中重复出现的行列。参数 -c 在每列旁边显示该行重复出现的次数。 -d 仅显示重复出现的行列。 -f&lt;栏位&gt; 忽略比较指定的栏位。 -s&lt;字符位置&gt; 忽略比较指定的字符。 -u 仅显示出一次的行列。 -w[字符位置] 指定要比较的字符。 –help 显示帮助。 –version 显示版本信息。 [输入文件] 指定已排序好的文本文件。如果不指定此项，则从标准读取数据； [输出文件] 指定输出的文件。如果不指定此选项，则将内容显示到标准输出设备（显示终端）。 语法uniq [-cdu][-f&lt;栏位&gt;][-s&lt;字符位置&gt;][-w&lt;字符位置&gt;][--help][--version][输入文件][输出文件] -c参数得到去除重复行的同时，还在每一行前打印出重复次数 123456[md@vm-kvm5643-app ~]$ uniq tmp2018-01-212019-02-282016-04-302010-10-012019-02-28 123456[md@vm-kvm5643-app ~]$ uniq -c tmp 1 2018-01-21 1 2019-02-28 1 2016-04-30 3 2010-10-01 1 2019-02-28 但是并不相邻的两行，uniq命令是不起作用的，这就需要使用sort 12345[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq2010-10-012016-04-302018-01-212019-02-28 12345[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq -c 3 2010-10-01 1 2016-04-30 1 2018-01-21 2 2019-02-28 找出文件中的重复行 123[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq -d2010-10-012019-02-28]]></content>
-      <categories>
-        <category>shell</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[Linux之df]]></title>
     <url>%2F2019%2F07%2F28%2Flinux%E4%B9%8Bdf%2F</url>
     <content type="text"><![CDATA[disk free基本格式 1df &#123;options&#125; &#123;mount_point_of_filesystem&#125; -a列出所有文件系统的磁盘使用量 12345678910111213141516171819202122[md@vm-kvm5643-app jcf]$ df -aFilesystem 1K-blocks Used Available Use% Mounted on/dev/mapper/vg_root-lv_root 2064208 279252 1680100 15% /proc 0 0 0 - /procsysfs 0 0 0 - /sysdevpts 0 0 0 - /dev/ptstmpfs 4028176 88 4028088 1% /dev/shm/dev/vda1 516040 43396 446432 9% /boot/dev/mapper/vg_root-lv_home 2577136 301320 2146804 13% /home/dev/mapper/vg_root-lv_opt 2064208 320232 1639120 17% /opt/dev/mapper/vg_root-lv_tmp 2064208 68948 1890404 4% /tmp/dev/mapper/vg_root-lv_usr 5160576 2050164 2848268 42% /usr/dev/mapper/vg_root-lv_var 5160576 520464 4377968 11% /var/dev/mapper/vg_app-lv_data 51602044 27507932 21472880 57% /DATAnone 0 0 0 - /proc/sys/fs/binfmt_misc -h以人类易读的方式输出 123456789101112131415161718[md@vm-kvm5643-app jcf]$ df -hFilesystem Size Used Avail Use% Mounted on/dev/mapper/vg_root-lv_root 2.0G 273M 1.7G 15% /tmpfs 3.9G 88K 3.9G 1% /dev/shm/dev/vda1 504M 43M 436M 9% /boot/dev/mapper/vg_root-lv_home 2.5G 295M 2.1G 13% /home/dev/mapper/vg_root-lv_opt 2.0G 313M 1.6G 17% /opt/dev/mapper/vg_root-lv_tmp 2.0G 68M 1.9G 4% /tmp/dev/mapper/vg_root-lv_usr 5.0G 2.0G 2.8G 42% /usr/dev/mapper/vg_root-lv_var 5.0G 509M 4.2G 11% /var/dev/mapper/vg_app-lv_data 50G 27G 21G 57% /DATA]]></content>
@@ -92,6 +92,14 @@
     <title><![CDATA[Linux之sort排序]]></title>
     <url>%2F2019%2F07%2F28%2Flinux%E4%B9%8Bsort%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[作用 排序 参数： -b 忽略每行前面开始出的空格字符。 -c 检查文件是否已经按照顺序排序。 -d 排序时，处理英文字母、数字及空格字符外，忽略其他的字符。 -f 排序时，将小写字母视为大写字母。 -i 排序时，除了040至176之间的ASCII字符外，忽略其他的字符。 -m 将几个排序好的文件进行合并。 -M 将前面3个字母依照月份的缩写进行排序。 -n 依照数值的大小排序。 -o&lt;输出文件&gt; 将排序后的结果存入指定的文件。 -r 以相反的顺序来排序。 -t&lt;分隔字符&gt; 指定排序时所用的栏位分隔字符。 +&lt;起始栏位&gt;&lt;结束栏位&gt; 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。 –help 显示帮助。 –version 显示版本信息 1.sort将文件每一行作为一个单位，相互比较，原则上是从首字母向后，按照ASCLL码比较 123456[md@vm-kvm5643-app ~]$ cat tmppythonjavacc++shell 123456[md@vm-kvm5643-app ~]$ sort tmpcc++javapythonshell 2.sort中-u参数是为了取出重复行 12345678[md@vm-kvm5643-app ~]$ cat tmppythonjavacc++shellpythonpython 123456[md@vm-kvm5643-app ~]$ sort -u tmpcc++javapythonshell 3.sort中默认是比较每个字符，所以会出现11在3前面的情况，-n可以指定按照数值比较 123456[md@vm-kvm5643-app ~]$ sort tmp11233278 123456[md@vm-kvm5643-app ~]$ sort -n tmp23113278 4.sort的-o选项是将排序之后的内容输出到指定文件 1234567[md@vm-kvm5643-app ~]$ sort -n tmp -o test[md@vm-kvm5643-app ~]$ cat test23113278 5.排序时-t指定分隔符，-k指定分割之后按照第几个分隔符来排序 123456[md@vm-kvm5643-app ~]$ sort tmp2010-10-012016-04-302018-01-212019-02-28 123456[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 2 tmp2018-01-212019-02-282016-04-302010-10-01]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux之uniq]]></title>
+    <url>%2F2019%2F07%2F28%2Flinux%E4%B9%8Buniq%2F</url>
+    <content type="text"><![CDATA[作用 Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。 uniq 可检查文本文件中重复出现的行列。参数 -c 在每列旁边显示该行重复出现的次数。 -d 仅显示重复出现的行列。 -f&lt;栏位&gt; 忽略比较指定的栏位。 -s&lt;字符位置&gt; 忽略比较指定的字符。 -u 仅显示出一次的行列。 -w[字符位置] 指定要比较的字符。 –help 显示帮助。 –version 显示版本信息。 [输入文件] 指定已排序好的文本文件。如果不指定此项，则从标准读取数据； [输出文件] 指定输出的文件。如果不指定此选项，则将内容显示到标准输出设备（显示终端）。 语法uniq [-cdu][-f&lt;栏位&gt;][-s&lt;字符位置&gt;][-w&lt;字符位置&gt;][--help][--version][输入文件][输出文件] -c参数得到去除重复行的同时，还在每一行前打印出重复次数 123456[md@vm-kvm5643-app ~]$ uniq tmp2018-01-212019-02-282016-04-302010-10-012019-02-28 123456[md@vm-kvm5643-app ~]$ uniq -c tmp 1 2018-01-21 1 2019-02-28 1 2016-04-30 3 2010-10-01 1 2019-02-28 但是并不相邻的两行，uniq命令是不起作用的，这就需要使用sort 12345[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq2010-10-012016-04-302018-01-212019-02-28 12345[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq -c 3 2010-10-01 1 2016-04-30 1 2018-01-21 2 2019-02-28 找出文件中的重复行 123[md@vm-kvm5643-app ~]$ sort -n -t&apos;-&apos; -k 1 tmp | uniq -d2010-10-012019-02-28]]></content>
       <categories>
         <category>shell</category>
       </categories>

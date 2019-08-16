@@ -95,16 +95,17 @@
   };
 </script>
 
-  <meta name="description" content="进击的测试">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/archives/2019/07/index.html">
+  <meta name="description" content="引用计数引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收 12345678910111213141516171819202122232425import osimport psutil# 显示当前 python 程序占用的内存大小def show_memory_info(hint):    pid = os.getpid()    p = psutil.Process(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python的垃圾回收机制">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/16/引用计数/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="进击的测试">
+<meta property="og:description" content="引用计数引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收 12345678910111213141516171819202122232425import osimport psutil# 显示当前 python 程序占用的内存大小def show_memory_info(hint):    pid = os.getpid()    p = psutil.Process(">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-16T10:35:57.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
-<meta name="twitter:description" content="进击的测试">
+<meta name="twitter:title" content="Python的垃圾回收机制">
+<meta name="twitter:description" content="引用计数引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收 12345678910111213141516171819202122232425import osimport psutil# 显示当前 python 程序占用的内存大小def show_memory_info(hint):    pid = os.getpid()    p = psutil.Process(">
 
 
 
@@ -114,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/archives/2019/07/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/16/引用计数/">
 
 
 
@@ -125,7 +126,7 @@
 </script>
 
   
-  <title>归档 | 我的博客</title>
+  <title>Python的垃圾回收机制 | 我的博客</title>
   
 
 
@@ -173,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,7 +260,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -325,276 +326,267 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/08/16/引用计数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="唐潇唐">
+      <meta itemprop="description" content="进击的测试">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Python的垃圾回收机制
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+
           
-        
-        嗯..! 目前共计 14 篇日志。 继续努力。
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+          
 
-        
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+              
+                
+              
 
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/31/关于不同测试阶段测试场景/" itemprop="url">
+              <time title="创建时间：2019-08-16 18:35:30 / 修改时间：18:35:57" itemprop="dateCreated datePublished" datetime="2019-08-16T18:35:30+08:00">2019-08-16</time>
+            </span>
+          
+
+          
             
-              <span itemprop="name">关于不同测试阶段的测试场景</span>
+
             
-          </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T17:57:48+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
-    </header>
-  </article>
+                
+                
+              
+            </span>
+          
 
+          
+            
+            
+          
 
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/31/处理xml文件/" itemprop="url">
-            
-              <span itemprop="name">处理xml文件</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T17:57:48+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前 python 程序占用的内存大小</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_memory_info</span><span class="params">(hint)</span>:</span></span><br><span class="line">    pid = os.getpid()</span><br><span class="line">    p = psutil.Process(pid)</span><br><span class="line">    </span><br><span class="line">    info = p.memory_full_info()</span><br><span class="line">    memory = info.uss / <span class="number">1024.</span> / <span class="number">1024</span></span><br><span class="line">    print(<span class="string">'&#123;&#125; memory used: &#123;&#125; MB'</span>.format(hint, memory))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a created'</span>)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line">initial memory used: <span class="number">47.19140625</span> MB</span><br><span class="line">after a created memory used: <span class="number">433.91015625</span> MB</span><br><span class="line">finished memory used: <span class="number">48.109375</span> MB</span><br></pre></td></tr></table></figure>
 
-        
-        
+<p>这个例子说明的是，a是局部变量，当包含a的函数执行完成之后，a的引用就变为0，也就被回收了，想要改变这种方式的话，只需要将a设置为<code>global</code>变量即可</p>
+<p>这里存在的问题是，如果a是被返回的值，那么列表a的生命周期就没有消失，仍然会继续占用内存</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a created'</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
 
-        
+<p>查看对象的引用次数可用sys模块中的<code>getrefcount</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = []</span><br><span class="line">print(sys.getrefcount(a))	<span class="comment">#output:2(一次来自于a，一次来自于getrefcount自身)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_count</span><span class="params">(a)</span>:</span></span><br><span class="line">    print(sys.getrefcount(a))</span><br><span class="line"><span class="comment">#output:4(a,python函数调用，函数参数，getrefcount)</span></span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>需要注意的是，函数调用时，函数本身和函数参数都会产生调用，<code>sys.getrefcount()</code>并不是统计的指针数，而是统计指针指向的变量数量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之df/" itemprop="url">
-            
-              <span itemprop="name">Linux之df</span>
-            
-          </a>
-        
-      </h2>
+<p>而回收内存的方法也很简单，先调用del语句，在强制调用<code>gc.collect()</code>手动启动垃圾回收即可</p>
+<h3 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h3><p>python中绝大部分都采用的<code>引用计数</code>的垃圾回收机制，但是，当多个计数存在相互调用的情况下时，可能为内存带来很大的负担</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    b = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a, b created'</span>)</span><br><span class="line">    a.append(b)</span><br><span class="line">    b.append(a)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br><span class="line"><span class="comment">#output</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">initial memory used: 8.2421875 MB</span></span><br><span class="line"><span class="string">after a, b created memory used: 783.05078125 MB</span></span><br><span class="line"><span class="string">finished memory used: 783.05078125 MB</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
+<p>由上例可以看出，当<code>func</code>函数执行完之后，按理说a, b的生命周期已经结束，但是可以看出内存并没有释放。因为他们还有相互引用，导致内存并没有释放。</p>
+<p>如果想要回收内存，可以显示调用<code>gc.collect()</code>手动启动垃圾回收</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func()</span><br><span class="line">gc.collect()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
-
-
+<p>python采用<code>标记清除算法</code>和<code>分代收集</code>，来启用针对循环引用的自动垃圾回收。</p>
+<p>标记清除大致的意思是，python会想一个有向图一样去遍历每个节点，如果存在没有被标记的节点就会被回收，当然，不可能每次都去遍历全部节点，python采用的是双向链表维护了一个数据结构。</p>
+<p>分代收集是指，python将所有对象分为三代。刚刚创建的对象为第0代，经过一次垃圾回收之后，依然存在的对象便会从上一代挪到下一代。而每一代都会有自动垃圾回收的阈值，值是可以单独指定的，当垃圾回收时，到达阈值时，对象就会被回收。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之sort排序/" itemprop="url">
-            
-              <span itemprop="name">Linux之sort排序</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/linux之uniq/" itemprop="url">
-            
-              <span itemprop="name">Linux之uniq</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/python笔记/" itemprop="url">
-            
-              <span itemprop="name">Python常见问题解析</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T20:35:48+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="唐潇唐 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="唐潇唐 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/深入理解迭代器和生成器/" rel="next" title="深入理解迭代器和生成器">
+                <i class="fa fa-chevron-left"></i> 深入理解迭代器和生成器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -614,8 +606,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -716,6 +717,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数"><span class="nav-number">1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环引用"><span class="nav-number">2.</span> <span class="nav-text">循环引用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -851,6 +869,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
@@ -871,6 +893,37 @@
 
 
 
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'a764377e47c2bf9c9611',
+    clientSecret: '5cf312fb5970a5d51371f98dccbb81b58838e3d6',
+    repo: 'bigmorebig.github.io',
+    owner: 'bigmorebig',
+    admin: ['bigmorebig'],
+    id: md5(location.pathname),
+    
+      language: 'zh-CN',
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
 
 
 
