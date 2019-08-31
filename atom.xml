@@ -255,6 +255,29 @@
   </entry>
   
   <entry>
+    <title>Linux之uniq</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.543Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
+&lt;li&gt;uniq 
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Linux之sort排序</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Bsort%E6%8E%92%E5%BA%8F/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之sort排序/</id>
@@ -269,29 +292,6 @@
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;参数：&quot;&gt;&lt;a href=&quot;#参数：&quot; class=&quot;headerlink&quot; tit
-      
-    
-    </summary>
-    
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux之uniq</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.543Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
-&lt;li&gt;uniq 
       
     
     </summary>
