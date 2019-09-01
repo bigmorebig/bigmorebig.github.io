@@ -452,20 +452,32 @@
       
         
           
-            <p>
-              引用计数引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收
-import osimport psutil# 显示当前 python 程序占用的内存大小def show_memory_info(hint):    pid = os.getpid()    p = psutil
-              ...
-            </p>
-          <!--noindex-->
+            <h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>引用计数是指当对象的引用计数(指针数)为0时，表示这个对象不可达，需要被回收</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前 python 程序占用的内存大小</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_memory_info</span><span class="params">(hint)</span>:</span></span><br><span class="line">    pid = os.getpid()</span><br><span class="line">    p = psutil.Process(pid)</span><br><span class="line">    </span><br><span class="line">    info = p.memory_full_info()</span><br><span class="line">    memory = info.uss / <span class="number">1024.</span> / <span class="number">1024</span></span><br><span class="line">    print(<span class="string">'&#123;&#125; memory used: &#123;&#125; MB'</span>.format(hint, memory))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a created'</span>)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line">initial memory used: <span class="number">47.19140625</span> MB</span><br><span class="line">after a created memory used: <span class="number">433.91015625</span> MB</span><br><span class="line">finished memory used: <span class="number">48.109375</span> MB</span><br></pre></td></tr></table></figure>
+
+<p>这个例子说明的是，a是局部变量，当包含a的函数执行完成之后，a的引用就变为0，也就被回收了，想要改变这种方式的话，只需要将a设置为<code>global</code>变量即可</p>
+<p>这里存在的问题是，如果a是被返回的值，那么列表a的生命周期就没有消失，仍然会继续占用内存</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a created'</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+
+<p>查看对象的引用次数可用sys模块中的<code>getrefcount</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = []</span><br><span class="line">print(sys.getrefcount(a))	<span class="comment">#output:2(一次来自于a，一次来自于getrefcount自身)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_count</span><span class="params">(a)</span>:</span></span><br><span class="line">    print(sys.getrefcount(a))</span><br><span class="line"><span class="comment">#output:4(a,python函数调用，函数参数，getrefcount)</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，函数调用时，函数本身和函数参数都会产生调用，<code>sys.getrefcount()</code>并不是统计的指针数，而是统计指针指向的变量数量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.getrefcount(a))</span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p>而回收内存的方法也很简单，先调用del语句，在强制调用<code>gc.collect()</code>手动启动垃圾回收即可</p>
+<h3 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h3><p>python中绝大部分都采用的<code>引用计数</code>的垃圾回收机制，但是，当多个计数存在相互调用的情况下时，可能为内存带来很大的负担</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    show_memory_info(<span class="string">'initial'</span>)</span><br><span class="line">    a = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    b = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>)]</span><br><span class="line">    show_memory_info(<span class="string">'after a, b created'</span>)</span><br><span class="line">    a.append(b)</span><br><span class="line">    b.append(a)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br><span class="line"><span class="comment">#output</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">initial memory used: 8.2421875 MB</span></span><br><span class="line"><span class="string">after a, b created memory used: 783.05078125 MB</span></span><br><span class="line"><span class="string">finished memory used: 783.05078125 MB</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+
+<p>由上例可以看出，当<code>func</code>函数执行完之后，按理说a, b的生命周期已经结束，但是可以看出内存并没有释放。因为他们还有相互引用，导致内存并没有释放。</p>
+<p>如果想要回收内存，可以显示调用<code>gc.collect()</code>手动启动垃圾回收</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func()</span><br><span class="line">gc.collect()</span><br><span class="line">show_memory_info(<span class="string">'finished'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>python采用<code>标记清除算法</code>和<code>分代收集</code>，来启用针对循环引用的自动垃圾回收。</p>
+<p>标记清除大致的意思是，python会想一个有向图一样去遍历每个节点，如果存在没有被标记的节点就会被回收，当然，不可能每次都去遍历全部节点，python采用的是双向链表维护了一个数据结构。</p>
+<p>分代收集是指，python将所有对象分为三代。刚刚创建的对象为第0代，经过一次垃圾回收之后，依然存在的对象便会从上一代挪到下一代。而每一代都会有自动垃圾回收的阈值，值是可以单独指定的，当垃圾回收时，到达阈值时，对象就会被回收。</p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/16/引用计数/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -628,20 +640,21 @@ import osimport psutil# 显示当前 python 程序占用的内存大小def show_
       
         
           
-            <p>
-              对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用next()函数才会去取一次数据，直到抛出StopIteration异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值
-&gt;&gt;&gt; a = (i for i in range(
-              ...
-            </p>
-          <!--noindex-->
+            <p>对于生成器来说，最大的作用可能是对于内存的节省，因为每次调用<code>next()</code>函数才会去取一次数据，直到抛出<code>StopIteration</code>异常。但这并不是本次笔记的重点，本次笔记的重点在于一定要牢记每次调用生成器之后，都会消耗生成器中的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(a)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>对于经常使用的<code>(i in a)</code>来说，其实它底层调用的还是生成器原理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    val = next(a)</span><br><span class="line">    <span class="keyword">if</span> val == i:</span><br><span class="line">        <span class="keyword">yield</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>所以，先看以下示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="number">2</span> <span class="keyword">in</span> b)</span><br><span class="line">print(<span class="number">4</span> <span class="keyword">in</span> b)</span><br><span class="line">print(<span class="number">3</span> <span class="keyword">in</span> b)</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>原因在于每次使用print函数时，都会消耗掉b中的值，而每次使用in函数时，比如<code>2 in b</code>就会消耗掉0, 1, 2这三个值，剩下3, 4这两个值，而<code>4 in b</code>时，其中存在4，就返回为True，此时b中已消耗完所有元素，在此调用就会失败。</p>
+<p>在看一个<a href="https://leetcode-cn.com/problems/is-subsequence/submissions/" target="_blank" rel="noopener">leetcode示例</a>，给定字符串 <strong>s</strong> 和 <strong>t</strong> ，判断 <strong>s</strong> 是否为 <strong>t</strong> 的子序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_subsequence</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    b = iter(b)</span><br><span class="line">    <span class="keyword">return</span> all(i <span class="keyword">in</span> b <span class="keyword">for</span> i <span class="keyword">in</span> a)</span><br><span class="line"></span><br><span class="line">print(is_subsequence([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br><span class="line">print(is_subsequence([<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">########## 输出 ##########</span></span><br><span class="line"></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/09/深入理解迭代器和生成器/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -804,23 +817,47 @@ import osimport psutil# 显示当前 python 程序占用的内存大小def show_
       
         
           
-            <p>
-              首先看以下示例：
-&gt;&gt;&gt; a = 1&gt;&gt;&gt; b = 1&gt;&gt;&gt; a is bTrue&gt;&gt;&gt; a = [1, 2]&gt;&gt;&gt; b = [1, 2]&gt;&gt;&gt; a is bFalse
+            <p>首先看以下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>变量的赋值，表示让变量指向某个对象，并不是拷贝对象给变量；而一个对象是可以由多个对象指向</li>
+<li>可变对象(列表，字典，集合等)的改变，会影响所有指向该对象的变量</li>
+<li>对于不可变对象(字符串，整型，元祖)的改变，所有指向该对象的变量的值总是一样的，也不会改变。但是通过某些操作(+,=等等)更新不可变对象时，会返回一个新的对象</li>
+<li>变量可以被删除，但对象无法被删除。这也和python的垃圾回收机制相符合，只有当该对象的指向变量为0个时，才会回收该对象。</li>
+</ul>
+<p>通过以下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a += <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-变量的赋值，表示让
-              ...
-            </p>
-          <!--noindex-->
+<p>由于1是不可变对象，a, b都是指向1这个变量，a的值变化时，相当于a的指向又会重新改变，而b的指向是没有变化的</p>
+<p><img src="/images/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png" alt="1565256260196"></p>
+<p>而对于可变对象来说，a, b会同时指向一个内存地址，改变可变对象的值，会改变所有指向该对象的变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92.png" alt="1565312225472"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中，变量a和b同时指向1这个对象，当执行到a = 2时，是将a重新指向了2这个对象，而b仍然还是指向的1这个对象</p>
+<p>如果想要改变上述过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>可将b变量重新指向2这个对象，这样就能改变b的值</p>
+<p>而对于可变参数来说，改变对象的值，会改变所有指向它的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a.append(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a += [<span class="number">4</span>]</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a)</span>:</span></span><br><span class="line"><span class="meta">... </span>    a = a + [<span class="number">4</span>]</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，a += [4]和a = a + [4]是不相同的操作，a = a + [4]是表示新创建一个新的列表，然后让a重新指向它，而a += [4]是一个自增的过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610677016776</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a += [<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610677016776</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = a + [<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2610680008648</span></span><br></pre></td></tr></table></figure>
+
+<p>总结来说：</p>
+<ul>
+<li>如果对象是可变的，对象改变时，指向这个对象的所有变量都会改变</li>
+<li>如果对象是不可变的，对象改变时，指向这个对象的变量不会受到影响</li>
+<li>为了安全，函数末尾尽量使用return返回</li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/09/python参数传递/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -983,21 +1020,43 @@ import osimport psutil# 显示当前 python 程序占用的内存大小def show_
       
         
           
-            <p>
-              之前对于装饰器的理解感觉比较片面，没成体系，在此记录一下装饰器的学习之路
+            <p>之前对于装饰器的理解感觉比较片面，没成体系，在此记录一下装饰器的学习之路</p>
+<blockquote>
+<p>Decorators is to modify the behavior of the function through a wrapper so we don’t have to actually modify the function.</p>
+</blockquote>
+<p>也就是说，<strong>所谓装饰器，就是通过装饰器函数，来修改原函数的一些功能，使原函数在不需要修改的情况下达到某些目的。</strong>通常广泛应用于日志，身份认证，缓存等方面。</p>
+<h4 id="函数装饰器"><a href="#函数装饰器" class="headerlink" title="函数装饰器"></a>函数装饰器</h4><p>先看一个简单例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_decorator</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">'wrapper of decorator'</span>)</span><br><span class="line">        func()</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@my_decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello world'</span>)</span><br><span class="line"></span><br><span class="line">greet()</span><br></pre></td></tr></table></figure>
 
-Decorators is to modify the behavior of the function through a wrapper so we don’t have to actually modify the f
-              ...
-            </p>
-          <!--noindex-->
+<p><code>@</code>被称为语法糖，@my_decorator就相当于my_decorator(greet)，当然，my_decorator和greet函数也能带参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_decorator</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(<span class="string">'wrapper of decorator'</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+<p>这样也不是万无一失的，我们发现greet函数的元信息发生了变化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">greet.__name__</span><br><span class="line"><span class="comment">## 输出</span></span><br><span class="line"><span class="string">'wrapper'</span></span><br><span class="line"></span><br><span class="line">help(greet)</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">Help on function wrapper <span class="keyword">in</span> module __main__:</span><br><span class="line"></span><br><span class="line">wrapper(*args, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<p>为了解决这个问题，通常使用内置装饰器<code>@functools.wrap</code>，它会帮助我们保留函数的元信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(<span class="string">'wrapper of decorator'</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line">    </span><br><span class="line"><span class="meta">@my_decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">(message)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line"></span><br><span class="line">greet.__name__</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="string">'greet'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h4><p>不仅不可以使用函数装饰器，类也可以使用装饰器。类装饰器主要依赖于<code>__call__</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Count</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, func)</span>:</span></span><br><span class="line">        self.func = func</span><br><span class="line">        self.num_calls = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        self.num_calls += <span class="number">1</span></span><br><span class="line">        print(<span class="string">'num of calls is: &#123;&#125;'</span>.format(self.num_calls))</span><br><span class="line">        <span class="keyword">return</span> self.func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Count</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello world"</span>)</span><br><span class="line"></span><br><span class="line">example()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">num of calls <span class="keyword">is</span>: <span class="number">1</span></span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line">example()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">num of calls <span class="keyword">is</span>: <span class="number">2</span></span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>装饰器也可以是嵌套使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@decorator1</span></span><br><span class="line"><span class="meta">@decorator2</span></span><br><span class="line"><span class="meta">@decorator3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decorator1(decorator2(decorator3(func)))</span><br></pre></td></tr></table></figure>
+
+<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>最常用的应该还是日志记录。如果想要测试某些函数的耗时时长，装饰器就是一种常用方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log_execution_time</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        start = time.perf_counter()</span><br><span class="line">        res = func(*args, **kwargs)</span><br><span class="line">        end = time.perf_counter()</span><br><span class="line">        print(<span class="string">'&#123;&#125; took &#123;&#125; ms'</span>.format(func.__name__, (end - start) * <span class="number">1000</span>))</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line">    </span><br><span class="line"><span class="meta">@log_execution_time</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_similarity</span><span class="params">(items)</span>:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>对于身份认证来说，往往使用需要登录之后才能使用的功能，例如评论，在校验这种身份的时候也经常使用装饰器来校验</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">authenticate</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        request = args[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> check_user_logged_in(request): <span class="comment"># 如果用户处于登录状态</span></span><br><span class="line">            <span class="keyword">return</span> func(*args, **kwargs) <span class="comment"># 执行函数 post_comment() </span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'Authentication failed'</span>)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line">    </span><br><span class="line"><span class="meta">@authenticate</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">post_comment</span><span class="params">(request, ...)</span></span></span><br><span class="line"><span class="function">    ...</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，对于测试来说，往往需要传入某种格式固定的参数，例如传入值的先后顺序时候合法等，也常用装饰器来进行校验</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validation_check</span><span class="params">(input)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span> </span><br><span class="line">        ... <span class="comment"># 检查输入是否合法</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@validation_check</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">neural_network_training</span><span class="params">(param1, param2, ...)</span>:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/09/装饰器/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1160,20 +1219,28 @@ Decorators is to modify the behavior of the function through a wrapper so we don
       
         
           
-            <p>
-              is VS ==简单来说，==比较的是值大小，is比较的是内存地址，总的来说，is运算符的速度大于==运算符，这是在于is运算符没办法重载，而运行==运算符时，程序会先去搜索__eq__函数，如果没有重载，就会直接比较大小，由于python很多内置的函数都重载了__eq__函数
-值得注意的是，对于整
-              ...
-            </p>
-          <!--noindex-->
+            <h3 id="is-VS"><a href="#is-VS" class="headerlink" title="is VS =="></a>is VS ==</h3><p>简单来说，<code>==</code>比较的是值大小，<code>is</code>比较的是内存地址，总的来说，is运算符的速度大于==运算符，这是在于is运算符没办法重载，而运行==运算符时，程序会先去搜索<code>__eq__</code>函数，如果没有重载，就会直接比较大小，由于python很多内置的函数都重载了<code>__eq__</code>函数</p>
+<p>值得注意的是，对于整型数字来说，a is b为True的结论，只适用于-5到256之间，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">257</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">257</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">2314450519952</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(b)</span><br><span class="line"><span class="number">2314450941424</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>原因在于，出于性能考虑，python内部会维持一个-5到256的数组，起到一个缓存的作用。每次你去创建一个-5到256范围的整型数字时，python会去这个数组中取值，而不是去创建一个新的内存。</p>
+<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><p><strong>浅拷贝</strong>：是指重新分配一块内存，创建一个新的对象，里面的元素是对原对象中子对象的引用。如果原对象中元素是不可变类型，不会产生影响，如果是可变类型，会带来新对象的改变。</p>
+<p><strong>深拷贝</strong>：指重新分配一块新的内存地址，创建一个新的对象和新的元素，和原对象没有任何关联。</p>
+<p>注意，浅拷贝带来的变化只针对原对象的子对象是可变类型数据，例如嵌套列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a[:]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>].append(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>], <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>], <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">1</span>] += (<span class="number">5</span>, )</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a[:]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">1</span>] += (<span class="number">5</span>, )</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>而深拷贝不会受到任何影响</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = deepcopy(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>].append(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>深拷贝也不是完美的，如果被拷贝对象是自身，程序有可能会陷入无限循环</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.append(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">[<span class="number">1</span>, [...]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = deepcopy(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">[<span class="number">1</span>, [...]]</span><br></pre></td></tr></table></figure>
+
+<p>x为一个无限嵌套的列表，深拷贝的时候，程序并没有报<code>stack overflow</code>的现象，这是在于深拷贝函数内部维护这一个字典，记录已经拷贝对象和ID，拷贝过程中，如果字典里存储了将要拷贝对象，会直接将字典中内容返回</p>
+<p>而在使用==比较深拷贝之后的无限嵌套列表时，会抛出异常<code>RecursionError: maximum recursion depth exceeded in comparison</code>，这是在于列表中==会去遍历每个值的大小再去比较，而列表时无限嵌套的，所以会抛出异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">x = [<span class="number">1</span>]</span><br><span class="line">x.append(x)</span><br><span class="line">y = copy.deepcopy(x)</span><br><span class="line">print(x == y)	<span class="comment">#RecursionError: maximum recursion depth exceeded in comparison</span></span><br></pre></td></tr></table></figure>
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/07/python比较与拷贝问题/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1336,23 +1403,96 @@ Decorators is to modify the behavior of the function through a wrapper so we don
       
         
           
-            <p>
-              数据库范式我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。
-目前关系型数据库一共有6种范式，，由低到高分别为：
+            <h3 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h3><p>我们在设计数据库模型的时候，需要对关系内部各个属性之间联系的合理化程度进行定义，这就有了不同等级的规范要求，这些规范要求就被称为范式(NF)。也可以理解为，一张数据表的设计结构需要满足的某种设计标准级别。</p>
+<p>目前关系型数据库一共有6种范式，，由低到高分别为：</p>
+<ol>
+<li>1NF（第一范式）</li>
+<li>2NF（第二范式）</li>
+<li>3NF（第三范式）</li>
+<li>BCNF（巴斯-科德范式）</li>
+<li>4NF（第四范式）</li>
+<li>5NF（第五范式，也叫完美范式）</li>
+</ol>
+<p>数据库范式的设计越高阶，冗余度就越低，同时高阶的范式一定会满足低阶的要求。</p>
+<p><strong>数据库表中键的定义</strong>：</p>
+<ul>
+<li><p>超键：能唯一标识的属性集</p>
+</li>
+<li><p>候选键：如果超键中不包含多余的属性，那么这个键就是超键</p>
+</li>
+<li><p>主键：用户可以从候选键中选择一个键作为主键</p>
+</li>
+<li><p>外键：如果R1数据表中某属性集不是R1的主键，而是另一个表R2的主键，那么这个键就是R1的主键</p>
+</li>
+<li><p>主属性：包含任一候选键的属性成为主属性</p>
+</li>
+<li><p>非主属性：与主属性相对，不包含任何一个候选键的属性</p>
+</li>
+</ul>
+<p><strong>第一范式</strong>：<strong>指的是数据表中任何属性都是原子性的，不可再分</strong>。几乎所有关系型数据库都满足第一范式的要求。</p>
+<p><strong>第二范式</strong>：<strong>指的是数据表的非主属性都要和这个数据表的候选键有完全依赖</strong>。以球员表player_game表为例，包含球员编号，姓名，年龄，比赛编号，比赛时间和比赛场地等属性，这里的候选键和主键分别为(球员编号和比赛编号)。但是这个数据表设计并不满足第二范式，因为还存在以下对应关系:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(球员编号)--&gt; (姓名，年龄)</span><br><span class="line">(比赛编号) --&gt; (比赛时间，比赛场地)</span><br></pre></td></tr></table></figure>
 
-1NF（第一范式）
-2NF（第
-              ...
-            </p>
-          <!--noindex-->
+<p>这样会产生以下问题：</p>
+<ol>
+<li>数据冗余：如果一个球员可以参加n场比赛，那么球员的姓名和年龄就重复了n-1次。一个比赛可能有m个球员参加，比赛时间和场地就重复了m-1次</li>
+<li>插入异常：我们想要添加一场新的比赛，但是这时还没确定参加的球员都有谁，那么久没法插入</li>
+<li>删除异常：比如想要删除某个球员编号，如果没有单独保存比赛表时，就会把比赛信息也删除掉</li>
+<li>更新异常：如果想要调整某个比赛时间，那么数据表中所有时间都要调整</li>
+</ol>
+<p>为避免以上情况，可以将一张表拆分为3张表。球员player表包含球员编号，年龄，姓名；比赛game表包含比赛编号，比赛时间和比赛场地等属性；球员关系player_game表包含球员编号，比赛编号，比赛得分等属性</p>
+<p><strong>第三范式：对任何非主属性都不传递依赖于候选键。</strong></p>
+<p>以球员player表为例，这张表包含球员编号，姓名，球队名称，球队主教练。球员编号决定了球队名称，球队名称决定了球队主教练，那么非主属性球队主教练就依赖于候选键球员编号。需要将player表拆分为下面这样：</p>
+<p>球员表包含球员编号，姓名和球队名称；球队表包含球队名称和球队主教练。</p>
+<p>当然，也不一定是范式越高就越好，越高阶以为这冗余越少，同时数据表也越多，搜索的时间也越大。实际工作中往往根据实际情况适当采用<strong>反范式</strong>，以时间换取空间的做法，容忍适当的冗余。</p>
+<table>
+<thead>
+<tr>
+<th>仓库名</th>
+<th>管理员</th>
+<th>物品名</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>北京仓</td>
+<td>张三</td>
+<td>iPhone XR</td>
+<td>10</td>
+</tr>
+<tr>
+<td>北京仓</td>
+<td>张三</td>
+<td>iPhone 7</td>
+<td>20</td>
+</tr>
+<tr>
+<td>上海仓</td>
+<td>李四</td>
+<td>iPhone 8</td>
+<td>30</td>
+</tr>
+<tr>
+<td>上海仓</td>
+<td>李四</td>
+<td>iPhone X</td>
+<td>40</td>
+</tr>
+</tbody></table>
+<p>在上表中，一个仓库只有一个管理员，同时一个管理员也管理者一个仓库。这样候选键为(仓库名，物品名)和(管理员，物品名)，然后我们从中选取一个候选键作为主键。按照以上理论梳理，此表满足了1NF,2NF,3NF规范，但是同样存在以下问题：</p>
+<ol>
+<li>增加一个仓库，但是没有存放任何物品，根据数据完整性的要求，主键不能有空值，因此会出现插入异常</li>
+<li>仓库管理员更换之后，会修改多条记录</li>
+<li>仓库物品卖空后，仓库名称和管理员都会随之删除掉</li>
+</ol>
+<p>由此引入<strong>BCNF</strong>(巴斯-科德范式)：<strong>它在3NF的基础上消除了主属性对候选键的部分依赖或者传递依赖关系</strong></p>
+<p>按照<code>BCNF</code>要求，我们需要将上表拆分为两个表：</p>
+<ul>
+<li>仓库表：(仓库名，管理员)</li>
+<li>库存表：（仓库名，物品名，数量）</li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/07/SQL进阶/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1525,25 +1665,468 @@ Decorators is to modify the behavior of the function through a wrapper so we don
       
         
           
-            <p>
-              Oracle执行流程
+            <h3 id="Oracle执行流程"><a href="#Oracle执行流程" class="headerlink" title="Oracle执行流程"></a>Oracle执行流程</h3><p><img src="/images/Oracle%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="oracle执行流程"></p>
+<ol>
+<li><p><strong>语法检查</strong>：检查 SQL 拼写是否正确，如果不正确，Oracle 会报语法错误。</p>
+</li>
+<li><p><strong>语义检查</strong>：检查 SQL 中的访问对象是否存在。比如我们在写SELECT 语句的时候，列名写错了，系统就会提示错误。语法检查和语义检查的作用是保证 SQL 语句没有错误。</p>
+</li>
+<li><p><strong>权限检查</strong>：看用户是否具备访问该数据的权限。</p>
+</li>
+<li><p><strong>共享池检查</strong>：共享池(Shared Pool)是一块内存池，最主要的作用是缓存SQL语句和该语句的执行计划。Oracle通过检查共享池是否存在SQL语句的执行计划，来判断进行软解析</p>
+<ul>
+<li>软解析：在共享池中，Oracle首先对SQL语句进行Hash运算，然后根据Hash值在库缓存(Library Cache)中查找，如果存在SQL语句的执行计划，就直接拿来用，直接进入’执行器’环节</li>
+<li>硬解析：如果没找到SQL语句和执行计划，Oracle就需要创建解析树进行解析，生成执行计划，进入’优化器’这个环节</li>
+</ul>
+</li>
+<li><p>优化器：优化器中就需要进行硬解析，也就是决定怎么做，比如创建执行树，生成执行计划</p>
+</li>
+<li><p>执行器：执行SQL语句</p>
+</li>
+</ol>
+<h3 id="MYSQL架构"><a href="#MYSQL架构" class="headerlink" title="MYSQL架构"></a>MYSQL架构</h3><p><img src="/images/MYSQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="MYSQL架构"></p>
+<p>MYSQL是典型的的C/S架构，服务端程序应用的是mysqld</p>
+<ol>
+<li><strong>连接层</strong>：客户端和服务器建立连接，客户端发送SQL至服务端</li>
+<li><strong>SQL层</strong>：对SQL语句进行查询处理</li>
+<li><strong>存储引擎层</strong>：与数据文件打交道，负责数据存储和读取</li>
+</ol>
+<h3 id="MYSQL执行流程"><a href="#MYSQL执行流程" class="headerlink" title="MYSQL执行流程"></a>MYSQL执行流程</h3><p><img src="/images/MYSQL%E7%BB%93%E6%9E%84.jpg" alt="mysql执行流程"></p>
+<ol>
+<li><strong>缓存查询</strong>：Server在缓存中查询到了这条语句，会直接将结果返回给客户端，如果没有，就会进入解析器阶段。需要说明的是，因为查询效率不高，所以在MySQL8.0之后就抛弃掉这个功能</li>
+<li><strong>解析器</strong>：在解析器中对SQL语句进行语法分析，语句分析</li>
+<li><strong>优化器</strong>：在优化器中会确定SQL语句的执行路径</li>
+<li><strong>执行器</strong>：在执行之前需要判断用户是否具备权限，如果具备权限就执行SQL查询并返回结果。在MySQL8.0以下版本，会将查询结果缓存。</li>
+</ol>
+<h3 id="SELECT执行顺序"><a href="#SELECT执行顺序" class="headerlink" title="SELECT执行顺序"></a>SELECT执行顺序</h3><ol>
+<li><p>查询的关键字顺序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> ... <span class="keyword">GROUP</span> <span class="keyword">BY</span> ... <span class="keyword">HAVING</span> ... <span class="keyword">ORDER</span> <span class="keyword">BY</span> ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SELECT的执行顺序(在MYSQL和Oracle中SELECT的执行顺序基本相同)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; SELECT 的字段 &gt; DISTINCT &gt; ORDER BY &gt; LIMIT</span><br></pre></td></tr></table></figure>
 
-语法检查：检查 SQL 拼写是否正确，如果不正确，Oracle 会报语法错误。
+<p>详细顺序如下所示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> player_id, player_name, <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">num</span> <span class="comment"># 顺序 5</span></span><br><span class="line"><span class="keyword">FROM</span> player <span class="keyword">JOIN</span> team <span class="keyword">ON</span> player.team_id = team.team_id <span class="comment"># 顺序 1</span></span><br><span class="line"><span class="keyword">WHERE</span> height &gt; <span class="number">1.80</span> <span class="comment"># 顺序 2</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> player.team_id <span class="comment"># 顺序 3</span></span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">num</span> &gt; <span class="number">2</span> <span class="comment"># 顺序 4</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">num</span> <span class="keyword">DESC</span> <span class="comment"># 顺序 6</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">2</span> <span class="comment"># 顺序 7</span></span><br></pre></td></tr></table></figure>
 
-语义检查：检查 SQL 中的访问对象是否存在。比如我们在写SELECT 语句的时候，列名写错了，系统就会提示错误。语法检查和语义检查的作用是保证 SQL 语句没有错误。
+</li>
+</ol>
+<h3 id="SQL内置函数"><a href="#SQL内置函数" class="headerlink" title="SQL内置函数"></a>SQL内置函数</h3><p>通常将内置函数分为四类：</p>
+<ol>
+<li>算术函数</li>
+<li>字符串函数</li>
+<li>日期函数</li>
+<li>转换函数</li>
+</ol>
+<h4 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ABS()</td>
+<td>去绝对值</td>
+</tr>
+<tr>
+<td>MOD()</td>
+<td>取余</td>
+</tr>
+<tr>
+<td>ROUND()</td>
+<td>四舍五入为指定小数位数，需要有两个参数，分别为字段名称和小数位数</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ABS</span>(<span class="number">-2</span>);		<span class="comment">#output:2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MOD</span>(<span class="number">10</span>, <span class="number">3</span>);	<span class="comment">#output:1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="number">1.123456</span>, <span class="number">2</span>)	<span class="comment">#output:1.12</span></span><br></pre></td></tr></table></figure>
 
-权限检查：看用户是否具
-              ...
-            </p>
-          <!--noindex-->
+<h4 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCAT()</td>
+<td>将多个字段拼接起来</td>
+</tr>
+<tr>
+<td>LENGTH()</td>
+<td>计算字段长度，一个汉字算3个字符</td>
+</tr>
+<tr>
+<td>CHAR_LENGTH()</td>
+<td>计算字段长度，汉字，字母，数字都算1个字符</td>
+</tr>
+<tr>
+<td>LOWER()</td>
+<td>将字符串转换为小写</td>
+</tr>
+<tr>
+<td>UPPER()</td>
+<td>将字符串转换为大写</td>
+</tr>
+<tr>
+<td>REPLACE()</td>
+<td>替换函数，有3个参数，分别为：要替换的表达式或字段名，old,new</td>
+</tr>
+<tr>
+<td>SUBSTRING()</td>
+<td>截取字符串，有3个参数，分别为：字符串，开始位置，截取长度（下边从1开始）</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- SELECT CONCAT('aa','bb','cc') as concat;</span></span><br><span class="line"><span class="comment">-- SELECT LENGTH('qwerty') as len;</span></span><br><span class="line"><span class="comment">-- SELECT LENGTH('唐肖') as han_len;</span></span><br><span class="line"><span class="comment">-- SELECT CHAR_LENGTH('唐肖') as char_len;</span></span><br><span class="line"><span class="comment">-- SELECT LOWER('PYTHON') as low;</span></span><br><span class="line"><span class="comment">-- SELECT UPPER('python') as up;</span></span><br><span class="line"><span class="comment">-- SELECT REPLACE('weekday', 'k','ken') as re;</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">'python'</span>, <span class="number">1</span>, <span class="number">3</span>) <span class="keyword">as</span> sub;</span><br></pre></td></tr></table></figure>
+
+<h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURRENT_DATE()</td>
+<td>系统当前日期</td>
+</tr>
+<tr>
+<td>CURRENT_TIME()</td>
+<td>系统当前时间，没有具体日期</td>
+</tr>
+<tr>
+<td>CURRENT_TIMESTAMP()</td>
+<td>系统当前时间，包含日期和时间</td>
+</tr>
+<tr>
+<td>EXTRACT()</td>
+<td>抽取具体的年，月，日</td>
+</tr>
+<tr>
+<td><strong>DATE()</strong></td>
+<td>返回时间的日期部分</td>
+</tr>
+<tr>
+<td>YEAR()</td>
+<td>返回时间的年</td>
+</tr>
+<tr>
+<td>MONTH()</td>
+<td>返回时间的月</td>
+</tr>
+<tr>
+<td>DAY()</td>
+<td>返回时间的天数</td>
+</tr>
+<tr>
+<td>HOUR()</td>
+<td>返回时间的小时</td>
+</tr>
+<tr>
+<td>MINUTE()</td>
+<td>返回时间的分钟</td>
+</tr>
+<tr>
+<td>SECOND()</td>
+<td>返回时间的秒</td>
+</tr>
+</tbody></table>
+<h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CAST()</td>
+<td>数据类型转换，参数是一个表达式，表达式通过AS关键词分割了2个参数，分别是原始数据和目标类型数据</td>
+</tr>
+<tr>
+<td>COALESCE()</td>
+<td>返回第一个非空数值</td>
+</tr>
+</tbody></table>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXISTS</td>
+<td>判断条件是否存在，存在未True，否则为False</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>判断是否在结果集中</td>
+</tr>
+<tr>
+<td>ANY</td>
+<td>需要与比较操作符一起使用，与子查询返回的任何值做比较</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>需要与比较操作符一起使用，与子查询返回的所有值做比较</td>
+</tr>
+</tbody></table>
+<ol>
+<li>查看出场过的球员都有哪些</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id, team_id, player_name <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> player_id <span class="keyword">in</span> (<span class="keyword">SELECT</span> player_id <span class="keyword">FROM</span> player_score <span class="keyword">WHERE</span> player.player_id = player_score.player_id)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中任何一个球员身高高的球员的信息</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL: <span class="keyword">SELECT</span> player_id, player_name, height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> height &gt; <span class="keyword">ANY</span> (<span class="keyword">SELECT</span> height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> team_id = <span class="number">1002</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查询球员表中，比印第安纳步行者（对应的 team_id 为1002）中所有球员身高高的球员的信息</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL: <span class="keyword">SELECT</span> player_id, player_name, height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> height &gt; <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> height <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> team_id = <span class="number">1002</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查询场均得分大于 20 的球员。场均得分从player_score 表中获取</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id,team_id,player_name <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> player_id <span class="keyword">IN</span>(<span class="keyword">SELECT</span> player_id <span class="keyword">FROM</span> player_score <span class="keyword">GROUP</span> <span class="keyword">BY</span> player_id <span class="keyword">HAVING</span> <span class="keyword">AVG</span>(score) &gt; <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="联表查询"><a href="#联表查询" class="headerlink" title="联表查询"></a>联表查询</h3><p>由于主流关系型数据库对SQL92的支持更好，在此以SQL92作为示例。</p>
+<h4 id="交叉查询"><a href="#交叉查询" class="headerlink" title="交叉查询"></a>交叉查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> player <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> team</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>CROSS JOIN</code>关键字可以得到两张表的笛卡尔积查询结果，当然也可以多次使用该关键字来连接多张表</p>
+<h4 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h4><p>使用<code>NATURAL JOIN</code>关键字可以自动连接两张表相同的关键字，然后进行等值连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id, team_id, player_name, height, team_name <span class="keyword">FROM</span> player <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> team</span><br></pre></td></tr></table></figure>
+
+<h4 id="ON连接"><a href="#ON连接" class="headerlink" title="ON连接"></a>ON连接</h4><p><code>ON</code>用来指定连接条件，<code>ON player.team_id = team.team_id</code>相当于是指定team_id字段的等值连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id, player.team_id, player_name, height, team_name <span class="keyword">FROM</span> player <span class="keyword">JOIN</span> team <span class="keyword">ON</span> player.team_id = team.team_id</span><br></pre></td></tr></table></figure>
+
+<p>当然，也可以进行非等值连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> p.player_name, p.height, h.height_level</span><br><span class="line"><span class="keyword">FROM</span> player <span class="keyword">as</span> p <span class="keyword">JOIN</span> height_grades <span class="keyword">as</span> h</span><br><span class="line"><span class="keyword">ON</span> height <span class="keyword">BETWEEN</span> h.height_lowest <span class="keyword">AND</span> h.height_highest</span><br></pre></td></tr></table></figure>
+
+<h4 id="USING"><a href="#USING" class="headerlink" title="USING"></a>USING</h4><p>使用<code>USING</code>关键字指定数据库中相同字段名进行等值连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> player_id, team_id, player_name, height, team_name <span class="keyword">FROM</span> player <span class="keyword">JOIN</span> team <span class="keyword">USING</span>(team_id)</span><br></pre></td></tr></table></figure>
+
+<h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><p>包含三种连接方式：</p>
+<ol>
+<li>左连接：LEFT JOIN</li>
+<li>右连接：RIGHT JOIN</li>
+<li>全连接：FULL JOIN</li>
+</ol>
+<p>值得注意的是，MYSQL并不支持全连接</p>
+<p>例子：根据不同身高等级查询球员的个数，输出身高等级和个数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> height_level, <span class="keyword">count</span>(*) <span class="keyword">FROM</span> height_grades <span class="keyword">as</span> h <span class="keyword">JOIN</span> player <span class="keyword">as</span> p <span class="keyword">ON</span> p.height <span class="keyword">BETWEEN</span> h.height_lowest <span class="keyword">AND</span> h.height_highest <span class="keyword">GROUP</span> <span class="keyword">BY</span> height_level;</span><br></pre></td></tr></table></figure>
+
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图作为一张虚拟表，只是帮助我们封装底层与数据库接口，相当于一张表或多张表的结果集，视图一般在数据量比较大的情况下使用，它具有以下特点，</p>
+<ul>
+<li>安全性：虚拟表是基于底层数据库的，我们在使用视图时一般不会通过视图对底层数据进行修改，在一定程度上保证了数据的安全性，同时，还可以针对不同用户开放不同的数据查询权限</li>
+<li>简单清晰：视图是对SQL语句的封装，将原来复杂的语句简单化，类似于函数的作用</li>
+</ul>
+<p><strong>创建视图</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> column1, column2</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">WHERE</span> condition</span><br></pre></td></tr></table></figure>
+
+<p>例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> avg_height <span class="keyword">AS</span> <span class="keyword">SELECT</span> <span class="keyword">AVG</span>(height) <span class="keyword">FROM</span> player;</span><br></pre></td></tr></table></figure>
+
+<p>同时，视图还支持视图嵌套</p>
+<p><strong>修改视图</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> column1, column2</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">WHERE</span> condition</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除视图</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> view_name</span><br></pre></td></tr></table></figure>
+
+<p><strong>关于视图的应用</strong></p>
+<p>查询球员中的身高介于1.90m到2.08m之间的名字，身高，以及对应的身高等级</p>
+<ol>
+<li><p>创建身高等级的视图</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> player_height_grades <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> p.player_name, p.height, h.height_level</span><br><span class="line"><span class="keyword">FROM</span> player <span class="keyword">as</span> p <span class="keyword">JOIN</span> height_grades <span class="keyword">as</span> h</span><br><span class="line"><span class="keyword">ON</span> height <span class="keyword">BETWEEN</span> h.height_lowest <span class="keyword">AND</span> h.height_highest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询身高介于1.90m到2.08m之间的名字，身高，以及对应的身高等级</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> player_height_grades <span class="keyword">WHERE</span> height &gt;= <span class="number">1.90</span> <span class="keyword">AND</span> height &lt;= <span class="number">2.08</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>事务的特性(<code>ACID</code>)是：要么全部成功，要么全部失败。这保证了数据的一致性和可恢复性，它保证了我们在增加，删除，修改的时候某一个环节出错也能回滚还原。</p>
+<p>Oracle是支持事务的，在MYSQL中，InnoDB才支持事务，可以通过<code>SHOW ENGINES</code>查看哪些存储引擎支持事务</p>
+<p>事务的流程控制语句：</p>
+<ol>
+<li>START TRANSACTION或BEGIN：显式开启一个事务</li>
+<li>COMMIT：提交事务。提交事务之后，对数据库的修改是永久性的。</li>
+<li>ROLLBACK或ROLLBACK TO [SAVEPOINT]：回滚事务，表示撤销当前所有没有提交的修改或回滚到某个保存点</li>
+<li>SAVEPOINT：在事务中创建保存点，一个事务可以有多个保存点</li>
+<li>RELEASE SAVEPOINT：删除某个保存点</li>
+<li>SET TRANSACTION：设置事务的隔离级别</li>
+</ol>
+<p>需要注意的是，使用事务有两种，分别为隐式事务和显式事务。隐式事务实际上就是自动提交，Oracle不自动提交，需要手写COMMIT命令，而MYSQL自动提交</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set autocommit =0;  // 关闭自动提交</span><br><span class="line">mysql&gt; set autocommit =1;  // 开启自动提交</span><br></pre></td></tr></table></figure>
+
+<p>在MYSQL默认情况下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>), PRIMARY <span class="keyword">KEY</span> (<span class="keyword">name</span>)) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>;</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'关羽'</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'张飞'</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'张飞'</span>;</span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+
+<p>表中存在一条数据<code>关羽</code>，原因在于<code>name</code>为主键，插入第二条数据的name字段为<code>张飞</code>时，抛出异常，回滚到上一次事务提交点</p>
+<p>MYSQL中<code>completion_type</code>参数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> @@completion_type = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>), PRIMARY <span class="keyword">KEY</span> (<span class="keyword">name</span>)) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>;</span><br><span class="line"><span class="keyword">SET</span> @@completion_type = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'关羽'</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'张飞'</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span> <span class="keyword">SELECT</span> <span class="string">'张飞'</span>;</span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+
+<p>表中存在一条数据，原因在于<code>completion=1</code>相当于在提交之后，在下一行写下<code>BEGIN</code></p>
+<ol>
+<li>completion=0,默认情况，在我们执行COMMIT的时候提交事务，在执行下一个事务时，还需要START TRANSACTION或BEGIN来开启</li>
+<li>completion=1，提交事务之后，相当于是执行了COMMIT AND CHAIN，也就是开启了一个链式事务，即当我们提交了事务之后会开启一个相同隔离级别的事务</li>
+<li>completion=2，这种情况下COMMIT=COMMIT AND RELEASE，在我们提交之后会自动断开与服务器连接</li>
+</ol>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>严格来讲，我们可以使用串行化的方式来执行每个事务，这就意味着每个事务相互独立，不存在并发的情况。在生产中，往往存在高并发情况，这时需要降低数据库的隔离标准来换取事务之间的并发数</p>
+<p><strong>三种异常情况</strong></p>
+<ol>
+<li>脏读(DIRTY READ)：读到了其他用户还没提交的事务</li>
+<li>不可重复读(Nnrepeatable Read)：对某数据进行读取，发现两次结果不同。这时由于有其他事务对这个数据进行了修改</li>
+<li>幻读(Phantom Read)：事务A根据条件查询到了N条事务，但此时B事务更改了符合事务A查询条件的数据，事务A再次查询发现数据不一致</li>
+</ol>
+<p>针对不同的异常情况，SQL92设置了4中隔离级别</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交(READ UNCOMMITTED)</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>读已提交(READ COMMITTED)</td>
+<td>禁止</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>可重复读(REPEATABLE READ)</td>
+<td>禁止</td>
+<td>禁止</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>可串行化(SERIALIZABLE)</td>
+<td>禁止</td>
+<td>禁止</td>
+<td>禁止</td>
+</tr>
+</tbody></table>
+<p>读已提交属于RDBMS中常见的默认隔离级别(比如Oracle和SQL Server)，如果想要避免不可重复读和幻读，需要在SQL查询时编写带锁的SQL语句</p>
+<p>可重复读，是MYSQL默认的隔离级别</p>
+<h3 id="PYTHON操作MYSQL接口"><a href="#PYTHON操作MYSQL接口" class="headerlink" title="PYTHON操作MYSQL接口"></a>PYTHON操作MYSQL接口</h3><p>在此使用<code>pymysql</code>模块来操作mysql接口</p>
+<p>connection可以对当前数据库的连接进行管理，它提供以下接口</p>
+<ol>
+<li>指定host，user，passwd，port，database等参数连接数据库</li>
+<li>db.cursor()：创建游标</li>
+<li>db.close():关闭连接</li>
+<li>db.begin()：开启事务</li>
+<li>db.commit()和db.rollback()：事务提交和回滚</li>
+</ol>
+<p>游标提供的接口：</p>
+<ol>
+<li><p>cursor.execute():执行sql语句</p>
+</li>
+<li><p>cursor.fetchone()：读取查询结果一条数据</p>
+</li>
+<li><p>cursor.fetchall()：读取查询结果全部数据，以元祖类型返回</p>
+</li>
+<li><p>cursor.fetchmany(n)：读取查询结果多条数据，以元祖类型返回</p>
+</li>
+<li><p>cursor.rowcount：返回查询的行数</p>
+</li>
+<li><p>cursor.close()：关闭游标。</p>
+</li>
+</ol>
+<p>为了保证数据修改的正确，可用try..except…模式捕获异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  sql = <span class="string">"INSERT INTO player (team_id, player_name, height) VALUES (%s, %s, %s)"</span></span><br><span class="line">  val = (<span class="number">1003</span>, <span class="string">" 约翰 - 科林斯 "</span>, <span class="number">2.08</span>)</span><br><span class="line">  cursor.execute(sql, val)</span><br><span class="line">  db.commit()</span><br><span class="line">  print(cursor.rowcount, <span class="string">" 记录插入成功。"</span>)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">  <span class="comment"># 打印异常信息</span></span><br><span class="line">  traceback.print_exc()</span><br><span class="line">  <span class="comment"># 回滚  </span></span><br><span class="line">  db.rollback()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">  <span class="comment"># 关闭数据库连接</span></span><br><span class="line">  db.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python-ORM框架操作MYSQL"><a href="#Python-ORM框架操作MYSQL" class="headerlink" title="Python ORM框架操作MYSQL"></a>Python ORM框架操作MYSQL</h3><p>ORM(Object Relation Mapping),使用ORM框架的原因在于随着项目的增加，降低维护成本，且不用关系底层的SQL语句是如何写的，就可以像类或者函数一样使用。以下示例都基于<code>sqlalchemy</code></p>
+<h4 id="初始化表结构"><a href="#初始化表结构" class="headerlink" title="初始化表结构"></a>初始化表结构</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, String, create_engine, Integer, Float</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line"><span class="comment"># 创建对象的基类:Base = declarative_base()</span></span><br><span class="line"><span class="comment"># 定义User对象:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span><span class="params">(Base)</span>:</span></span><br><span class="line"><span class="comment"># 表的名字:</span></span><br><span class="line">	__tablename__ = <span class="string">'player'</span></span><br><span class="line">    <span class="comment"># 表的结构: </span></span><br><span class="line">    player_id = Column(Integer, primary_key=<span class="literal">True</span>, autoincrement=<span class="literal">True</span>)</span><br><span class="line">    team_id = Column(Integer) </span><br><span class="line">    player_name = Column(String(<span class="number">255</span>))   </span><br><span class="line">    height = Column(Float(<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># 初始化数据库连接:</span></span><br><span class="line">engine = create_engine(<span class="string">'mysql+pymysql://root:123456@localhost:3306/heros_data'</span>)</span><br><span class="line"><span class="comment"># 创建DBSession类型:</span></span><br><span class="line">DBSession = sessionmaker(bind=engine)</span><br><span class="line">session = DBSession()</span><br></pre></td></tr></table></figure>
+
+<p>连接格式为<code>数据库类型+数据库连接框架://用户名：密码@host:port/数据库名</code></p>
+<p><code>__tablename</code>指明了对应的数据库表名称</p>
+<p>在 SQLAlchemy 中，我们采用 Column 对字段进行定义，常用的数据类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>Integer</th>
+<th>整数型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Float</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>Decimal</td>
+<td>定点类型</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>布尔类型</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>datetime.date日期类型</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>datetime.date时间类型</td>
+</tr>
+<tr>
+<td>String</td>
+<td>字符类型，使用时需指明长度</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>文本类型</td>
+</tr>
+</tbody></table>
+<p>除了数据类型之外，也可以指定Column参数</p>
+<table>
+<thead>
+<tr>
+<th>default</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>primary_key</td>
+<td>是否为主键</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>是否唯一</td>
+</tr>
+<tr>
+<td>autoincrement</td>
+<td>是否自增</td>
+</tr>
+</tbody></table>
+<h4 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增一行数据</span></span><br><span class="line">new_player = Player(team_id=<span class="number">1002</span>, player_name=<span class="string">'唐潇唐'</span>, height=<span class="number">1.71</span>)</span><br><span class="line">session.add(new_player)</span><br><span class="line">session.commit()</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将球员身高为2.08的全部改为2.09</span></span><br><span class="line">rows = session.query(Player).filter(Player.height == <span class="number">2.08</span>).all()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rows:  </span><br><span class="line">	i.height = <span class="number">2.09</span></span><br><span class="line">session.commit()session.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">row = session.query(Player).filter(Player.player_name==<span class="string">'约翰 - 科林斯'</span>).first()</span><br><span class="line">session.delete(row)</span><br><span class="line">session.commit()</span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><p>query(Player)相当于是<code>select *</code>,这时可以对player表中所有字段进行打印</p>
+<p>filter()函数相当于是<code>WHERE</code>条件查询 </p>
+<p>多条件查询时，比如查询身高大于等于2.08，小于等于2.10的球员</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows = session.query(Player).filter(Player.height &gt;=<span class="number">2.08</span>, Player.height &lt;=<span class="number">2.10</span>).all()</span><br></pre></td></tr></table></figure>
+
+<p>使用or查询时，需要引入<code>or_</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> or_</span><br><span class="line">rows = session.query(Player).filter(or_(Player.height &gt;=<span class="number">2.08</span>, Player.height &lt;=<span class="number">2.10</span>)).all()</span><br></pre></td></tr></table></figure>
+
+<p>分组查询，排序，统计等需要引入<code>func</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line">rows = session.query(Player.team_id, func.count(Player.player_id)).group_by(Player.team_id).having(func.count(Player.player_id)&gt;<span class="number">5</span>).order_by(func.count(Player.player_id).asc()).all()</span><br><span class="line">print(rows)</span><br></pre></td></tr></table></figure>
+
+<p>关于条件查询更多的接口，可以查看<code>filter</code>方法和<code>func</code>方法的源码目录</p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/05/SQL/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1706,197 +2289,256 @@ Decorators is to modify the behavior of the function through a wrapper so we don
       
         
           
-            <p>
-              sed 是 stream editor 的缩写，中文称之为“流编辑器”。
-sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（STDOUT）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准
-              ...
-            </p>
-          <!--noindex-->
+            <p>sed 是 <code>stream editor</code> 的缩写，中文称之为“流编辑器”。</p>
+<p>sed 命令是一个面向行处理的工具，它以“行”为处理单位，针对每一行进行处理，处理后的结果会输出到标准输出（<code>STDOUT</code>）。你会发现 sed 命令是很懂礼貌的一个命令，它不会对读取的文件做任何贸然的修改，而是将内容都输出到标准输出中。  </p>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [option] '[pattern]/command' filename</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，<code>sed</code>也支持<code>管道符</code>来传递引用文本</p>
+<h3 id="option参数"><a href="#option参数" class="headerlink" title="option参数"></a>option参数</h3><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-e</td>
+<td align="left">多段编辑</td>
+</tr>
+<tr>
+<td align="center">-n</td>
+<td align="left">只打印出查询到的值</td>
+</tr>
+<tr>
+<td align="center">-f</td>
+<td align="left">可将某个文件作为patter传入</td>
+</tr>
+<tr>
+<td align="center">-r</td>
+<td align="left">支持扩展正则表达式</td>
+</tr>
+<tr>
+<td align="center">-i</td>
+<td align="left">修改源文件的内容</td>
+</tr>
+</tbody></table>
+<h3 id="patter参数"><a href="#patter参数" class="headerlink" title="patter参数"></a>patter参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10command</td>
+<td>匹配第10行</td>
+</tr>
+<tr>
+<td>10,20command</td>
+<td>匹配从第10行到第20行</td>
+</tr>
+<tr>
+<td>10，+5command</td>
+<td>匹配从第10行开始，到第16行结束</td>
+</tr>
+<tr>
+<td>/patter/command</td>
+<td>匹配含有patter的行</td>
+</tr>
+<tr>
+<td>/patter1/,/patter2/command</td>
+<td>匹配到从含有patter1开始，到patter2结束的所有行</td>
+</tr>
+<tr>
+<td>10,/patter/command</td>
+<td>匹配从第10行开始，到含有patter的行结束的所有行</td>
+</tr>
+<tr>
+<td>/patter/,10command</td>
+<td>匹配从含有patter的行开始，到第10行结束的所有行</td>
+</tr>
+</tbody></table>
+<h3 id="command参数"><a href="#command参数" class="headerlink" title="command参数"></a>command参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td>a</td>
+<td>行后增加</td>
+</tr>
+<tr>
+<td>i</td>
+<td>行前增加</td>
+</tr>
+<tr>
+<td>r</td>
+<td>外部文件读入，行后增加</td>
+</tr>
+<tr>
+<td>w</td>
+<td>将匹配到的行写入外部文件</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td>s/old/new</td>
+<td>将行内的第1个old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/g</td>
+<td>将行内的所有old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/2g</td>
+<td>将行内的从第2处开始到结束的old替换为new</td>
+</tr>
+<tr>
+<td>s/old/new/ig</td>
+<td>将行内的所有old替换为new，且忽略大小写</td>
+</tr>
+</tbody></table>
+<h3 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h3><p>反向引用的意思是将前面匹配到的值通过参数的形式传递给后一个，可用<code>&amp;</code>或<code>\1</code>传递，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/\(redis_Port=\).*/\15555/g' tmp.cfg	#修改redis的端口号为5555</span><br><span class="line"><span class="meta">#</span>result：redis_Port=5555</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，<code>\1</code>支持使用括号来指定反向引用的内容，而<code>&amp;</code>并不支持这个功能</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1p</td>
+<td>打印第1行的内容</td>
+</tr>
+<tr>
+<td>1,10p</td>
+<td>打印第1行到第10行的内容</td>
+</tr>
+<tr>
+<td>1，+5p</td>
+<td>打印第1行到第6行的内容</td>
+</tr>
+<tr>
+<td><strong>/patter/p</strong></td>
+<td>打印含有patter的行</td>
+</tr>
+<tr>
+<td><strong>/patter1/, /patter2/p</strong></td>
+<td>打印从含有patter1的行开始，到含有patter2的行结束</td>
+</tr>
+<tr>
+<td>/patter/, 10p</td>
+<td>打印从含有patter的行开始，到第10行结束</td>
+</tr>
+<tr>
+<td>10，/patter/p</td>
+<td>打印从第10行开始，到含有patter的行结束</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查询包含redis的所有行</span><br><span class="line">[srvc@vm-kvm5645-app ~]$ sed -n '/redis/p' tmp.cfg</span><br><span class="line">redis_Port=5555</span><br><span class="line">redis_Timeout=1</span><br><span class="line">redis_PORT_ALARM=6379</span><br><span class="line">redis_TIMEOUT_ALARM=5</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1s/old/new/</td>
+<td>替换第一行的old为new</td>
+</tr>
+<tr>
+<td>1,10s/old/new/</td>
+<td>将1到10行中的old替换为new</td>
+</tr>
+<tr>
+<td>1, +5s/old/new/</td>
+<td>将1到6行中的old替换为new</td>
+</tr>
+<tr>
+<td><strong>/patter/s/old/new/</strong></td>
+<td>将含有patter的行中的old替换为new</td>
+</tr>
+<tr>
+<td><strong>/patter1/,/patter2/s/old/new/</strong></td>
+<td>将从含有patter1开始的行到patter2结束行中的old替换为new</td>
+</tr>
+<tr>
+<td>/patter/,10s/old/new/</td>
+<td>将从patter开始的行到第10行结束的old替换为new</td>
+</tr>
+<tr>
+<td>10,/patter/s/old/new/</td>
+<td>将从第10行开始到含有patter行结束的old替换为new</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 将redis的超时时间修改为3s</span><br><span class="line">sed -i '/\[.*\]/,/\[.*\]/s/\(redis_Timeout=\).*/\13/g' tmp.cfg</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1d</td>
+<td>删除第1行的内容</td>
+</tr>
+<tr>
+<td>1,10d</td>
+<td>删除第1行到第10行的内容</td>
+</tr>
+<tr>
+<td>1,+5d</td>
+<td>删除第1行到第6行内容</td>
+</tr>
+<tr>
+<td><strong>/patter/d</strong></td>
+<td>删除含有patter的行</td>
+</tr>
+<tr>
+<td><strong>/patter1/,/patter2/d</strong></td>
+<td>删除从包含patter1的行开始，到包含patter2结束的所有行</td>
+</tr>
+<tr>
+<td>/patter/, 10d</td>
+<td>删除从包含patter的行开始，到第10行结束的所有行</td>
+</tr>
+<tr>
+<td>10,/patter/d</td>
+<td>删除从第10行开始，到含有patter的行结束的所有行</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 删除配置文件中的注释行和空行</span><br><span class="line">sed -i '/^#/d;/^$/d' tmp.cfg</span><br></pre></td></tr></table></figure>
+
+<h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><p>对于自动化测试来说，shell脚本的存在价值似乎并没有太大必要，而且由于公司使用的是<code>python</code>来作为自动化编程语言，问题在于，使用<code>RF</code>执行python脚本修改服务器上配置文件时，老是会出错，且通过<code>beyond compares</code>对比，修改之后有问题的文件和之前正确的文件无任何差别，初步判断有可能是编码问题，由于公司的<code>RF</code>必须使用jybot来执行脚本，于是，为了不纠结这个问题，使用shell脚本处理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[srvc@vm-kvm5645-app auto_test]$ more modify_wf.sh</span><br><span class="line"><span class="meta">#</span>/bin/bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span>author:tangxiao</span><br><span class="line"><span class="meta">#</span>modify redis password or host in WEATHER.cfg</span><br><span class="line"></span><br><span class="line">function modify</span><br><span class="line">&#123;</span><br><span class="line">sed -i "/\#weather_open/,/redis_Timeout/ s/$1/$2/g" /opt/app/todewf/bin/WEATHER.cfg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modify $1 $2</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的点是，由于引用了变量<code>$1</code>和<code>$2</code>，patter部分语句必须使用<code>双引号</code>，且执行脚本的时候，传入的参数必须使用引号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh modify_wf.sh '\(redis_Pass=\).*' '\1$&#123;redis_pass&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>参考：</p>
+<ul>
+<li><p><a href="https://man.linuxde.net/sed" target="_blank" rel="noopener">sed基本语法</a></p>
+</li>
+<li><p><a href="https://man.linuxde.net/docs/shell_regex.html" target="_blank" rel="noopener">shell正则表达式基本用法</a></p>
+</li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/shell文本处理三剑客之sed/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="唐潇唐">
-      <meta itemprop="description" content="进击的测试">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/31/处理xml文件/" class="post-title-link" itemprop="url">处理xml文件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：17:59:07" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              python处理xml文件通常存在多种方式，这里分别以处理简单文件和大文件为例
-处理一般文件处理一般文件，通常使用ElementTree模块,python3.3之后会自动寻找可用的C库来加快速度
-try:    import xml.etree.cElementTree as ETexcept Im
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/31/处理xml文件/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -2059,21 +2701,260 @@ try:    import xml.etree.cElementTree as ETexcept Im
       
         
           
-            <p>
-              单元测试代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的等价类
-单元测试用例（单元测试是一个包含输入数据和预计输出的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类：
-1. 被测函数的输入参数
-              ...
-            </p>
-          <!--noindex-->
+            <h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>代码的基本特征和产生错误的原因（要做到代码功能逻辑正确，必须做到分类正确且完备没有遗漏，同事每个分类的逻辑处理正确）代码中的功能点相当于单元测试的<code>等价类</code></p>
+<p>单元测试用例（单元测试是一个包含<code>输入数据</code>和<code>预计输出</code>的集合）输入数据并不只是被测试函数的输入参数，以下为一些分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的输入参数  </span><br><span class="line">2. 被测函数内部需要读取的全局静态变量</span><br><span class="line">3. 函数内部调用子函数获得的数据等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>  预计输出并不只是被测函数的返回值，以下为一些分类：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 被测函数的返回值</span><br><span class="line">2. 被测函数的输出参数</span><br><span class="line">3. 被测函数中进行的文件更新</span><br><span class="line">4. 被测函数中进行的数据库更新等等</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h4 id="驱动代码，桩代码和Mock代码"><a href="#驱动代码，桩代码和Mock代码" class="headerlink" title="驱动代码，桩代码和Mock代码"></a>驱动代码，桩代码和Mock代码</h4><p><strong>驱动代码</strong>: 调用被测函数的代码，包含调用被测函数前的数据准备，调用被测函数和验证相关结果，驱动代码结构通常由单元测试框架决定。</p>
+<p><strong>桩代码</strong>: 指用来代替函数内部某个尚未实现的函数的代码，与真是代码相比，桩代码具有与原函数相同的原形，只是内部实现不同，桩代码只是起到隔离和补齐的作用，是被测代码能够独立编译，链接并独立运行，同时桩代码还有控制被测函数执行路径的作用，通常桩代码的<code>验证(assert)</code>逻辑出现在驱动代码中</p>
+<p><strong>Mock代码</strong>: 与桩代码类似，对于结果的验证通常出现在<code>Mock</code>代码中</p>
+<h4 id="单元测试自动化的过程"><a href="#单元测试自动化的过程" class="headerlink" title="单元测试自动化的过程"></a>单元测试自动化的过程</h4><ol>
+<li>测试用例自动执行</li>
+<li>用例框架代码生成的自动化,如<code>unittest</code>框架提高开发效率</li>
+<li>部分测试输入数据的自动化生成,如通过条件判断语句来控制测试输入数据的自动化生成</li>
+<li>自动桩代码的生成</li>
+</ol>
+<ul>
+<li><p>指自动化工具对被测代码进行分析扫描，自 动为被测函数内部调用的其他函数生成可编程的桩代码</p>
+<ul>
+<li>抽桩：在代码集成测试阶段，希望不再调用桩代码而调用真实代码</li>
+</ul>
+<ol start="5">
+<li>被测代码的自动化静态分析：主要指代码的<code>静态扫描</code>，目的是识别违反编码规则和编码风格的代码行，比较常见的工具有<code>sonar</code>和<code>coverity</code>。</li>
+<li>测试覆盖率的自动统计与分析</li>
+</ol>
+</li>
+</ul>
+<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>如单元测试最大的区别在于代码集成测试不允许使用桩代码<code>web service</code>测试</p>
+<ol>
+<li>测试脚手架代码的自动化生成,如<code>httprunner</code>可以自动生成项目脚手架</li>
+<li>部分测试数据的自动化生成,与单元测试的区别在于单元测试的输入数据是函数的参数组合，API测试对应的是API的参数和API调用的payload</li>
+<li><code>response</code>验证的自动化</li>
+<li>基于测试工具(如<code>postman</code>)的自动化脚本生成:在使用测试工具测试时，在已经存在多个测试用例的情况下来基于代码实现API测试时，存在一个问题就在于，可以开发一个代码转换工具，自动将已有的测试用例(如<code>JSON</code>格式)转换为可执行代码，为后续<code>CI/CD</code>直接使用</li>
+</ol>
+<h3 id="功能测试与性能测试"><a href="#功能测试与性能测试" class="headerlink" title="功能测试与性能测试"></a>功能测试与性能测试</h3><h4 id="验证功能性需求"><a href="#验证功能性需求" class="headerlink" title="验证功能性需求"></a>验证功能性需求</h4><ul>
+<li><strong>显示功能需求</strong>：实现软件本身的功能需求</li>
+<li><strong>隐式功能需求</strong>：软件出现异常的处理机制是否正确</li>
+</ul>
+<h4 id="非功能性需求"><a href="#非功能性需求" class="headerlink" title="非功能性需求"></a>非功能性需求</h4><ul>
+<li><strong>安全</strong>：如密码加密，传输过程加密，<code>SQL注入</code>，<code>XSS攻击</code>（补充：拿到加密密码反解成本是否符合要求）</li>
+<li><strong>性能</strong>：响应时间是否达到要求，死锁和不合理资源等待情况，高并发情况下服务端是否存在内存泄漏</li>
+<li><strong>兼容性</strong>：不同浏览器，不同主机，不同网络，不同分辨率</li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/31/关于不同测试阶段测试场景/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="唐潇唐">
+      <meta itemprop="description" content="进击的测试">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/31/处理xml文件/" class="post-title-link" itemprop="url">处理xml文件</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
           
-          <!--/noindex-->
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：17:59:07" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>python处理<code>xml</code>文件通常存在多种方式，这里分别以处理简单文件和大文件为例</p>
+<h2 id="处理一般文件"><a href="#处理一般文件" class="headerlink" title="处理一般文件"></a>处理一般文件</h2><p>处理一般文件，通常使用<code>ElementTree</code>模块,python3.3之后会自动寻找可用的C库来加快速度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询xml"><a href="#查询xml" class="headerlink" title="查询xml"></a>查询xml</h3><p>解析根节点**</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tree = ET.parse(<span class="string">'111.xml'</span>)</span><br><span class="line">root = tree.getroot()</span><br><span class="line"><span class="comment">#&lt;Element data at 0x1f74dabef48&gt;, so root is data</span></span><br></pre></td></tr></table></figure>
+
+<p>而获取root的原因在于方便后面解析使用, 通常情况，<code>xml</code>结构标识为<code>&lt;tag attrib1=1&gt;text&lt;/tag&gt;tail</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#source data:&lt;country name="Liechtenstein"&gt;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>].attrib	<span class="comment">#获取属性</span></span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'Liechtenstein'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>][<span class="number">0</span>].text	<span class="comment">#获取文本</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>][<span class="number">0</span>].tag	<span class="comment">#获取标签</span></span><br><span class="line">rank</span><br></pre></td></tr></table></figure>
+
+<p>当然，<strong>root也是可以迭代的</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root: </span><br><span class="line">	print(i.tag, i.attrib, i.text, i.tail, sep=<span class="string">';'</span>, end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>也可以是根据某一个标签进行迭代</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findall(<span class="string">'country'</span>):	<span class="comment">#遍历所有符合条件子节点</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.find(<span class="string">'country'</span>):	<span class="comment">#遍历第一个符合条件子节点</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findtext(<span class="string">'country'</span>):	<span class="comment">#只遍历文本</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.iter(<span class="string">'country'</span>):	<span class="comment">#以当前节点为树节点</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改xml"><a href="#修改xml" class="headerlink" title="修改xml"></a>修改xml</h3><p>需要注意的是，<code>xml</code>中所有字符均为字符串类型，需要注意字符转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rank.text = str(new_rank)  <span class="comment"># 必须将int转为str</span></span><br><span class="line">rank.set(<span class="string">"updated"</span>, <span class="string">"yes"</span>) <span class="comment"># 添加属性</span></span><br><span class="line"><span class="keyword">del</span> rank.attrib[<span class="string">'updated'</span>]	<span class="comment">#删除属性</span></span><br><span class="line">tree.write(<span class="string">'111.xml'</span>)	<span class="comment">#将数据写入磁盘</span></span><br><span class="line">root.remove(country)	<span class="comment">#删除子节点</span></span><br></pre></td></tr></table></figure>
+
+<p>修改之后的内容只是放在内存中，所以需要将内存里面的数据保存到磁盘中</p>
+<p>值得注意的是，python为查询的接口提供了<code>find</code>和<code>findall</code>接口，分别表示查询第一个值就返回和返回所有查询到的值，这就不要注意<code>find</code>并不支持<code>xpath</code>路径查找，如果想要使用<code>xpath</code>查找要使用<code>findall</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findall(<span class="string">'country[2]/year'</span>):  </span><br><span class="line">	print(i.text)</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，还能对元素使用索引和切片，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = root.findall(<span class="string">'country'</span>)</span><br><span class="line">print(i[<span class="number">1</span>:<span class="number">2</span>])</span><br><span class="line"><span class="comment">#output:[&lt;Element 'country' at 0x000002A4D5794138&gt;]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="处理大型xml文件"><a href="#处理大型xml文件" class="headerlink" title="处理大型xml文件"></a>处理大型xml文件</h2><p>  当然，处理大型文档，除了使用固有的函数模块之外，还可以使用普通文档解析方式，这样只不过会导致取值更麻烦而已</p>
+<p>  其实只要一想到处理大型数据，就应该第一时间想到迭代器或者生成器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> iterparse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_and_remove</span><span class="params">(filename, path)</span>:</span></span><br><span class="line">    path_parts = path.split(<span class="string">'/'</span>)</span><br><span class="line">    doc = iterparse(filename, (<span class="string">'start'</span>, <span class="string">'end'</span>))</span><br><span class="line">    <span class="comment"># Skip the root element</span></span><br><span class="line">    next(doc)</span><br><span class="line"></span><br><span class="line">    tag_stack = []</span><br><span class="line">    elem_stack = []</span><br><span class="line">    <span class="keyword">for</span> event, elem <span class="keyword">in</span> doc:</span><br><span class="line">        <span class="keyword">if</span> event == <span class="string">'start'</span>:</span><br><span class="line">            tag_stack.append(elem.tag)</span><br><span class="line">            elem_stack.append(elem)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">'end'</span>:</span><br><span class="line">            <span class="keyword">if</span> tag_stack == path_parts:</span><br><span class="line">                <span class="keyword">yield</span> elem</span><br><span class="line">                elem_stack[<span class="number">-2</span>].remove(elem)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                tag_stack.pop()</span><br><span class="line">                elem_stack.pop()</span><br><span class="line">            <span class="keyword">except</span> IndexError:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p><code>iterparse()</code> 方法允许对XML文档进行增量操作。 使用时，你需要提供文件名和一个包含下面一种或多种类型的事件列表： <code>start</code>, <code>end</code>, <code>start-ns</code> 和 <code>end-ns</code> 。由 <code>iterparse()</code> 创建的迭代器会产生形如 <code>(event, elem)</code> 的元组， 其中 <code>event</code> 是上述事件列表中的某一个，而 <code>elem</code> 是相应的XML元素。</p>
+<p><code>start</code> 事件在某个元素第一次被创建并且还没有被插入其他数据(如子元素)时被创建。 而 <code>end</code> 事件在某个元素已经完成时被创建。</p>
+<p>在 <code>yield</code> 之后的下面这个语句才是使得程序占用极少内存的ElementTree的核心特性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elem_stack[-2].remove(elem)</span><br></pre></td></tr></table></figure>
+
+<p>这个语句使得之前由 <code>yield</code> 产生的元素从它的父节点中删除掉。 假设已经没有其它的地方引用这个元素了，那么这个元素就被销毁并回收内存。</p>
+<p>对节点的迭代式解析和删除的最终效果就是一个在文档上高效的增量式清扫过程。 文档树结构从始自终没被完整的创建过。尽管如此，还是能通过上述简单的方式来处理这个XML数据。</p>
+<h2 id="将字典类型数据转换为xml"><a href="#将字典类型数据转换为xml" class="headerlink" title="将字典类型数据转换为xml"></a>将字典类型数据转换为xml</h2><p>存在两种解决方案：</p>
+<ul>
+<li>手动构造，以字符串的<code>format</code>函数替代的方式来构造，不过这样显得有点蠢</li>
+<li>使用<code>xml.etree.ElementTree</code>模块中的<code>Element</code>函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> Element, tostringdef</span><br><span class="line">dict_to_xml(tag, d): </span><br><span class="line">    elem = Element(tag) </span><br><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> d.items():  </span><br><span class="line">        child = Element(key)     </span><br><span class="line">        child.text = str(val)     </span><br><span class="line">        elem.append(child)   </span><br><span class="line">    <span class="keyword">return</span> elem</span><br><span class="line">s = &#123;<span class="string">'name'</span>: <span class="string">'GOOG'</span>, <span class="string">'shares'</span>: <span class="number">100</span>, <span class="string">'price'</span>: <span class="number">490.1</span>&#125;</span><br><span class="line">e = dict_to_xml(<span class="string">'stock'</span>, s)	<span class="comment">#&lt;Element 'stock' at 0x000001CE0548C908&gt;</span></span><br><span class="line">print(tostring(e).decode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="comment">#&lt;stock&gt;&lt;name&gt;GOOG&lt;/name&gt;&lt;shares&gt;100&lt;/shares&gt;&lt;price&gt;490.1&lt;/price&gt;&lt;/stock&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样做的目的在于，可以通过查询数据库中的值放进字典中，利用字典生成<code>xml</code>文件</p>
+
+          
         
       
     </div>
