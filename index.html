@@ -366,7 +366,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/11/07/容器技术的实现/" class="post-title-link" itemprop="url">Python的垃圾回收机制</a>
+                <a href="/2019/11/07/容器技术的实现/" class="post-title-link" itemprop="url">容器技术的实现</a>
               
             
           </h1>
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-11-07 18:10:11 / 修改时间：18:16:13" itemprop="dateCreated datePublished" datetime="2019-11-07T18:10:11+08:00">2019-11-07</time>
+              <time title="创建时间：2019-11-07 18:10:11 / 修改时间：18:30:44" itemprop="dateCreated datePublished" datetime="2019-11-07T18:10:11+08:00">2019-11-07</time>
             </span>
           
 
@@ -457,7 +457,7 @@
 <li>Docker公司发布的Docker项目具有里程碑式的意义</li>
 <li>Docker项目通过“容器镜像”，解决了应用打包的根本性难题</li>
 </ul>
-<h3 id="NameSpace隔离"><a href="#NameSpace隔离" class="headerlink" title="NameSpace隔离"></a>NameSpace隔离</h3><p>我们经常看见一张对比虚拟机和Docker的图![虚拟机 VS Docker](/images/docker VS 虚拟机.png)</p>
+<h3 id="NameSpace隔离"><a href="#NameSpace隔离" class="headerlink" title="NameSpace隔离"></a>NameSpace隔离</h3><p>我们经常看见一张对比虚拟机和Docker的图<img src="/images/docker_VS_%E8%99%9A%E6%8B%9F%E6%9C%BA.png" alt="虚拟机 VS Docker"></p>
 <p>这幅图的左边，画出了虚拟机的工作原理。其中，名为 <code>Hypervisor</code>的软件是虚拟机最主要的部分。它通过硬件虚拟化功能，模拟出了运行一个操作系统需要的各种硬件，比如 CPU、内存、I/O 设备等等。然后，它在这些虚拟的硬件上安装了一个新的操作系统，即 Guest OS。</p>
 <p>而这幅图的右边，则用一个名为 Docker Engine 的软件替换了 <code>Hypervisor</code>。这也是为什么，很多人会把 Docker 项目称为“轻量级”虚拟化技术的原因，实际上就是把虚拟机的概念套在了容器上。</p>
 <p><strong>可是这样的说法并不严谨。容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出一个“边界”。</strong></p>
@@ -480,7 +480,7 @@
 <p>比如，Mount Namespace，用于让被隔离进程只看到当前 Namespace 里的挂载点信息；Network Namespace，用于让被隔离进程看到当前 Namespace 里的网络设备和配置。</p>
 <p>这，就是 Linux 容器最基本的实现原理了。</p>
 <p>由此可见，虚拟机和Docker的比对图应该如下所示</p>
-<p>![docker VS 虚拟机修正版](/images/docker VS 虚拟机修正版.png)</p>
+<p><img src="/images/docker_VS_%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BF%AE%E6%AD%A3%E7%89%88.png" alt="docker VS 虚拟机修正版"></p>
 <p>使用虚拟化技术作为应用沙盒，就必须要由 <code>Hypervisor</code> 来负责创建虚拟机，这个虚拟机是真实存在的，并且它里面必须运行一个完整的 Guest OS 才能执行用户的应用进程。这就不可避免地带来了额外的资源消耗和占用。相比之下，容器技术的应用并不需要单独的GuestOS，共享宿主机的内核。</p>
 <p>但是，有利也有弊，Linux NameSpace在隔离上也存在<strong>隔离不彻底</strong>的问题。</p>
 <p><strong>首先，既然容器只是运行在宿主机上的一种特殊的进程，那么多个容器之间使用的就还是同一个宿主机的操作系统内核。</strong></p>
