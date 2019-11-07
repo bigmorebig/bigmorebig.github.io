@@ -95,17 +95,19 @@
   };
 </script>
 
-  <meta name="description" content="python处理xml文件通常存在多种方式，这里分别以处理简单文件和大文件为例 处理一般文件处理一般文件，通常使用ElementTree模块,python3.3之后会自动寻找可用的C库来加快速度 1234try:    import xml.etree.cElementTree as ETexcept ImportError:    import xml.etree.ElementTree as">
+  <meta name="description" content="容器技术的兴起 容器技术的兴起源于PaSS技术的普及 Docker公司发布的Docker项目具有里程碑式的意义 Docker项目通过“容器镜像”，解决了应用打包的根本性难题  NameSpace隔离我们经常看见一张对比虚拟机和Docker的图![虚拟机 VS Docker](/images/docker VS 虚拟机.png) 这幅图的左边，画出了虚拟机的工作原理。其中，名为 Hypervisor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="处理xml文件">
-<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/index.html">
+<meta property="og:title" content="Python的垃圾回收机制">
+<meta property="og:url" content="https://github.com/bigmorebig/bigmorebig.github.io/2019/11/07/容器技术的实现/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="python处理xml文件通常存在多种方式，这里分别以处理简单文件和大文件为例 处理一般文件处理一般文件，通常使用ElementTree模块,python3.3之后会自动寻找可用的C库来加快速度 1234try:    import xml.etree.cElementTree as ETexcept ImportError:    import xml.etree.ElementTree as">
+<meta property="og:description" content="容器技术的兴起 容器技术的兴起源于PaSS技术的普及 Docker公司发布的Docker项目具有里程碑式的意义 Docker项目通过“容器镜像”，解决了应用打包的根本性难题  NameSpace隔离我们经常看见一张对比虚拟机和Docker的图![虚拟机 VS Docker](/images/docker VS 虚拟机.png) 这幅图的左边，画出了虚拟机的工作原理。其中，名为 Hypervisor">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-31T09:59:07.688Z">
+<meta property="og:image" content="c:%5Cstudy%5C%E7%AC%94%E8%AE%B0%5Cdocker%E5%88%86%E5%B1%82.png">
+<meta property="og:updated_time" content="2019-11-07T10:16:13.294Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="处理xml文件">
-<meta name="twitter:description" content="python处理xml文件通常存在多种方式，这里分别以处理简单文件和大文件为例 处理一般文件处理一般文件，通常使用ElementTree模块,python3.3之后会自动寻找可用的C库来加快速度 1234try:    import xml.etree.cElementTree as ETexcept ImportError:    import xml.etree.ElementTree as">
+<meta name="twitter:title" content="Python的垃圾回收机制">
+<meta name="twitter:description" content="容器技术的兴起 容器技术的兴起源于PaSS技术的普及 Docker公司发布的Docker项目具有里程碑式的意义 Docker项目通过“容器镜像”，解决了应用打包的根本性难题  NameSpace隔离我们经常看见一张对比虚拟机和Docker的图![虚拟机 VS Docker](/images/docker VS 虚拟机.png) 这幅图的左边，画出了虚拟机的工作原理。其中，名为 Hypervisor">
+<meta name="twitter:image" content="c:%5Cstudy%5C%E7%AC%94%E8%AE%B0%5Cdocker%E5%88%86%E5%B1%82.png">
 
 
 
@@ -115,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/">
+  <link rel="canonical" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/11/07/容器技术的实现/">
 
 
 
@@ -126,7 +128,7 @@
 </script>
 
   
-  <title>处理xml文件 | 我的博客</title>
+  <title>Python的垃圾回收机制 | 我的博客</title>
   
 
 
@@ -346,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/bigmorebig/bigmorebig.github.io/2019/11/07/容器技术的实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="唐潇唐">
@@ -363,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">处理xml文件
+          <h1 class="post-title" itemprop="name headline">Python的垃圾回收机制
 
               
             
@@ -389,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-07-31 17:57:48 / 修改时间：17:59:07" itemprop="dateCreated datePublished" datetime="2019-07-31T17:57:48+08:00">2019-07-31</time>
+              <time title="创建时间：2019-11-07 18:10:11 / 修改时间：18:16:13" itemprop="dateCreated datePublished" datetime="2019-11-07T18:10:11+08:00">2019-11-07</time>
             </span>
           
 
@@ -408,7 +410,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/容器与容器技术/" itemprop="url" rel="index"><span itemprop="name">容器与容器技术</span></a></span>
 
                 
                 
@@ -448,51 +450,130 @@
       
 
       
-        <p>python处理<code>xml</code>文件通常存在多种方式，这里分别以处理简单文件和大文件为例</p>
-<h2 id="处理一般文件"><a href="#处理一般文件" class="headerlink" title="处理一般文件"></a>处理一般文件</h2><p>处理一般文件，通常使用<code>ElementTree</code>模块,python3.3之后会自动寻找可用的C库来加快速度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br></pre></td></tr></table></figure>
-
-<h3 id="查询xml"><a href="#查询xml" class="headerlink" title="查询xml"></a>查询xml</h3><p>解析根节点**</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tree = ET.parse(<span class="string">'111.xml'</span>)</span><br><span class="line">root = tree.getroot()</span><br><span class="line"><span class="comment">#&lt;Element data at 0x1f74dabef48&gt;, so root is data</span></span><br></pre></td></tr></table></figure>
-
-<p>而获取root的原因在于方便后面解析使用, 通常情况，<code>xml</code>结构标识为<code>&lt;tag attrib1=1&gt;text&lt;/tag&gt;tail</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#source data:&lt;country name="Liechtenstein"&gt;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>].attrib	<span class="comment">#获取属性</span></span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'Liechtenstein'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>][<span class="number">0</span>].text	<span class="comment">#获取文本</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root[<span class="number">0</span>][<span class="number">0</span>].tag	<span class="comment">#获取标签</span></span><br><span class="line">rank</span><br></pre></td></tr></table></figure>
-
-<p>当然，<strong>root也是可以迭代的</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root: </span><br><span class="line">	print(i.tag, i.attrib, i.text, i.tail, sep=<span class="string">';'</span>, end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>也可以是根据某一个标签进行迭代</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findall(<span class="string">'country'</span>):	<span class="comment">#遍历所有符合条件子节点</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.find(<span class="string">'country'</span>):	<span class="comment">#遍历第一个符合条件子节点</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findtext(<span class="string">'country'</span>):	<span class="comment">#只遍历文本</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.iter(<span class="string">'country'</span>):	<span class="comment">#以当前节点为树节点</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改xml"><a href="#修改xml" class="headerlink" title="修改xml"></a>修改xml</h3><p>需要注意的是，<code>xml</code>中所有字符均为字符串类型，需要注意字符转换</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rank.text = str(new_rank)  <span class="comment"># 必须将int转为str</span></span><br><span class="line">rank.set(<span class="string">"updated"</span>, <span class="string">"yes"</span>) <span class="comment"># 添加属性</span></span><br><span class="line"><span class="keyword">del</span> rank.attrib[<span class="string">'updated'</span>]	<span class="comment">#删除属性</span></span><br><span class="line">tree.write(<span class="string">'111.xml'</span>)	<span class="comment">#将数据写入磁盘</span></span><br><span class="line">root.remove(country)	<span class="comment">#删除子节点</span></span><br></pre></td></tr></table></figure>
-
-<p>修改之后的内容只是放在内存中，所以需要将内存里面的数据保存到磁盘中</p>
-<p>值得注意的是，python为查询的接口提供了<code>find</code>和<code>findall</code>接口，分别表示查询第一个值就返回和返回所有查询到的值，这就不要注意<code>find</code>并不支持<code>xpath</code>路径查找，如果想要使用<code>xpath</code>查找要使用<code>findall</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> root.findall(<span class="string">'country[2]/year'</span>):  </span><br><span class="line">	print(i.text)</span><br></pre></td></tr></table></figure>
-
-<p>除此之外，还能对元素使用索引和切片，比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = root.findall(<span class="string">'country'</span>)</span><br><span class="line">print(i[<span class="number">1</span>:<span class="number">2</span>])</span><br><span class="line"><span class="comment">#output:[&lt;Element 'country' at 0x000002A4D5794138&gt;]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="处理大型xml文件"><a href="#处理大型xml文件" class="headerlink" title="处理大型xml文件"></a>处理大型xml文件</h2><p>  当然，处理大型文档，除了使用固有的函数模块之外，还可以使用普通文档解析方式，这样只不过会导致取值更麻烦而已</p>
-<p>  其实只要一想到处理大型数据，就应该第一时间想到迭代器或者生成器</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> iterparse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_and_remove</span><span class="params">(filename, path)</span>:</span></span><br><span class="line">    path_parts = path.split(<span class="string">'/'</span>)</span><br><span class="line">    doc = iterparse(filename, (<span class="string">'start'</span>, <span class="string">'end'</span>))</span><br><span class="line">    <span class="comment"># Skip the root element</span></span><br><span class="line">    next(doc)</span><br><span class="line"></span><br><span class="line">    tag_stack = []</span><br><span class="line">    elem_stack = []</span><br><span class="line">    <span class="keyword">for</span> event, elem <span class="keyword">in</span> doc:</span><br><span class="line">        <span class="keyword">if</span> event == <span class="string">'start'</span>:</span><br><span class="line">            tag_stack.append(elem.tag)</span><br><span class="line">            elem_stack.append(elem)</span><br><span class="line">        <span class="keyword">elif</span> event == <span class="string">'end'</span>:</span><br><span class="line">            <span class="keyword">if</span> tag_stack == path_parts:</span><br><span class="line">                <span class="keyword">yield</span> elem</span><br><span class="line">                elem_stack[<span class="number">-2</span>].remove(elem)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                tag_stack.pop()</span><br><span class="line">                elem_stack.pop()</span><br><span class="line">            <span class="keyword">except</span> IndexError:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-
-<p><code>iterparse()</code> 方法允许对XML文档进行增量操作。 使用时，你需要提供文件名和一个包含下面一种或多种类型的事件列表： <code>start</code>, <code>end</code>, <code>start-ns</code> 和 <code>end-ns</code> 。由 <code>iterparse()</code> 创建的迭代器会产生形如 <code>(event, elem)</code> 的元组， 其中 <code>event</code> 是上述事件列表中的某一个，而 <code>elem</code> 是相应的XML元素。</p>
-<p><code>start</code> 事件在某个元素第一次被创建并且还没有被插入其他数据(如子元素)时被创建。 而 <code>end</code> 事件在某个元素已经完成时被创建。</p>
-<p>在 <code>yield</code> 之后的下面这个语句才是使得程序占用极少内存的ElementTree的核心特性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elem_stack[-2].remove(elem)</span><br></pre></td></tr></table></figure>
-
-<p>这个语句使得之前由 <code>yield</code> 产生的元素从它的父节点中删除掉。 假设已经没有其它的地方引用这个元素了，那么这个元素就被销毁并回收内存。</p>
-<p>对节点的迭代式解析和删除的最终效果就是一个在文档上高效的增量式清扫过程。 文档树结构从始自终没被完整的创建过。尽管如此，还是能通过上述简单的方式来处理这个XML数据。</p>
-<h2 id="将字典类型数据转换为xml"><a href="#将字典类型数据转换为xml" class="headerlink" title="将字典类型数据转换为xml"></a>将字典类型数据转换为xml</h2><p>存在两种解决方案：</p>
-<ul>
-<li>手动构造，以字符串的<code>format</code>函数替代的方式来构造，不过这样显得有点蠢</li>
-<li>使用<code>xml.etree.ElementTree</code>模块中的<code>Element</code>函数</li>
+        <h3 id="容器技术的兴起"><a href="#容器技术的兴起" class="headerlink" title="容器技术的兴起"></a>容器技术的兴起</h3><ul>
+<li>容器技术的兴起源于<a href="https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.etools.mft.doc/cf10009_.htm" target="_blank" rel="noopener">PaSS</a>技术的普及</li>
+<li>Docker公司发布的Docker项目具有里程碑式的意义</li>
+<li>Docker项目通过“容器镜像”，解决了应用打包的根本性难题</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> Element, tostringdef</span><br><span class="line">dict_to_xml(tag, d): </span><br><span class="line">    elem = Element(tag) </span><br><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> d.items():  </span><br><span class="line">        child = Element(key)     </span><br><span class="line">        child.text = str(val)     </span><br><span class="line">        elem.append(child)   </span><br><span class="line">    <span class="keyword">return</span> elem</span><br><span class="line">s = &#123;<span class="string">'name'</span>: <span class="string">'GOOG'</span>, <span class="string">'shares'</span>: <span class="number">100</span>, <span class="string">'price'</span>: <span class="number">490.1</span>&#125;</span><br><span class="line">e = dict_to_xml(<span class="string">'stock'</span>, s)	<span class="comment">#&lt;Element 'stock' at 0x000001CE0548C908&gt;</span></span><br><span class="line">print(tostring(e).decode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="comment">#&lt;stock&gt;&lt;name&gt;GOOG&lt;/name&gt;&lt;shares&gt;100&lt;/shares&gt;&lt;price&gt;490.1&lt;/price&gt;&lt;/stock&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="NameSpace隔离"><a href="#NameSpace隔离" class="headerlink" title="NameSpace隔离"></a>NameSpace隔离</h3><p>我们经常看见一张对比虚拟机和Docker的图![虚拟机 VS Docker](/images/docker VS 虚拟机.png)</p>
+<p>这幅图的左边，画出了虚拟机的工作原理。其中，名为 <code>Hypervisor</code>的软件是虚拟机最主要的部分。它通过硬件虚拟化功能，模拟出了运行一个操作系统需要的各种硬件，比如 CPU、内存、I/O 设备等等。然后，它在这些虚拟的硬件上安装了一个新的操作系统，即 Guest OS。</p>
+<p>而这幅图的右边，则用一个名为 Docker Engine 的软件替换了 <code>Hypervisor</code>。这也是为什么，很多人会把 Docker 项目称为“轻量级”虚拟化技术的原因，实际上就是把虚拟机的概念套在了容器上。</p>
+<p><strong>可是这样的说法并不严谨。容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出一个“边界”。</strong></p>
+<p>对于 Docker 等大多数 Linux 容器来说，<code>Cgroups</code> 技术是用来制造约束的主要手段，而 <code>Namespace</code>技术则是用来修改进程视图的主要方法。</p>
+<p>假如运行一个容器，并进入其交互界面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> docker run -it busybox /bin/sh</span><br><span class="line">/ #</span><br></pre></td></tr></table></figure>
 
-<p>这样做的目的在于，可以通过查询数据库中的值放进字典中，利用字典生成<code>xml</code>文件</p>
+<p>再执行<code>ps</code>指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/ # ps</span><br><span class="line">PID  USER   TIME COMMAND</span><br><span class="line">  1 root   0:00 /bin/sh</span><br><span class="line">  10 root   0:00 ps</span><br></pre></td></tr></table></figure>
+
+<p>可以看见，容器中的<code>/bin/bash</code>的<code>pid</code>为1，以及命令本身包含的ps，这说明Docker已经被隔离在了一个完全隔离的世界中了。</p>
+<p>而Docker采用的隔离机制其实就是Linux的<code>NameSpace</code>技术。而 Namespace 的使用方式也非常有意思：它其实只是 Linux 创建新进程的一个可选参数。我们知道，在 Linux 系统中创建线程的系统调用是 clone()，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int pid = clone(main_function, stack_size, SIGCHLD, NULL);</span><br></pre></td></tr></table></figure>
+
+<p>这个系统调用就会为我们创建一个新的进程，并且返回它的进程号 pid。而当我们用 clone() 系统调用创建一个新进程时，就可以在参数中指定 <code>CLONE_NEWPID</code> 参数，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);</span><br></pre></td></tr></table></figure>
+
+<p>这时，新创建的这个进程将会“看到”一个全新的进程空间，在这个进程空间里，它的 PID 是 1。之所以说“看到”，是因为这只是一个“障眼法”，在宿主机真实的进程空间里，这个进程的 PID 还是真实的数值，比如 100。</p>
+<p>除了我们刚刚用到的 PID Namespace，Linux 操作系统还提供了 Mount、UTS、IPC、Network 和 User 这些 Namespace，用来对各种不同的进程上下文进行“障眼法”操作。</p>
+<p>比如，Mount Namespace，用于让被隔离进程只看到当前 Namespace 里的挂载点信息；Network Namespace，用于让被隔离进程看到当前 Namespace 里的网络设备和配置。</p>
+<p>这，就是 Linux 容器最基本的实现原理了。</p>
+<p>由此可见，虚拟机和Docker的比对图应该如下所示</p>
+<p>![docker VS 虚拟机修正版](/images/docker VS 虚拟机修正版.png)</p>
+<p>使用虚拟化技术作为应用沙盒，就必须要由 <code>Hypervisor</code> 来负责创建虚拟机，这个虚拟机是真实存在的，并且它里面必须运行一个完整的 Guest OS 才能执行用户的应用进程。这就不可避免地带来了额外的资源消耗和占用。相比之下，容器技术的应用并不需要单独的GuestOS，共享宿主机的内核。</p>
+<p>但是，有利也有弊，Linux NameSpace在隔离上也存在<strong>隔离不彻底</strong>的问题。</p>
+<p><strong>首先，既然容器只是运行在宿主机上的一种特殊的进程，那么多个容器之间使用的就还是同一个宿主机的操作系统内核。</strong></p>
+<p>这意味着，如果你要在 Windows 宿主机上运行 Linux 容器，或者在低版本的 Linux 宿主机上运行高版本的 Linux 容器，都是行不通的。</p>
+<p><strong>其次，在 Linux 内核中，有很多资源和对象是不能被 Namespace 化的，最典型的例子就是：时间。</strong></p>
+<p>这意味着，在容器中修改了时间，宿主机的时间也会被修改，这显然不符合期望的要求。</p>
+<p><strong>所以总结来说，容器，就是一种特殊的进程。</strong></p>
+<h3 id="Cgroups限制"><a href="#Cgroups限制" class="headerlink" title="Cgroups限制"></a>Cgroups限制</h3><p>由于容器是一个特殊的进程，这意味着，它所能够使用到的资源（比如 CPU、内存），却是可以随时被宿主机上的其他进程（或者其他容器）占用的。当然，这个 100 号进程自己也可能把所有资源吃光。这些情况，显然都不是一个“沙盒”应该表现出来的合理行为。</p>
+<p>好在<strong>Linux Cgroups就是Linux内核中用来设置资源限制的一个重要功能。</strong></p>
+<p>在 Linux 中，Cgroups 给用户暴露出来的操作接口是文件系统，即它以文件和目录的方式组织在操作系统的 <code>/sys/fs/cgroup</code> 路径下。可以通过mount指令显示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> mount -t cgroup </span><br><span class="line">cpuset on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)</span><br><span class="line">cpu on /sys/fs/cgroup/cpu type cgroup (rw,nosuid,nodev,noexec,relatime,cpu)</span><br><span class="line">cpuacct on /sys/fs/cgroup/cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,cpuacct)</span><br><span class="line">blkio on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,blkio)</span><br><span class="line">memory on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，目录下有很多诸如 cpuset、cpu、 memory 这样的子目录，也叫子系统。这些都是我这台机器当前可以被 Cgroups 进行限制的资源种类。而在子系统对应的资源种类下，你就可以看到该类资源具体可以被限制的方法。比如，对 CPU 子系统来说，我们就可以看到如下几个配置文件，这个指令是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> ls /sys/fs/cgroup/cpu</span><br><span class="line">cgroup.clone_children cpu.cfs_period_us cpu.rt_period_us  cpu.shares notify_on_release</span><br><span class="line">cgroup.procs      cpu.cfs_quota_us  cpu.rt_runtime_us cpu.stat  tasks</span><br></pre></td></tr></table></figure>
+
+<p>其中cfs_period 和 cfs_quota 这两个参数需要组合使用，可以用来限制进程在长度为 cfs_period 的一段时间内，只能被分配到总量为 cfs_quota 的 CPU 时间，tasks可以用来指定进程的PID。</p>
+<p>对于配置文件的使用，需要到对应的子系统下创建一个目录，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">root@ubuntu:/sys/fs/cgroup/cpu$ mkdir container</span><br><span class="line">root@ubuntu:/sys/fs/cgroup/cpu$ ls container/</span><br><span class="line">cgroup.clone_children cpu.cfs_period_us cpu.rt_period_us  cpu.shares notify_on_release</span><br><span class="line">cgroup.procs      cpu.cfs_quota_us  cpu.rt_runtime_us cpu.stat  tasks</span><br></pre></td></tr></table></figure>
+
+<p>这个目录被称为<code>控制组</code>，操作系统会在你新创建的 container 目录下，自动生成该子系统对应的资源限制文件。</p>
+<p>假如在后台执行一个死循环脚本，让脚本将操作系统CPU吃满</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> while : ; do : ; done &amp;</span><br><span class="line">[1] 226</span><br></pre></td></tr></table></figure>
+
+<p>可以通过top指令来确认CPU实时变化</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> top</span><br><span class="line"><span class="meta">%</span>Cpu0 :100.0 us, 0.0 sy, 0.0 ni, 0.0 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st</span><br></pre></td></tr></table></figure>
+
+<p>而此时，可以通过查看container目录下的文件，可以看到container 控制组里的 CPU quota 还没有任何限制（即：-1），CPU period 则是默认的 100  ms（100000  us）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> cat /sys/fs/cgroup/cpu/container/cpu.cfs_quota_us </span><br><span class="line">-1</span><br><span class="line"><span class="meta">$</span> cat /sys/fs/cgroup/cpu/container/cpu.cfs_period_us </span><br><span class="line">100000</span><br></pre></td></tr></table></figure>
+
+<p>接下来可以通过修改配置文件的方式来对CPU占用率进行限制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span> echo 20000 &gt; /sys/fs/cgroup/cpu/container/cpu.cfs_quota_us</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> echo 226 &gt; /sys/fs/cgroup/cpu/container/tasks </span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> top</span><br><span class="line"><span class="meta">%</span>Cpu0 : 20.3 us, 0.0 sy, 0.0 ni, 79.7 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，CPU占用率立马降为20%。除 CPU 子系统外，Cgroups 的每一项子系统都有其独有的资源限制能力，比如：</p>
+<ul>
+<li>blkio：为块设备设定I/O 限制，一般用于磁盘等设备；</li>
+<li>cpuset：为进程分配单独的 CPU 核和对应的内存节点；</li>
+<li>memory：为进程设定内存使用的限制。</li>
+</ul>
+<p><strong>Linux Cgroups 的设计还是比较易用的，简单粗暴地理解呢，它就是一个子系统目录加上一组资源限制文件的组合。</strong>当然，至于控制组下面的资源文件限制值，可以在运行image的时候通过参数来指定</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run -it --cpu-period=100000 --cpu-quota=20000 ubuntu /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> cat /sys/fs/cgroup/cpu/docker/5d5c9f67d/cpu.cfs_period_us </span><br><span class="line">100000</span><br><span class="line"><span class="meta">$</span> cat /sys/fs/cgroup/cpu/docker/5d5c9f67d/cpu.cfs_quota_us </span><br><span class="line">20000</span><br></pre></td></tr></table></figure>
+
+<p>总结来说，容器是一个<code>单进程</code>模型，这意味着，一个容器没法运行两个不同的应用，因为没法找到一个公共的PID=1来充当两个不同应用的父进程。这是因为容器本身的设计就是希望应用和容器同生命周期。</p>
+<p>同样，Cgroups也是有利有弊，最明显的就是<code>/proc</code>文件系统问题。</p>
+<p><code>/proc</code>是用来存放当前内核的运行状态的一些特殊文件集合，比如CPU使用情况，内存使用情况，top指令的主要来源值就是来自于这里。但是，在容器中，<code>proc</code>显示的是宿主机的数据，这是绝对不允许的。</p>
+<p>当然，可采用<code>lxcfs</code>来隔离宿主机和容器的文件系统。</p>
+<h3 id="容器文件系统的深入理解"><a href="#容器文件系统的深入理解" class="headerlink" title="容器文件系统的深入理解"></a>容器文件系统的深入理解</h3><p>由于NameSpace的作用是<code>隔离</code>，它的应用让容器只能看到该NameSpace内的世界；Cgroups的作用是<code>限制</code>，，它的作用是限制容器对于资源的使用率。对于理想的容器文件系统应该是看到一份完全独立的文件系统，且不受宿主机的影响。关于Mount NameSpace的小实验可以参考<a href="https://coolshell.cn/articles/17010.html" target="_blank" rel="noopener">DOCKER基础技术</a>,可以得出结论是：</p>
+<p><strong>Mount Namespace 跟其他 Namespace 的使用略有不同的地方：它对容器进程视图的改变，一定是伴随着挂载操作（mount）才能生效。</strong></p>
+<p>对于刚进入容器的文件系统来说，容器使用的是Linux名为<code>chroot</code>的指令，即改变进程根目录到指定的目录下。用法如下所示：</p>
+<p>首先，创建一个test目录和几个lib文件夹，再把bash命令拷贝到test目录下对应的bin目录下，接下来，把 bash 命令需要的所有 so 文件，也拷贝到 test 目录对应的 lib 路径下。找到 so 文件可以用 ldd 命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir -p $HOME/test</span><br><span class="line"><span class="meta">$</span> mkdir -p $HOME/test/&#123;bin,lib64,lib&#125;</span><br><span class="line"><span class="meta">$</span> cd $T</span><br><span class="line"><span class="meta">$</span> cp -v /bin/&#123;bash,ls&#125; $HOME/test/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> T=$HOME/test</span><br><span class="line"><span class="meta">$</span> list="$(ldd /bin/ls | egrep -o '/lib.*\.[0-9]')"</span><br><span class="line"><span class="meta">$</span> for i in $list; do cp -v "$i" "$&#123;T&#125;$&#123;i&#125;"; done</span><br></pre></td></tr></table></figure>
+
+<p>最后，执行 chroot 命令，告诉操作系统，我们将使用 $HOME/test 目录作为 /bin/bash 进程的根目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> chroot $HOME/test /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>这时，你如果执行 “ls /“，就会看到，它返回的都是 $HOME/test 目录下面的内容，而不是宿主机的内容。实际上，Mount Namespace 正是基于对 chroot 的不断改良才被发明出来的，它也是 Linux 操作系统里的第一个 Namespace。</strong></p>
+<p>当然，为了能够让容器的这个根目录看起来更“真实”，我们一般会在这个容器的根目录下挂载一个完整操作系统的文件系统，比如 Ubuntu16.04 的 ISO。</p>
+<p>而这个挂载在容器根目录上、用来为容器进程提供隔离后执行环境的文件系统，就是所谓的“容器镜像”。它还有一个更为专业的名字，叫作：<code>rootfs</code>（根文件系统）。</p>
+<p>现在，对于Docker项目来说，最核心的原理已经完成了，即：</p>
+<ul>
+<li>启用 Linux Namespace 配置；</li>
+<li>设置指定的 Cgroups 参数；</li>
+<li>切换进程的根目录（Change Root）。</li>
+</ul>
+<p>不过需要注意的是，<strong>rootfs 只是一个操作系统所包含的文件、配置和目录，并不包括操作系统内核。在 Linux 操作系统中，这两部分是分开存放的，操作系统只有在开机启动时才会加载指定版本的内核镜像。</strong></p>
+<p>也就是说，同一台机器上的所有容器，都共享一个操作系统内核，这也是容器相比于虚拟机的主要区别：毕竟后者有模拟出来的硬件机器充当沙盒，每个沙盒中还有一个完整的GuestOS。</p>
+<p>当然，在有了rootfs之后，还必须面对的一个问题就是，是否需要每次改动一下应用都需要重新制作一次rootfs。</p>
+<p>Docker的做法是，在镜像的设计中，引入了<code>层（layer）</code>的概念。也就是说，用户制作镜像的每一步操作，都会生成一个层，也就是一个增量 rootfs。</p>
+<p>这个做法主要依赖Linux的联合文件系统(Union File System)，最主要的功能是将多个不同位置的目录联合挂载（union mount）到同一个目录下。比如，我现在有两个目录 A 和 B，它们分别有两个文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tree</span><br><span class="line">.</span><br><span class="line">├── A</span><br><span class="line">│  ├── a</span><br><span class="line">│  └── x</span><br><span class="line">└── B</span><br><span class="line">  ├── b</span><br><span class="line">  └── x</span><br></pre></td></tr></table></figure>
+
+<p>然后，我使用联合挂载的方式，将这两个目录挂载到一个公共的目录 C 上：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir C</span><br><span class="line"><span class="meta">$</span> mount -t aufs -o dirs=./A:./B none ./C</span><br></pre></td></tr></table></figure>
+
+<p>这时，我再查看目录 C 的内容，就能看到目录 A 和 B 下的文件被合并到了一起：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tree ./C</span><br><span class="line">./C</span><br><span class="line">├── a</span><br><span class="line">├── b</span><br><span class="line">└── x</span><br></pre></td></tr></table></figure>
+
+<p>Docker采用<code>AuFS</code>这个联合文件系统来实现联合挂载，对于 AuFS 来说，它最关键的目录结构在 /var/lib/docker 路径下的 diff 目录：<code>/var/lib/docker/aufs/diff/&lt;layer_id&gt;</code>，而在使用镜像时，Docker 会把这些增量联合挂载在一个统一的挂载点上<code>/var/lib/docker/aufs/mnt/&lt;layer_id&gt;</code>。</p>
+<p>而且，从这个结构可以看出来，这个容器的 rootfs 由如下图所示的三部分组成：</p>
+<p><img src="C:%5Cstudy%5C%E7%AC%94%E8%AE%B0%5Cdocker%E5%88%86%E5%B1%82.png" alt="docker分层"></p>
+<p><strong>第一部分：只读层</strong></p>
+<p>它是这个容器的 rootfs 最下面的五层，对应的正是 ubuntu:latest 镜像的五层。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ls /var/lib/docker/aufs/diff/72b0744e06247c7d0...</span><br><span class="line">etc sbin usr var</span><br><span class="line"><span class="meta">$</span> ls /var/lib/docker/aufs/diff/32e8e20064858c0f2...</span><br><span class="line">run</span><br><span class="line"><span class="meta">$</span> ls /var/lib/docker/aufs/diff/a524a729adadedb900...</span><br><span class="line">bin boot dev etc home lib lib64 media mnt opt proc root run sbin srv sys tmp usr var</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这些层，都以增量的方式分别包含了 Ubuntu 操作系统的一部分。</p>
+<p><strong>第二部分：可读写层</strong></p>
+<p>在没有写入文件之前，这个目录是空的。而一旦在容器里做了写操作，你修改产生的内容就会以增量的方式出现在这个层中。</p>
+<p>而对于删除来说，AuFS 会在可读写层创建一个 whiteout 文件，把只读层里的文件“遮挡”起来。比如，你要删除只读层里一个名叫 foo 的文件，那么这个删除操作实际上是在可读写层创建了一个名叫.wh.foo 的文件。这样，当这两个层被联合挂载之后，foo 文件就会被.wh.foo 文件“遮挡”起来，“消失”了。</p>
+<p><strong>第三部分：Init层</strong></p>
+<p>它是一个以<code>-init</code>结尾的层，夹在只读层和读写层之间。Init 层是 Docker 项目单独生成的一个内部层，专门用来存放 /etc/hosts、/etc/resolv.conf 等信息。</p>
+<p>需要这样一层的原因是，这些文件本来属于只读的 Ubuntu 镜像的一部分，但是用户往往需要在启动容器时写入一些指定的值比如 hostname，所以就需要在可读写层对它们进行修改。</p>
+<p>所以，Docker 做法是，在修改了这些文件之后，以一个单独的层挂载了出来。而用户执行 docker commit 只会提交可读写层，所以是不包含这些内容的。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://coolshell.cn/articles/17010.html" target="_blank" rel="noopener">https://coolshell.cn/articles/17010.html</a></li>
+<li><a href="https://time.geekbang.org/column/intro/116" target="_blank" rel="noopener">https://time.geekbang.org/column/intro/116</a></li>
+</ol>
 
       
     </div>
@@ -571,8 +652,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/关于不同测试阶段测试场景/" rel="next" title="关于不同测试阶段的测试场景">
-                <i class="fa fa-chevron-left"></i> 关于不同测试阶段的测试场景
+              <a href="/2019/08/16/引用计数/" rel="next" title="Python的垃圾回收机制">
+                <i class="fa fa-chevron-left"></i> Python的垃圾回收机制
               </a>
             
           </div>
@@ -580,10 +661,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/01/shell文本处理三剑客之sed/" rel="prev" title="shell文本处理三剑客之sed">
-                shell文本处理三剑客之sed <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -744,7 +821,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理一般文件"><span class="nav-number">1.</span> <span class="nav-text">处理一般文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询xml"><span class="nav-number">1.1.</span> <span class="nav-text">查询xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改xml"><span class="nav-number">1.2.</span> <span class="nav-text">修改xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理大型xml文件"><span class="nav-number">2.</span> <span class="nav-text">处理大型xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将字典类型数据转换为xml"><span class="nav-number">3.</span> <span class="nav-text">将字典类型数据转换为xml</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器技术的兴起"><span class="nav-number">1.</span> <span class="nav-text">容器技术的兴起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NameSpace隔离"><span class="nav-number">2.</span> <span class="nav-text">NameSpace隔离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cgroups限制"><span class="nav-number">3.</span> <span class="nav-text">Cgroups限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器文件系统的深入理解"><span class="nav-number">4.</span> <span class="nav-text">容器文件系统的深入理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
