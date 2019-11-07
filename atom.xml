@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/bigmorebig/bigmorebig.github.io/"/>
-  <updated>2019-11-07T10:30:44.929Z</updated>
+  <updated>2019-11-07T11:10:17.937Z</updated>
   <id>https://github.com/bigmorebig/bigmorebig.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/11/07/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/11/07/容器技术的实现/</id>
     <published>2019-11-07T10:10:11.207Z</published>
-    <updated>2019-11-07T10:30:44.929Z</updated>
+    <updated>2019-11-07T11:10:17.937Z</updated>
     
     <summary type="html">
     
@@ -212,28 +212,6 @@
   </entry>
   
   <entry>
-    <title>处理xml文件</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/</id>
-    <published>2019-07-31T09:57:48.000Z</published>
-    <updated>2019-07-31T09:59:07.688Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;python处理&lt;code&gt;xml&lt;/code&gt;文件通常存在多种方式，这里分别以处理简单文件和大文件为例&lt;/p&gt;
-&lt;h2 id=&quot;处理一般文件&quot;&gt;&lt;a href=&quot;#处理一般文件&quot; class=&quot;headerlink&quot; title=&quot;处理一般文件&quot;&gt;&lt;/a&gt;处理一般文件&lt;/
-      
-    
-    </summary>
-    
-      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>关于不同测试阶段的测试场景</title>
     <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%85%B3%E4%BA%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF/"/>
     <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/关于不同测试阶段测试场景/</id>
@@ -255,24 +233,23 @@
   </entry>
   
   <entry>
-    <title>Linux之uniq</title>
-    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
-    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
-    <published>2019-07-28T12:35:48.000Z</published>
-    <updated>2019-07-28T12:55:53.543Z</updated>
+    <title>处理xml文件</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/31/处理xml文件/</id>
+    <published>2019-07-31T09:57:48.000Z</published>
+    <updated>2019-07-31T09:59:07.688Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
-&lt;li&gt;uniq 
+        &lt;p&gt;python处理&lt;code&gt;xml&lt;/code&gt;文件通常存在多种方式，这里分别以处理简单文件和大文件为例&lt;/p&gt;
+&lt;h2 id=&quot;处理一般文件&quot;&gt;&lt;a href=&quot;#处理一般文件&quot; class=&quot;headerlink&quot; title=&quot;处理一般文件&quot;&gt;&lt;/a&gt;处理一般文件&lt;/
       
     
     </summary>
     
-      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+      <category term="python" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/python/"/>
     
     
   </entry>
@@ -314,6 +291,29 @@
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;参数：&quot;&gt;&lt;a href=&quot;#参数：&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="https://github.com/bigmorebig/bigmorebig.github.io/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux之uniq</title>
+    <link href="https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux%E4%B9%8Buniq/"/>
+    <id>https://github.com/bigmorebig/bigmorebig.github.io/2019/07/28/linux之uniq/</id>
+    <published>2019-07-28T12:35:48.000Z</published>
+    <updated>2019-07-28T12:55:53.543Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;作用&quot;&gt;&lt;a href=&quot;#作用&quot; class=&quot;headerlink&quot; title=&quot;作用&quot;&gt;&lt;/a&gt;作用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Linux uniq 命令用于检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用。&lt;/li&gt;
+&lt;li&gt;uniq 
       
     
     </summary>
